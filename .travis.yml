@@ -1,3 +1,8 @@
+compiler:
+  - gcc
+  - gcc-4.8
+  - clang
+
 before_install:
   - sudo apt-get update
   - sudo apt-get upgrade
@@ -16,7 +21,7 @@ before_script:
   - lupdate-qt4 src/src.pro
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(LIBOAUTH_LIBS =.*\)|\1 -loauth|" src/gcconfig.pri
+  - sed -i "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -loauth|" src/gcconfig.pri
   - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
   - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d-qt4|" src/gcconfig.pri
   - sed -i "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d-qt4|" src/gcconfig.pri
@@ -31,7 +36,7 @@ before_script:
   - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
   - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
   - cd ..
-  
+
 script:
 # Build SRMIO and install
   - cd srmio
@@ -42,7 +47,7 @@ script:
   - cd GoldenCheetah
   - qmake-qt4 -recursive CONFIG+=release
   - make -j4
-  
+
 after_success:
   - ldd src/GoldenCheetah
   - src/GoldenCheetah --version
