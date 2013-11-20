@@ -38,15 +38,17 @@ before_script:
   - cd ..
 
 script:
+  - gcc -version
+  - g++ -version
 # Build SRMIO and install
   - cd srmio
   - ./configure --enable-static --disable-shared
-  - make -j4 && sudo make install
+  - make -j4 -silent && sudo make install -silent
   - cd ..
 # Build GoldenCheetah
   - cd GoldenCheetah
   - qmake-qt4 -recursive CONFIG+=release
-  - make -j4
+  - make -j4 -silent
 
 after_success:
   - ldd src/GoldenCheetah
