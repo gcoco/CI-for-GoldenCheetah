@@ -10,6 +10,7 @@ before_script:
   - cd srmio && sh ./genautomake.sh && cd ..
 # Setup GoldenCheetah
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
+  - cd GoldenCheetah
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - lupdate-qt4 src/src.pro
