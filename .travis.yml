@@ -1,5 +1,13 @@
-compiler:
-  - gcc
+language: objective-c
+compiler: gcc
+before_install:
+  - brew update
+before_script:
+ - brew install srmio
+ 
+language: cpp
+  
+compiler: gcc
   
 before_install:
   - sudo apt-get update -qq
@@ -50,9 +58,5 @@ after_success:
   - ldd src/GoldenCheetah
   - src/GoldenCheetah --version
   
-matrix:
-  include:
-    - language: cpp
-      - compiler: gcc
-    - language: objective-c
-      - compiler: gcc
+language: objective-c
+compiler: gcc
