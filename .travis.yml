@@ -37,12 +37,12 @@ before_script:
   - cd ..
 
 script:
-  - echo $CC
-  - echo $CXX
+  - echo %CC
+  - echo %CXX
 # Build SRMIO and install
   - cd srmio
   - ./configure --enable-static --disable-shared
-  - make -j4 CC=$CC CXX=$CXX && sudo make install -silent
+  - make -j4 CC=%CC CXX=%CXX && sudo make install -silent
   - cd ..
 # Build GoldenCheetah
   - cd GoldenCheetah
