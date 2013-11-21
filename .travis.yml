@@ -38,8 +38,8 @@ before_script:
   - cd ..
 
 script:
-  - gcc -version
-  - g++ -version
+  - gcc --version
+  - g++ --version
 # Build SRMIO and install
   - cd srmio
   - ./configure --enable-static --disable-shared
