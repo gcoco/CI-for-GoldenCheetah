@@ -1,7 +1,7 @@
 language: cpp
 
-compiler:
-  - gcc
+#compiler:
+#  - gcc
 
 before_install:
   - export CC=${REAL_CC} CXX=${REAL_CXX}
