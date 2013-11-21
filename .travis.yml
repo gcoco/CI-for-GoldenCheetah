@@ -1,6 +1,5 @@
 compiler:
   - gcc
-  - gcc-4.8
   - clang
 
 before_install:
@@ -38,12 +37,12 @@ before_script:
   - cd ..
 
 script:
-  - gcc --version
-  - g++ --version
+  - echo $CC
+  - echo $CXX
 # Build SRMIO and install
   - cd srmio
   - ./configure --enable-static --disable-shared
-  - make -j4 -silent && sudo make install -silent
+  - make -j4 CC=$CC CXX=$CXX && sudo make install -silent
   - cd ..
 # Build GoldenCheetah
   - cd GoldenCheetah
