@@ -42,12 +42,12 @@ script:
 # Build SRMIO and install
   - cd srmio
   - ./configure --enable-static --disable-shared
-  - make -j4 && sudo make install
+  - make -j4 CC=$CC CXX=$CXX && sudo make install
   - cd ..
 # Build GoldenCheetah
   - cd GoldenCheetah
   - qmake-qt4 -recursive CONFIG+=release
-  - make -j4
+  - make -j4 CC=$CC CXX=$CXX
 
 after_success:
   - ldd src/GoldenCheetah
