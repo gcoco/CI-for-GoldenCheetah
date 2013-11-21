@@ -12,7 +12,7 @@ before_install:
 #    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 
 before_script:
-  - brew install srmio
+  - brew install srmio qt
 # Setup SRMIO
 #  - git clone --depth 1 git://github.com/rclasen/srmio.git
 #  - cd srmio && sh ./genautomake.sh && cd ..
