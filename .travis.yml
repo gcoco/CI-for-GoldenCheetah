@@ -48,7 +48,8 @@ script:
 #  - cd ..
 # Build GoldenCheetah
   - cd GoldenCheetah
-  - qmake-qt4 -recursive CONFIG+=release
+  - ls -lar /usr/local/bin/
+  - qmake -recursive CONFIG+=release
   - make -j4
 
 after_success:
