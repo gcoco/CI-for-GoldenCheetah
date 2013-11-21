@@ -1,19 +1,19 @@
 language: objective-c
 compiler: gcc
+
 before_install:
   - brew update
 before_script:
  - brew install srmio
  
-language: cpp
-  
-compiler: gcc
+#language: cpp
+#compiler: gcc
   
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get upgrade -qq
-  - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
-    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
+#  - sudo apt-get update -qq
+#  - sudo apt-get upgrade -qq
+#  - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
+#    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 
 before_script:
 # Setup SRMIO
@@ -57,6 +57,3 @@ script:
 after_success:
   - ldd src/GoldenCheetah
   - src/GoldenCheetah --version
-  
-language: objective-c
-compiler: gcc
