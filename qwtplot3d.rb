@@ -22,19 +22,10 @@ class Qwtplot3d < Formula
 end
 
 __END__
-diff --git a/src/qwt3d_function.cpp b/src/qwt3d_function.cpp
-index 28d874e..72f93a9 100644
---- a/src/qwt3d_function.cpp
-+++ b/src/qwt3d_function.cpp
-@@ -1,3 +1,4 @@
-+#include <cstdio>
- #include "qwt3d_surfaceplot.h"
- #include "qwt3d_function.h"
- 
--- 
-diff U3 qwtplot3d.pro qwtplot3d.pro
---- qwtplot3d.pro	Tue Nov 26 11:00:56 2013
-+++ qwtplot3d.pro	Tue Nov 26 11:06:51 2013
+diff --git a/qwtplot3d.pro b/qwtplot3d.pro
+index 4060fe8..b0e8aa6 100644
+--- a/qwtplot3d.pro
++++ b/qwtplot3d.pro
 @@ -3,7 +3,7 @@
  
  TARGET            = qwtplot3d
@@ -44,7 +35,7 @@ diff U3 qwtplot3d.pro qwtplot3d.pro
  MOC_DIR           = tmp
  OBJECTS_DIR       = tmp
  INCLUDEPATH       = include
-@@ -21,7 +21,7 @@
+@@ -21,7 +21,7 @@ win32:QMAKE_CXXFLAGS     += $$QMAKE_CFLAGS_STL
  win32:CONFIG -= zlib
  
  linux-g++:TMAKE_CXXFLAGS += -fno-exceptions
@@ -53,34 +44,16 @@ diff U3 qwtplot3d.pro qwtplot3d.pro
  
  # Input
  SOURCES += src/qwt3d_axis.cpp \
-@@ -92,4 +92,10 @@
-   DEFINES += GL2PS_HAVE_ZLIB
+@@ -93,3 +93,10 @@ zlib {
    win32:LIBS += zlib.lib
  	unix:LIBS  += -lz
--}
-\ No newline at end of file
-+}
-+target.path    = $$INSTALLBASE/lib
-+headers.path   = $$INSTALLBASE/include/qwtplot3d
-+doc.path       = $$INSTALLBASE/share/qwtplot3d/doc
-+headers.files  = $$HEADERS
+ }
++
++target.path    = $$INSTALLBASE/lib 
++headers.path   = $$INSTALLBASE/include/qwtplot3d 
++doc.path       = $$INSTALLBASE/share/qwtplot3d/doc 
++headers.files  = $$HEADERS 
 +
 +INSTALLS       = target headers doc
-\ No newline at end of file
---- include/qwt3d_openglhelper.h.orig	2012-05-29 15:07:16.000000000 -0400
-+++ include/qwt3d_openglhelper.h	2012-05-29 15:08:16.000000000 -0400
-@@ -5,6 +5,7 @@
- #if QT_VERSION < 0x040000
- #include <qgl.h>
- #else
-+#include <OpenGL/glu.h>
- #include <QtOpenGL/qgl.h>
- #endif
- 
---- src/qwt3d_function.cpp.orig
-+++ src/qwt3d_function.cpp
-@@ -1,3 +1,4 @@
-+#include <cstdio>
- #include "qwt3d_surfaceplot.h"
- #include "qwt3d_function.h"
-
+-- 
+1.8.4
