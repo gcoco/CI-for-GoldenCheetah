@@ -16,7 +16,6 @@ class Qwtplot3d < Formula
 end
 
 __END__
-diff -urNad qwtplot3d/src/qwt3d_function.cpp qwtplot3d/src/qwt3d_function.cpp
 --- qwtplot3d/src/qwt3d_function.cpp	2007-08-23 12:20:56.000000000 +0200
 +++ qwtplot3d/src/qwt3d_function.cpp	2009-11-14 14:04:57.000000000 +0100
 @@ -1,3 +1,4 @@
