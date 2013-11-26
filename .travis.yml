@@ -5,7 +5,7 @@ before_install:
   - brew install qt
 
 script:
-  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
+  - brew install --verbose https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
 
 after_success:
   - brew audit qwtplot3d
