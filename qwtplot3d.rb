@@ -6,7 +6,7 @@ class Qwtplot3d < Formula
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
   def patches
-    DATA
+    { :p0 => DATA }
   end
   
   def install
@@ -16,78 +16,10 @@ class Qwtplot3d < Formula
 end
 
 __END__
-# Cherry-picked from:
-# https://trac.macports.org/browser/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff?rev=94241 
---- qwtplot3d/qwtplot3d.pro.orig	Tue Nov 26 11:00:56 2013
-+++ qwtplot3d/qwtplot3d.pro	Tue Nov 26 11:06:51 2013
-@@ -5,3 +5,3 @@
- TEMPLATE          = lib
--CONFIG           += qt warn_on opengl thread zlib debug
-+CONFIG           += qt warn_on opengl thread zlib release
- MOC_DIR           = tmp
-@@ -23,3 +23,3 @@
- linux-g++:TMAKE_CXXFLAGS += -fno-exceptions
--unix:VERSION = 0.2.6
-+unix:VERSION = 0.2.7
- 
-@@ -94,2 +94,8 @@
- 	unix:LIBS  += -lz
--}
-\ No newline at end of file
-+}
-+target.path    = $$INSTALLBASE/lib
-+headers.path   = $$INSTALLBASE/include/qwtplot3d
-+doc.path       = $$INSTALLBASE/share/qwtplot3d/doc
-+headers.files  = $$HEADERS
-+
-+INSTALLS       = target headers doc
-\ No newline at end of file
----
-# Cherry-pick from:
-# http://sourceforge.net/p/qwtplot3d/code/226/tree/trunk/qwtplot3d/src/qwt3d_function.cpp?diff=185 
---- a/qwtplot3d/include/qwt3d_io_gl2ps.h
-+++ b/qwtplot3d/include/qwt3d_io_gl2ps.h
+diff -urNad qwtplot3d/src/qwt3d_function.cpp qwtplot3d/src/qwt3d_function.cpp
+--- qwtplot3d/src/qwt3d_function.cpp	2007-08-23 12:20:56.000000000 +0200
++++ qwtplot3d/src/qwt3d_function.cpp	2009-11-14 14:04:57.000000000 +0100
 @@ -1,3 +1,4 @@
-+#pragma once
- #ifndef qwt3d_io_gl2ps_h__2004_05_07_01_16_begin_guarded_code
- #define qwt3d_io_gl2ps_h__2004_05_07_01_16_begin_guarded_code
- 
----
-# Cherry-pick from
-# http://sourceforge.net/p/qwtplot3d/code/254/tree/branches/multiple_curves_0_2_x/qwtplot3d/include/qwt3d_io_gl2ps.h?diff=219
---- a/branches/multiple_curves_0_2_x/qwtplot3d/include/qwt3d_io_gl2ps.h
-+++ b/branches/multiple_curves_0_2_x/qwtplot3d/include/qwt3d_io_gl2ps.h
-@@ -2,12 +2,7 @@
- #define qwt3d_io_gl2ps_h__2004_05_07_01_16_begin_guarded_code
- 
- #include <time.h>
--
--#if QT_VERSION < 0x040000
--#include <qgl.h>
--#else
--#include <QtOpenGL/qgl.h>
--#endif
-+#include <QtOpenGL>
- 
- #include "qwt3d_types.h"
- #include "qwt3d_io.h"
---- 
-# Cherry-pick from:
-# http://sourceforge.net/p/qwtplot3d/code/254/tree//branches/multiple_curves_0_2_x/qwtplot3d/include/qwt3d_openglhelper.h?diff=253
---- a/branches/multiple_curves_0_2_x/qwtplot3d/include/qwt3d_openglhelper.h
-+++ b/branches/multiple_curves_0_2_x/qwtplot3d/include/qwt3d_openglhelper.h
-@@ -2,11 +2,8 @@
- #define __openglhelper_2003_06_06_15_49__
- 
- #include "qglobal.h"
--#if QT_VERSION < 0x040000
--#include <qgl.h>
--#else
--#include <QtOpenGL/qgl.h>
--#endif
-+#include <QtOpenGL>
-+#include <GL/glu.h>
- 
- namespace Qwt3D
- {
----
++#include <cstdio>
+ #include "qwt3d_surfaceplot.h"
+ #include "qwt3d_function.h"
