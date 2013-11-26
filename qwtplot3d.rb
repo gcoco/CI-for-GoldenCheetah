@@ -2,7 +2,7 @@ require 'formula'
 
 class Qwtplot3d < Formula
   homepage 'http://qwtplot3d.sourceforge.net/'
-  url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
+  url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.zip'
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
   def patches
