@@ -18,13 +18,14 @@ end
 __END__
 # Cherry-picked from:
 # https://trac.macports.org/browser/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff?rev=94241 
---- qwtplot3d/qwtplot3d.pro 2010-11-02 15:48:06.000000000 -0400
-+++ qwtplot3d/qwtplot3d.pro 2010-11-02 15:50:49.000000000 -0400
+--- qwtplot3d-0.2.7/qwtplot3d/qwtplot3d.pro.orig	Tue Nov 26 11:00:56 2013
++++ qwtplot3d-0.2.7/qwtplot3d/qwtplot3d.pro	Tue Nov 26 11:06:51 2013
 @@ -3,7 +3,7 @@
+ 
  TARGET            = qwtplot3d
  TEMPLATE          = lib
 -CONFIG           += qt warn_on opengl thread zlib debug
-+CONFIG           += qt warn_on opengl thread zlib release @ARCHES@
++CONFIG           += qt warn_on opengl thread zlib release
  MOC_DIR           = tmp
  OBJECTS_DIR       = tmp
  INCLUDEPATH       = include
@@ -37,20 +38,20 @@ __END__
  
  # Input
  SOURCES += src/qwt3d_axis.cpp \
-@@ -92,5 +92,11 @@
+@@ -92,4 +92,10 @@
    DEFINES += GL2PS_HAVE_ZLIB
    win32:LIBS += zlib.lib
-         unix:LIBS  += -lz
+ 	unix:LIBS  += -lz
 -}
 \ No newline at end of file
 +}
-+
 +target.path    = $$INSTALLBASE/lib
 +headers.path   = $$INSTALLBASE/include/qwtplot3d
-+doc.path       = $$INSTALLBASE/share/qwt/doc
++doc.path       = $$INSTALLBASE/share/qwtplot3d/doc
 +headers.files  = $$HEADERS
 +
 +INSTALLS       = target headers doc
+\ No newline at end of file
 ---
 # Cherry-pick from:
 # http://sourceforge.net/p/qwtplot3d/code/226/tree/trunk/qwtplot3d/src/qwt3d_function.cpp?diff=185 
