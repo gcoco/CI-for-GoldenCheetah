@@ -22,6 +22,7 @@ class Qwtplot3d < Formula
 end
 
 __END__
+diff U3 qwtplot3d.pro.orig qwtplot3d.pro
 --- qwtplot3d.pro.orig	Tue Nov 26 11:00:56 2013
 +++ qwtplot3d.pro	Tue Nov 26 11:06:51 2013
 @@ -3,7 +3,7 @@
