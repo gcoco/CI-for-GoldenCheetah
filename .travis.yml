@@ -4,10 +4,9 @@ before_install:
   - brew update
   - brew install qt
 
-before_script:
-  - brew create http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz
-  
 script:
-  - qmake -recursive CONFIG+=release
+  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
 
 after_success:
+  - brew audit qwtplot3d
+  - brew info qwtplot3d
