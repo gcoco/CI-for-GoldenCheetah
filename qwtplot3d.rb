@@ -22,8 +22,8 @@ class Qwtplot3d < Formula
 end
 
 __END__
---- C:/Users/gareth.coco/Documents/qwtplot3d-0.2.7/qwtplot3d/qwtplot3d.pro.orig	Tue Nov 26 11:00:56 2013
-+++ C:/Users/gareth.coco/Documents/qwtplot3d-0.2.7/qwtplot3d/qwtplot3d.pro	Tue Nov 26 11:06:51 2013
+--- qwtplot3d.pro.orig	Tue Nov 26 11:00:56 2013
++++ qwtplot3d.pro	Tue Nov 26 11:06:51 2013
 @@ -3,7 +3,7 @@
  
  TARGET            = qwtplot3d
