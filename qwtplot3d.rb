@@ -18,8 +18,8 @@ class Qwtplot3d < Formula
 end
 
 __END__
---- a/qwtplot3d/src/qwt3d_function.cpp	2007-08-23 12:20:56.000000000 +0200
-+++ b/qwtplot3d/src/qwt3d_function.cpp	2009-11-14 14:04:57.000000000 +0100
+--- qwtplot3d/src/qwt3d_function.cpp	2007-08-23 12:20:56.000000000 +0200
++++ qwtplot3d/src/qwt3d_function.cpp	2009-11-14 14:04:57.000000000 +0100
 @@ -1,3 +1,4 @@
 +#include <cstdio>
  #include "qwt3d_surfaceplot.h"
