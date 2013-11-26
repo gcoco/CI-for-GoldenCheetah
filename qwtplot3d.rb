@@ -10,7 +10,8 @@ class Qwtplot3d < Formula
   def patches
     { :p0 => [
       "https://trac.macports.org/export/94241/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff",
-      "https://trac.macports.org/export/94241/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
+      "https://trac.macports.org/export/94241/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff",
+      DATA
     ]}
   end
   
@@ -21,11 +22,9 @@ class Qwtplot3d < Formula
 end
 
 __END__
-diff --git a/qwtplot3d/src/qwt3d_function.cpp b/qwtplot3d/src/qwt3d_function.cpp
---- a/qwtplot3d/src/qwt3d_function.cpp
-+++ b/qwtplot3d/src/qwt3d_function.cpp
+--- src/qwt3d_function.cpp.orig
++++ src/qwt3d_function.cpp
 @@ -1,3 +1,4 @@
 +#include <cstdio>
  #include "qwt3d_surfaceplot.h"
  #include "qwt3d_function.h"
-...
