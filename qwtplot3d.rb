@@ -1,6 +1,6 @@
 require 'formula'
 
-class qwtplot3d < Formula
+class Qwtplot3d < Formula
   homepage 'http://qwtplot3d.sourceforge.net/'
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
 
@@ -15,6 +15,42 @@ class qwtplot3d < Formula
 end
 
 __END__
+# Cherry-picked from:
+# https://trac.macports.org/browser/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff?rev=94241 
+-- qwtplot3d.pro.orig 2010-11-02 15:48:06.000000000 -0400
++++ qwtplot3d.pro 2010-11-02 15:50:49.000000000 -0400
+@@ -3,7 +3,7 @@
+ TARGET            = qwtplot3d
+ TEMPLATE          = lib
+-CONFIG           += qt warn_on opengl thread zlib debug
++CONFIG           += qt warn_on opengl thread zlib release @ARCHES@
+ MOC_DIR           = tmp
+ OBJECTS_DIR       = tmp
+ INCLUDEPATH       = include
+@@ -21,7 +21,7 @@
+ win32:CONFIG -= zlib
+ 
+ linux-g++:TMAKE_CXXFLAGS += -fno-exceptions
+-unix:VERSION = 0.2.6
++unix:VERSION = 0.2.7
+ 
+ # Input
+ SOURCES += src/qwt3d_axis.cpp \
+@@ -92,5 +92,11 @@
+   DEFINES += GL2PS_HAVE_ZLIB
+   win32:LIBS += zlib.lib
+         unix:LIBS  += -lz
+-}
+\ No newline at end of file
++}
++
++target.path    = $$INSTALLBASE/lib
++headers.path   = $$INSTALLBASE/include/qwtplot3d
++doc.path       = $$INSTALLBASE/share/qwt/doc
++headers.files  = $$HEADERS
++
++INSTALLS       = target headers doc
+---
 # Cherry-pick from:
 # http://sourceforge.net/p/qwtplot3d/code/226/tree/trunk/qwtplot3d/src/qwt3d_function.cpp?diff=185 
 --- a/trunk/qwtplot3d/include/qwt3d_io_gl2ps.h
