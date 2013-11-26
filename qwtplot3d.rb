@@ -18,29 +18,19 @@ end
 __END__
 # Cherry-picked from:
 # https://trac.macports.org/browser/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff?rev=94241 
---- qwtplot3d/qwtplot3d.pro	Tue Nov 26 11:00:56 2013
+--- qwtplot3d/qwtplot3d.pro.orig	Tue Nov 26 11:00:56 2013
 +++ qwtplot3d/qwtplot3d.pro	Tue Nov 26 11:06:51 2013
-@@ -3,7 +3,7 @@
- 
- TARGET            = qwtplot3d
+@@ -5,3 +5,3 @@
  TEMPLATE          = lib
 -CONFIG           += qt warn_on opengl thread zlib debug
 +CONFIG           += qt warn_on opengl thread zlib release
  MOC_DIR           = tmp
- OBJECTS_DIR       = tmp
- INCLUDEPATH       = include
-@@ -21,7 +21,7 @@
- win32:CONFIG -= zlib
- 
+@@ -23,3 +23,3 @@
  linux-g++:TMAKE_CXXFLAGS += -fno-exceptions
 -unix:VERSION = 0.2.6
 +unix:VERSION = 0.2.7
  
- # Input
- SOURCES += src/qwt3d_axis.cpp \
-@@ -92,4 +92,10 @@
-   DEFINES += GL2PS_HAVE_ZLIB
-   win32:LIBS += zlib.lib
+@@ -94,2 +94,8 @@
  	unix:LIBS  += -lz
 -}
 \ No newline at end of file
