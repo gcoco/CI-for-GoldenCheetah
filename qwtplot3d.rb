@@ -18,8 +18,8 @@ end
 __END__
 # Cherry-picked from:
 # https://trac.macports.org/browser/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff?rev=94241 
---- qwtplot3d.pro 2010-11-02 15:48:06.000000000 -0400
-+++ qwtplot3d.pro 2010-11-02 15:50:49.000000000 -0400
+--- a/qwtplot3d/qwtplot3d.pro 2010-11-02 15:48:06.000000000 -0400
++++ b/qwtplot3d/qwtplot3d.pro 2010-11-02 15:50:49.000000000 -0400
 @@ -3,7 +3,7 @@
  TARGET            = qwtplot3d
  TEMPLATE          = lib
@@ -54,8 +54,8 @@ __END__
 ---
 # Cherry-pick from:
 # http://sourceforge.net/p/qwtplot3d/code/226/tree/trunk/qwtplot3d/src/qwt3d_function.cpp?diff=185 
---- a/trunk/qwtplot3d/include/qwt3d_io_gl2ps.h
-+++ b/trunk/qwtplot3d/include/qwt3d_io_gl2ps.h
+--- a/qwtplot3d/include/qwt3d_io_gl2ps.h
++++ b/qwtplot3d/include/qwt3d_io_gl2ps.h
 @@ -1,3 +1,4 @@
 +#pragma once
  #ifndef qwt3d_io_gl2ps_h__2004_05_07_01_16_begin_guarded_code
