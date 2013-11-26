@@ -18,8 +18,8 @@ end
 __END__
 # Cherry-picked from:
 # https://trac.macports.org/browser/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff?rev=94241 
---- qwtplot3d-0.2.7/qwtplot3d/qwtplot3d.pro.orig	Tue Nov 26 11:00:56 2013
-+++ qwtplot3d-0.2.7/qwtplot3d/qwtplot3d.pro	Tue Nov 26 11:06:51 2013
+--- qwtplot3d/qwtplot3d.pro	Tue Nov 26 11:00:56 2013
++++ qwtplot3d/qwtplot3d.pro	Tue Nov 26 11:06:51 2013
 @@ -3,7 +3,7 @@
  
  TARGET            = qwtplot3d
