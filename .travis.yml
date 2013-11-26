@@ -2,10 +2,10 @@ language: objective-c
 
 before_install:
   - brew update
-  - brew install qt zlib
+  - brew install qt
 
 before_script:
-  - brew create http://sourceforge.net/projects/qwtplot3d/files/qwtplot3d/0.2.7/qwtplot3d-0.2.7.tgz/download
+  - brew create http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz
   
 script:
   - qmake -recursive CONFIG+=release
