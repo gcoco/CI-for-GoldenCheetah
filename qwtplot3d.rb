@@ -8,11 +8,11 @@ class Qwtplot3d < Formula
   #depends_on 'qt' => :build
   
   def patches
-    #{ :p0 => [
+    { :p0 => [
       #"https://trac.macports.org/export/94241/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff",
       #"https://trac.macports.org/export/94241/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff",
       "https://github.com/gcoco/CI-for-GoldenCheetah/commit/e6684821ba1648324eb0a478cc4096b5dc68bc91.patch"
-    #]}
+    ]}
   end
   
   def install
