@@ -8,11 +8,11 @@ class Qwtplot3d < Formula
   #depends_on 'qt' => :build
   
   def patches
-    [
+    { :p0 => [
       DATA,
       "https://trac.macports.org/export/94241/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff",
       "https://trac.macports.org/export/94241/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
-    ]
+    ]}
   end
   
   def install
