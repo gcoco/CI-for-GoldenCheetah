@@ -22,9 +22,22 @@ class Qwtplot3d < Formula
 end
 
 __END__
+--- include/qwt3d_openglhelper.h.orig	2012-05-29 15:07:16.000000000 -0400
++++ include/qwt3d_openglhelper.h	2012-05-29 15:08:16.000000000 -0400
+@@ -5,6 +5,7 @@
+ #if QT_VERSION < 0x040000
+ #include <qgl.h>
+ #else
++#include <OpenGL/glu.h>
+ #include <QtOpenGL/qgl.h>
+ #endif
+ 
+---
 --- src/qwt3d_function.cpp.orig
 +++ src/qwt3d_function.cpp
 @@ -1,3 +1,4 @@
 +#include <cstdio>
  #include "qwt3d_surfaceplot.h"
  #include "qwt3d_function.h"
+
+---
