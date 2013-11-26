@@ -5,7 +5,6 @@ before_install:
 #  - brew install qt
 
 script:
-  - brew install --verbose https://raw.github.com/mxcl/homebrew/3cf3749e6e9eaa243500109f5fc79e86aaaab570/Library/Formula/libid3tag.rb
   - brew install --verbose https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
 
 after_success:
