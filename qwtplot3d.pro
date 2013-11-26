@@ -3,7 +3,7 @@
 
 TARGET            = qwtplot3d
 TEMPLATE          = lib
-CONFIG           += qt warn_on opengl thread zlib debug
+CONFIG           += qt warn_on opengl thread zlib release
 MOC_DIR           = tmp
 OBJECTS_DIR       = tmp
 INCLUDEPATH       = include
@@ -21,7 +21,7 @@ win32:QMAKE_CXXFLAGS     += $$QMAKE_CFLAGS_STL
 win32:CONFIG -= zlib
 
 linux-g++:TMAKE_CXXFLAGS += -fno-exceptions
-unix:VERSION = 0.2.6
+unix:VERSION = 0.2.7
 
 # Input
 SOURCES += src/qwt3d_axis.cpp \
@@ -93,3 +93,10 @@ zlib {
   win32:LIBS += zlib.lib
 	unix:LIBS  += -lz
 }
+
+target.path    = $$INSTALLBASE/lib 
+headers.path   = $$INSTALLBASE/include/qwtplot3d 
+doc.path       = $$INSTALLBASE/share/qwtplot3d/doc 
+headers.files  = $$HEADERS 
+
+INSTALLS       = target headers doc
