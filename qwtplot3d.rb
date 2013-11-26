@@ -22,8 +22,18 @@ class Qwtplot3d < Formula
 end
 
 __END__
-diff U3 qwtplot3d.pro.orig qwtplot3d.pro
---- qwtplot3d.pro.orig	Tue Nov 26 11:00:56 2013
+diff --git a/src/qwt3d_function.cpp b/src/qwt3d_function.cpp
+index 28d874e..72f93a9 100644
+--- a/src/qwt3d_function.cpp
++++ b/src/qwt3d_function.cpp
+@@ -1,3 +1,4 @@
++#include <cstdio>
+ #include "qwt3d_surfaceplot.h"
+ #include "qwt3d_function.h"
+ 
+-- 
+diff U3 qwtplot3d.pro qwtplot3d.pro
+--- qwtplot3d.pro	Tue Nov 26 11:00:56 2013
 +++ qwtplot3d.pro	Tue Nov 26 11:06:51 2013
 @@ -3,7 +3,7 @@
  
