@@ -8,7 +8,10 @@ class Qwtplot3d < Formula
   #depends_on 'qt' => :build
   
   def patches
-    DATA
+    [
+      "https://trac.macports.org/browser/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff?rev=94241&format=txt",
+      DATA
+    ]
   end
   
   def install
