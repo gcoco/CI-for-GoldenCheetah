@@ -6,7 +6,8 @@ class Qwtplot3d < Formula
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
   def patches
-    { :p0 => DATA }
+  #{ :p0 => DATA }
+  DATA
   end
   
   def install
