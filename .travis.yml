@@ -1,88 +1,13 @@
 language: objective-c
-#compiler: gcc
 
-#language: cpp
-#compiler: gcc
-  
 before_install:
-# Mac build
   - brew update
-  - brew install flex bison qt srmio liboauth libical 
-# Linux Build
-#  - sudo apt-get update -qq
-#  - sudo apt-get upgrade -qq
-#  - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
-#    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
+  - brew install qt zlib
 
 before_script:
-# Setup GoldenCheetah
-  - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
-  - cd GoldenCheetah
-  - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
-  - cp src/gcconfig.pri.in src/gcconfig.pri
-  - cd ..
+  - brew create http://sourceforge.net/projects/qwtplot3d/files/qwtplot3d/0.2.7/qwtplot3d-0.2.7.tgz/download
   
-# Linux Build
-# Setup SRMIO
-#  - git clone --depth 1 git://github.com/rclasen/srmio.git
-#  - cd srmio && sh ./genautomake.sh && cd ..
-# Setup GoldenCheetah
-#  - cd GoldenCheetah
-#  - lupdate-qt4 src/src.pro
-#  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-#  - sed -i "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-#  - sed -i "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -loauth|" src/gcconfig.pri
-#  - sed -i "|#\(QWT3D_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-#  - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d-qt4|" src/gcconfig.pri
-#  - sed -i "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d-qt4|" src/gcconfig.pri
-#  - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-#  - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
-#  - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 /usr|" src/gcconfig.pri
-#  - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
-#  - sed -i "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-#  - sed -i "s|#\(VLC_LIBS    =.*\)|\1 -lvlc -lvlccore|" src/gcconfig.pri
-#  - sed -i "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/include/CLucene /usr/lib|" src/gcconfig.pri
-#  - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
-#  - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
-#  - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
-#  - cd ..
-
-# MAC build
-  - cd GoldenCheetah
-  - lupdate src/src.pro
-  - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -loauth|" src/gcconfig.pri
-#  - sed -i "" "s|#\(QWT3D_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-#  - sed -i "" "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d-qt4|" src/gcconfig.pri
-#  - sed -i "" "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d-qt4|" src/gcconfig.pri
-  - sed -i "" "s|#\(ICAL_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
-#  - sed -i "" "s|#\(LIBUSB_INSTALL =\).*|\1 /usr|" src/gcconfig.pri
-#  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
-#  - sed -i "" "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-#  - sed -i "" "s|#\(VLC_LIBS    =.*\)|\1 -lvlc -lvlccore|" src/gcconfig.pri
-#  - sed -i "" "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/include/CLucene /usr/lib|" src/gcconfig.pri
-#  - sed -i "" "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
-  - sed -i "" "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
-  - sed -i "" "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
-  - cd ..
-
 script:
-# Linux Build
-# Build SRMIO and install
-#  - cd srmio
-#  - ./configure --enable-static --disable-shared
-#  - make -j4 && sudo make install
-#  - cd ..
-  - cd GoldenCheetah
-# Linux Build
-#  - qmake-qt4 -recursive CONFIG+=release
-# Mac Build
   - qmake -recursive CONFIG+=release
 
-  - make -j4
-
 after_success:
-  - ldd src/GoldenCheetah
-  - src/GoldenCheetah --version
