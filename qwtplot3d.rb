@@ -7,7 +7,7 @@ class Qwtplot3d < Formula
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
-  depends_on 'qt'
+  #depends_on 'qt'
   
 #  def patches
 #    { :"-debug=3" => [
@@ -18,6 +18,8 @@ class Qwtplot3d < Formula
   
   def install
     system "ls", "-la"
+    system 'sed -i "" "s|debug|release|" qwtplot3d.pro'
+    system 'cat include/qwt3d_openglhelper.h'
     system "qmake -makefile -spec unsupported/macx-clang CONFIG+=release"
     system 'make'
     system "ls", "-la lib"
