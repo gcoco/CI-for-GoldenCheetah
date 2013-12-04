@@ -18,7 +18,7 @@ class Qwtplot3d < Formula
   
   def install
     system "ls", "-la"
-    system "qmake", "-spec unsupported/macx-clang", "CONFIG+=release"
+    system "qmake -makefile -spec unsupported/macx-clang CONFIG+=release"
     system 'make'
     system "ls", "-la lib"
   end
