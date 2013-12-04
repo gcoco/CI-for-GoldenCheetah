@@ -5,11 +5,12 @@ class Qwtplot3d < Formula
 #  url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.zip'
 #  sha1 '17f55d37ac93fd17d7f3f6b90031ceb796bfe6d1'
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
+  sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
 #  depends_on 'qt'
   
   def patches
-    { :"-help" => [
+    { :"--dry-run --unified" => [
     #"https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
     DATA
     ]}
