@@ -2,13 +2,14 @@ require 'formula'
 
 class Qwtplot3d < Formula
   homepage 'http://qwtplot3d.sourceforge.net/'
-  url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.zip'
-  sha1 '17f55d37ac93fd17d7f3f6b90031ceb796bfe6d1'
+#  url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.zip'
+#  sha1 '17f55d37ac93fd17d7f3f6b90031ceb796bfe6d1'
+  url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
 
 #  depends_on 'qt'
   
   def patches
-    { :"-verbose" => [
+    { :"-verbose", :u => [
     #"https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
     DATA
     ]}
