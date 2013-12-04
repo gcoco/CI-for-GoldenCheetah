@@ -19,6 +19,8 @@ class Qwtplot3d < Formula
   def install
     system "ls", "-la"
     system 'sed -i "" "s|debug|release|" qwtplot3d.pro'
+    system 'cat qwtplot3d.pro'
+    system 'sed -i "" $"8i\\\n#include <OpenGL/glu.h>\n" include/qwt3d_openglhelper.h'
     system 'cat include/qwt3d_openglhelper.h'
     system "qmake -makefile -spec unsupported/macx-clang CONFIG+=release"
     system 'make'
