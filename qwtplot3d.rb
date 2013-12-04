@@ -9,8 +9,8 @@ class Qwtplot3d < Formula
   
   def patches
     { :p1 => [
-    "https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
-    #DATA
+    #"https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
+    DATA
     ]}
   end
   
