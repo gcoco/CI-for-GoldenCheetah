@@ -8,10 +8,10 @@ class Qwtplot3d < Formula
   #depends_on 'qt' => :build
   
   def patches
-    #{ :p0 => [
+    { :p1 => [
     "https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
-      #DATA
-    #]}
+    #DATA
+    ]}
   end
   
   def install
