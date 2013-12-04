@@ -8,8 +8,7 @@ class Qwtplot3d < Formula
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
   depends_on 'qt'
-  depends_on 'perl' => :build
-  
+
 #  def patches
 #    { :"-debug=3" => [
 #      "https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
@@ -18,14 +17,8 @@ class Qwtplot3d < Formula
 #  end
   
   def install
-    system "ls", "-la"
-    system 'sed -i "" "s|debug|release|" qwtplot3d.pro'
-    system 'cat qwtplot3d.pro'
-    system 'perl -pi -e ', 'print "#include <OpenGL/glu.h>\n" if $. == 8', 'include/qwt3d_openglhelper.h'
-    system 'cat include/qwt3d_openglhelper.h'
     system "qmake -makefile -spec unsupported/macx-clang CONFIG+=release"
     system 'make'
-    system "ls", "-la lib"
   end
 end
 
@@ -42,4 +35,3 @@ index 4060fe8..b0e8aa6 100644
 +CONFIG           += qt warn_on opengl thread zlib release
  MOC_DIR           = tmp
  OBJECTS_DIR       = tmp
- INCLUDEPATH       = include
