@@ -10,7 +10,7 @@ class Qwtplot3d < Formula
 #  depends_on 'qt'
   
   def patches
-    { :"-dry-run --unified" => [
+    { :"-dry-run" => [
     #"https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
     DATA
     ]}
