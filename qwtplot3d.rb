@@ -5,7 +5,7 @@ class Qwtplot3d < Formula
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.zip'
   sha1 '17f55d37ac93fd17d7f3f6b90031ceb796bfe6d1'
 
-  #depends_on 'qt' => :build
+  depends_on 'qt'
   
   def patches
     { :p1 => [
