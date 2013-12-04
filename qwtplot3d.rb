@@ -5,10 +5,10 @@ class Qwtplot3d < Formula
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.zip'
   sha1 '17f55d37ac93fd17d7f3f6b90031ceb796bfe6d1'
 
-  depends_on 'qt'
+#  depends_on 'qt'
   
   def patches
-    { :p1 => [
+    { :p0 => [
     #"https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
     DATA
     ]}
@@ -21,10 +21,10 @@ class Qwtplot3d < Formula
 end
 
 __END__
-diff --git a/qwtplot3d.pro b/qwtplot3d.pro
+diff --git a/qwtplot3d.pro b/qwtplot3d.pro.diff
 index 4060fe8..b0e8aa6 100644
---- a/qwtplot3d.pro.orig
-+++ b/qwtplot3d.pro
+--- a/qwtplot3d.pro
++++ b/qwtplot3d.pro.diff
 @@ -3,7 +3,7 @@
  
  TARGET            = qwtplot3d
