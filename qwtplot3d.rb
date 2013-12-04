@@ -10,14 +10,15 @@ class Qwtplot3d < Formula
 #  depends_on 'qt'
   
   def patches
-    { :"-dry-run" => [
+    { :"-unified" => [
     #"https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
     DATA
     ]}
   end
   
   def install
-    system "qmake CONFIG+=release"
+    system "ls", "-la"
+    system "qmake", "CONFIG+=release"
     system 'make install'
   end
 end
