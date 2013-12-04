@@ -7,7 +7,7 @@ class Qwtplot3d < Formula
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
-  #depends_on 'qt'
+  depends_on 'qt', 'perl' :build
   
 #  def patches
 #    { :"-debug=3" => [
