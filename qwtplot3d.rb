@@ -17,6 +17,7 @@ class Qwtplot3d < Formula
   end
   
   def install
+    inreplace "qwtplot34d.pro", "$$INSTALLBASE", "#{prefix}"
     system 'qmake -makefile -spec unsupported/macx-clang'
     system 'make install'
     system 'ls -laR /usr/local'
