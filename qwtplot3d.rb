@@ -20,6 +20,6 @@ class Qwtplot3d < Formula
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
     system 'qmake -makefile -spec unsupported/macx-clang'
     system 'make install'
-    system 'ls -laR /usr/local'
+    system 'ls -laR /usr/local | egrep "qwt3d|qwtplot"'
   end
 end
