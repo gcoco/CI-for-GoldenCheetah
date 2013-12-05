@@ -10,7 +10,8 @@ class Qwtplot3d < Formula
   def patches
     { 
       :p0 => [
-        "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff",
+        #https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff",
+        "https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch",
         "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
       ]
     }
