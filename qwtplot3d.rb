@@ -10,7 +10,7 @@ class Qwtplot3d < Formula
   depends_on 'qt'
 
   def patches
-    { :"-debug=3", "-p0" => [
+    { :"p0 --debug=3" => [
       #"https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff"
       #]
     #}
