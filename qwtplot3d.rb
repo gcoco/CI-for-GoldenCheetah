@@ -9,12 +9,13 @@ class Qwtplot3d < Formula
 
   depends_on 'qt'
 
-#  def patches
-#    { :"-debug=3" => [
-#      "https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.pro.patch"
+  def patches
+    { :"-debug=3" => [
+      "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff",
+      "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
 #    #DATA
-#    ]}
-#  end
+    ]}
+  end
   
   def install
     system "qmake -makefile -spec unsupported/macx-clang CONFIG+=release"
