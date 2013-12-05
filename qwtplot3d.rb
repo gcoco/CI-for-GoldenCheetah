@@ -13,10 +13,13 @@ class Qwtplot3d < Formula
     { :"-debug=3" => [
       "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff"
       ]
+    }
+    {
       :p0 => [
       "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
 #    #DATA
-    ]}
+       ]
+    }
   end
   
   def install
