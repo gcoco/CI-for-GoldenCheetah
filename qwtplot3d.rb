@@ -8,17 +8,17 @@ class Qwtplot3d < Formula
   depends_on 'qt'
 
   def patches
-    { 
+    {
       :p0 => [
         "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff",
         "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
       ]
     }
   end
-  
+
   def install
-    inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
-    system 'qmake -makefile -spec unsupported/macx-clang'
+    inreplace "qwtplot3d.pro", "$$INSTALLBASE", "prefix"
+    system 'qmake', '-makefile', '-spec unsupported/macx-clang'
     system 'make install'
   end
 end
