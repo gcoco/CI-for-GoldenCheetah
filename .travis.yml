@@ -1,13 +1,103 @@
-language: objective-c
+branches:
+  only:
+    - master
+    - CI-Test-Linux
+    - CI-Test-Mac
+
+language: 
+  - objective-c
+  
+compiler:
+  - clang
+  
+env:
+  - BRANCH=master
+#  - BRANCH=release_3.0.0
 
 before_install:
   - brew update
-#  - brew install qt
-
+  # Qt4
+  - brew install qt
+  # Qt5
+  #-brew install qt5
+  - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
+  - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
+  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
+  - brew install libkml --HEAD
+  - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
+  - hdiutil mount D2XX1.2.2.dmg
+  
+before_script:
+  # Clone GoldenCheetah
+  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  # Copy in the libftd2xx libs/includes
+  - cd $BRANCH && mkdir D2XX
+  - cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib D2XX
+  - cp /Volumes/release/D2XX/bin/*.h D2XX
+  - sed -i "" "s|libftd2xx.dylib|@executable_path/../Frameworks/libftd2xx.1.2.2.dylib|" src/D2XX.cpp
+  # Configure GoldenCheetah
+#  - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
+  - cp src/gcconfig.pri.in src/gcconfig.pri
+  # QT4
+  - /usr/local/bin/lupdate src/src.pro
+  # Qt5
+  #- /usr/local/opt/qt5/bin/lupdate src/src.pro
+  - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
+  - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -loauth|" src/gcconfig.pri
+#  - sed -i "" "s|#\(QWT3D_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+#  - sed -i "" "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/local/include/qwtplot3d|" src/gcconfig.pri
+#  - sed -i "" "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d|" src/gcconfig.pri
+  - sed -i "" "s|#\(ICAL_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBUSB_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
+  - sed -i "" "s|#\(KML_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(KML_LIBS    =.*\)|\1 -lkmldom -lkmlconvenience -lkmlengine -lkmlbase|" src/gcconfig.pri
+  - sed -i "" "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/local/lib|" src/gcconfig.pri
+# clucene 0.9.21b
+#  - sed -i "" "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
+# clucene 2.3.3.4
+  - sed -i "" "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene-core -lclucene-shared|" src/gcconfig.pri
+# Uncomment next two lines for Qt5
+#  - sed -i "" "s|LIBZ_INCLUDE =\).*|\1 -L/usr/local/opt/qt5/lib|" src/gcconfig.pri
+#  - sed -i "" "s|LIBZ_LIBS = \).*|\1 -I/usr/local/opt/qt5/include -lz|" src/gcconfig.pri
+  - sed -i "" "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
+  - sed -i "" "s|#\(PKGCONFIG = .*\)|\1 oauth libical clucene libusb|" src/gcconfig.pri
+  - cd ..
+  
 script:
-  - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
+  - cd $BRANCH
+  # Qt4
+  - /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  # Qt5
+  #- /usr/local/opt/qt5/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - make qmake_all 
+  - make -j4 -silent sub-qwt
+  - make -j4 -silent sub-src
 
 after_success:
-  - ls -laR /usr/local | egrep "qwt3d|qwtplot3d"
-  - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
-  - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
+  - cd src
+  - mkdir GoldenCheetah.app/Contents/Frameworks
+  - cp ../D2XX/libftd2xx.1.2.2.dylib GoldenCheetah.app/Contents/Frameworks
+  - mkdir GoldenCheetah.app/Contents/Plugins
+  - mkdir GoldenCheetah.app/Contents/Plugins/imageformats
+  - mkdir GoldenCheetah.app/Contents/Plugins/sqldrivers
+  - cp /usr/local/opt/qt/plugins/imageformats/libqjpeg.dylib GoldenCheetah.app/Contents/Plugins/imageformats
+  - cp /usr/local/opt/qt/plugins/sqldrivers/libqsqlite.dylib GoldenCheetah.app/Contents/Plugins/sqldrivers
+  - ls -laR GoldenCheetah.app
+  - sudo chown -R travis:staff GoldenCheetah.app
+  - sudo chmod -R +rw GoldenCheetah.app
+  - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
+  # Qt4
+  - /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
+  # Qt5
+  #- /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
+  - brew rm qt
+  - hdiutil mount GoldenCheetah.dmg
+  - cd /Volumes/GoldenCheetah
+  - ls -laR GoldenCheetah.app
+  - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
+  - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
