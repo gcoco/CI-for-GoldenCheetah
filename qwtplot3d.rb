@@ -16,7 +16,7 @@ class Qwtplot3d < Formula
 #    }
 #  end
   def patches
-    :p1 => [ DATA ]
+    :p1 => DATA 
   end
 
   def install
@@ -28,7 +28,7 @@ class Qwtplot3d < Formula
 end
 
 
-__DATA__
+__END__
 diff --git a/qwtplot3d.pro b/qwtplot3d.pro
 index 4060fe8..b0e8aa6 100644
 --- a/qwtplot3d.pro
