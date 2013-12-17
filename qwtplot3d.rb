@@ -17,7 +17,7 @@ class Qwtplot3d < Formula
 #  end
   def patches
     {
-      :p1 => DATA
+      :p1 => [ DATA ]
     }
   end
 
