@@ -16,9 +16,7 @@ class Qwtplot3d < Formula
 #    }
 #  end
   def patches
-    {
-      :p1 => [ DATA ]
-    }
+    :p1 => [ DATA ]
   end
 
   def install
@@ -29,6 +27,7 @@ class Qwtplot3d < Formula
   end
 end
 
+
 __DATA__
 diff --git a/qwtplot3d.pro b/qwtplot3d.pro
 index 4060fe8..b0e8aa6 100644
@@ -36,7 +35,7 @@ index 4060fe8..b0e8aa6 100644
 +++ b/qwtplot3d.pro
 @@ -3,7 +3,7 @@
  
- TARGET            = qwtplot3d
+ TARGET            = qwtplot3d-qt4
  TEMPLATE          = lib
 -CONFIG           += qt warn_on opengl thread zlib debug
 +CONFIG           += qt warn_on opengl thread zlib release
@@ -58,8 +57,8 @@ index 4060fe8..b0e8aa6 100644
  }
 +
 +target.path    = $$INSTALLBASE/lib 
-+headers.path   = $$INSTALLBASE/include/qwtplot3d 
-+doc.path       = $$INSTALLBASE/share/qwtplot3d/doc 
++headers.path   = $$INSTALLBASE/include/qwtplot3d-qt4 
++doc.path       = $$INSTALLBASE/share/qwtplot3d-qt4/doc 
 +headers.files  = $$HEADERS 
 +
 +INSTALLS       = target headers doc
