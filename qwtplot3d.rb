@@ -29,10 +29,10 @@ end
 
 
 __END__
-diff --git a/qwtplot3d.pro b/qwtplot3d.pro
+diff --git qwtplot3d.pro qwtplot3d.pro
 index 4060fe8..b0e8aa6 100644
---- a/qwtplot3d.pro
-+++ b/qwtplot3d.pro
+--- qwtplot3d.pro
++++ qwtplot3d.pro
 @@ -3,7 +3,7 @@
  
  TARGET            = qwtplot3d
