@@ -29,8 +29,8 @@ end
 
 
 __END__
---- a/qwtplot3d.pro
-+++ b/qwtplot3d.pro
+--- qwtplot3d.pro.orig	2010-11-02 15:48:06.000000000 -0400
++++ qwtplot3d.pro	2010-11-02 15:50:49.000000000 -0400
 @@ -3,7 +3,7 @@
  
  TARGET            = qwtplot3d
@@ -40,3 +40,12 @@ __END__
  MOC_DIR           = tmp
  OBJECTS_DIR       = tmp
  INCLUDEPATH       = include
+@@ -21,7 +21,7 @@
+ win32:CONFIG -= zlib
+ 
+ linux-g++:TMAKE_CXXFLAGS += -fno-exceptions
+-unix:VERSION = 0.2.6
++unix:VERSION = 0.2.7
+ 
+ # Input
+ SOURCES += src/qwt3d_axis.cpp \
