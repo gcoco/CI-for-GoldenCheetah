@@ -29,8 +29,8 @@ end
 
 
 __END__
---- qwtplot3d.pro.orig	2010-11-02 15:48:06.000000000 -0400
-+++ qwtplot3d.pro	2010-11-02 15:50:49.000000000 -0400
+--- a/qwtplot3d.pro
++++ b/qwtplot3d.pro
 @@ -3,7 +3,7 @@
  
  TARGET            = qwtplot3d
