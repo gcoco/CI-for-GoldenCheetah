@@ -35,7 +35,7 @@ index 4060fe8..b0e8aa6 100644
 +++ b/qwtplot3d.pro
 @@ -3,7 +3,7 @@
  
- TARGET            = qwtplot3d-qt4
+ TARGET            = qwtplot3d
  TEMPLATE          = lib
 -CONFIG           += qt warn_on opengl thread zlib debug
 +CONFIG           += qt warn_on opengl thread zlib release
