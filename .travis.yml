@@ -18,7 +18,7 @@ before_install:
   - sudo apt-get update -qq
   - curl -O http://anychimirror101.mirrors.tds.net/pub/Qt/official_releases/qt/5.2/5.2.0/qt-linux-opensource-5.2.0-x86_64-offline.run
   - chmod u+x qt-linux-opensource-5.2.0-x86_64-offline.run
-  - sudo ./qt-linux-opensource-5.2.0-x86_64-offline.run --help
+  - sudo ./qt-linux-opensource-5.2.0-x86_64-offline.run --create-offline-repository --verbose
 #  - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
 #    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 #    liburiparser-dev libexpat1-dev libboost-all-dev
