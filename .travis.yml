@@ -17,7 +17,10 @@ before_install:
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
   - sudo apt-get update -qq
   - curl -O http://download.qt-project.org/official_releases/qt/5.2/5.2.0/qt-linux-opensource-5.2.0-x86_64-offline.run
-  - sudo sh ./qt-linux-opensource-5.2.0-x86_64-offline.run
+  - ls -la
+  - cat qt-linux-opensource-5.2.0-x86_64-offline.run
+  - chmod u+x qt-linux-opensource-5.2.0-x86_64-offline.run
+  - sudo ./qt-linux-opensource-5.2.0-x86_64-offline.run
 #  - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
 #    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 #    liburiparser-dev libexpat1-dev libboost-all-dev
