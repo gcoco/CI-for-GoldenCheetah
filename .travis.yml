@@ -1,6 +1,7 @@
 branches:
   only:
     - master
+    - Linux-QT5
 
 language:
   - cpp
