@@ -29,8 +29,11 @@ before_install:
 before_script:
   # Clone GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - cd $BRANCH
+  - git status
+  - git log --pretty=format:"   Commit Date - %cd %n   Commit hash - %H %n        Author - %an %nCommit Message - %s"
   # Copy in the libftd2xx libs/includes
-  - cd $BRANCH && mkdir D2XX
+  -- mkdir D2XX
   - cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib D2XX
   - sudo cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib /usr/local/lib
   - cp /Volumes/release/D2XX/bin/*.h D2XX
