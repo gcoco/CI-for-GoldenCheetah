@@ -18,9 +18,6 @@ before_install:
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-  - git status
-  - git log --pretty=format:"%d%n   Commit Date - %cd %n   Commit hash - %H %n        Author - %an %nCommit Message - %s"
-  - kjsvbhiuasbvklasbv
   - sudo apt-get update -qq
   - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
     liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
@@ -53,12 +50,7 @@ before_script:
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
   - git status
-  - git describe
-  - git describe --long --dirty --abbrev=10 --tags
-  - git rev-list --max-count=1 HEAD
-  - git rev-parse --short HEAD
-  - git log --pretty=format:'%h' -n 1
-  - kjsvbhiuasbvklasbv
+  - git log --pretty=format:"   Commit Date - %cd %n   Commit hash - %H %n        Author - %an %nCommit Message - %s"
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - /usr/bin/lupdate-qt4 src/src.pro
