@@ -19,7 +19,6 @@ before_install:
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
   - git status
-  - git describe --long --dirty --abbrev=10 --tags
   - git rev-list --max-count=1 HEAD
   - git rev-parse --short HEAD
   - git log --pretty=format:'%h' -n 1
