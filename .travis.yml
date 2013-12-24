@@ -16,8 +16,9 @@ env:
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
+  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - cd $BRANCH
   - git status
-#  - git describe
   - git describe --long --dirty --abbrev=10 --tags
   - git rev-list --max-count=1 HEAD
   - git rev-parse --short HEAD
