@@ -1,8 +1,7 @@
 branches:
   only:
     - master
-    - CI-Test-Linux
-    - CI-Test-Mac
+    - Mac
 
 language: 
   - objective-c
