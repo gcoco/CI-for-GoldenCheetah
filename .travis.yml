@@ -47,7 +47,13 @@ before_script:
 # Setup GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-  - git status && git show --oneline
+  - git status
+  - git describe
+  - git describe --long --dirty --abbrev=10 --tags
+  - git rev-list --max-count=1 HEAD
+  - git rev-parse --short HEAD
+  - git log --pretty=format:'%h' -n 1
+  - kjsvbhiuasbvklasbv
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - /usr/bin/lupdate-qt4 src/src.pro
