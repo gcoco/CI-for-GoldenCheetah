@@ -75,8 +75,8 @@ script:
   # Qt5
   #- /usr/local/opt/qt5/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - make qmake_all 
-  - make -j4 -silent sub-qwt
-  - make -j4 -silent sub-src
+  - make -j4 sub-qwt
+  - make -j4 sub-src
 
 after_success:
   - cd src
@@ -92,12 +92,11 @@ after_success:
   - sudo chmod -R +rw GoldenCheetah.app
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
   # Qt4
-  - /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
+  #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
   # Qt5
   #- /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
-  - brew rm qt
-  - hdiutil mount GoldenCheetah.dmg
-  - cd /Volumes/GoldenCheetah
-  - ls -laR GoldenCheetah.app
-  - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
-  - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
+  #- hdiutil mount GoldenCheetah.dmg
+  #- cd /Volumes/GoldenCheetah
+  #- ls -laR GoldenCheetah.app
+  #- GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
+  #- GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
