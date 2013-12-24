@@ -32,6 +32,7 @@ before_script:
   # Copy in the libftd2xx libs/includes
   - cd $BRANCH && mkdir D2XX
   - cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib D2XX
+  - sudo cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib /usr/local/lib
   - cp /Volumes/release/D2XX/bin/*.h D2XX
   - sed -i "" "s|libftd2xx.dylib|@executable_path/../Frameworks/libftd2xx.1.2.2.dylib|" src/D2XX.cpp
   # Configure GoldenCheetah
@@ -80,7 +81,7 @@ script:
 after_success:
   - cd src
   - mkdir GoldenCheetah.app/Contents/Frameworks
-  - cp ../D2XX/libftd2xx.1.2.2.dylib GoldenCheetah.app/Contents/Frameworks
+#  - cp ../D2XX/libftd2xx.1.2.2.dylib GoldenCheetah.app/Contents/Frameworks
   - mkdir GoldenCheetah.app/Contents/Plugins
   - mkdir GoldenCheetah.app/Contents/Plugins/imageformats
   - mkdir GoldenCheetah.app/Contents/Plugins/sqldrivers
