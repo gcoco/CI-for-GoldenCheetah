@@ -10,7 +10,7 @@ compiler:
   
 env:
   - BRANCH=master
-#  - BRANCH=release_3.0.0
+  - BRANCH=release_3.0.1
   
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
@@ -47,9 +47,7 @@ before_script:
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
   - git status
-#  - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
-#QWT_CONFIG           += QwtDll
-  - sed -i "s|\(QWT_CONFIG           += QwtDll.*\)|#\1|" qwt/qwtconfig.pri
+  - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - /usr/bin/lupdate-qt4 src/src.pro
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
