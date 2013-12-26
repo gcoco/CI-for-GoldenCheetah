@@ -97,3 +97,4 @@ script:
 after_success:
   - ldd src/GoldenCheetah
   - src/GoldenCheetah --version
+  - logout
