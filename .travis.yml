@@ -14,6 +14,8 @@ env:
   - BRANCH=master QT=qt5
 
 before_install:
+  - sudo apt-get dist-upgrade --help
+  - sudo apt-get dist-upgrade -qq --yes
   - cat /proc/version && lsb_release -a && uname -mrs
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
