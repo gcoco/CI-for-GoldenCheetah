@@ -95,5 +95,5 @@ script:
 
 after_success:
   - cd $TRAVIS_BUILD_DIR
-  - ldd $BRANCH/src/GoldenCheetah
+  - ldd $BRANCH/$BRANCH/src/GoldenCheetah
   - sh check-gc.sh
