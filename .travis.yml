@@ -44,8 +44,8 @@ before_script:
 #  - sh ./autogen.sh
 #  - cd ..
 # Setup SRMIO
-  - git clone --depth 1 git://github.com/rclasen/srmio.git
-  - cd srmio && sh ./genautomake.sh && cd ..
+#  - git clone --depth 1 git://github.com/rclasen/srmio.git
+#  - cd srmio && sh ./genautomake.sh && cd ..
 # Setup GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
@@ -82,10 +82,10 @@ script:
 #  - make -j4 && sudo make install-exec install-data
 #  - cd ..
 # Build SRMIO and install
-  - cd srmio
-  - ./configure --enable-static --disable-shared
-  - make -silent -j4 && sudo make -silent install
-  - cd ..
+#  - cd srmio
+#  - ./configure --enable-static --disable-shared
+#  - make -silent -j4 && sudo make -silent install
+#  - cd ..
 # Build GoldenCheetah
   - cd $BRANCH
   - qmake-qt4 -recursive
