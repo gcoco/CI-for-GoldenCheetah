@@ -1,2 +1,2 @@
 #!/bin/sh
-if [ "$BRANCH" == "master" ]; then : src/GoldenCheetah --version; fi
+if [ "$BRANCH" == "master" ]; then : $BRANCH/src/GoldenCheetah --version; fi
