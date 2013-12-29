@@ -95,6 +95,6 @@ script:
   - make -j4 sub-src
 
 after_success:
-  - ldd src/GoldenCheetah
-#  - src/GoldenCheetah --version
-#  - logout
+  - cd ..
+  - ldd $BRANCH/src/GoldenCheetah
+  - sh check-gc.sh
