@@ -95,6 +95,6 @@ script:
   - make -j4 sub-src
 
 after_success:
-  - cd ..
+  - cd
   - ldd $BRANCH/src/GoldenCheetah
   - sh check-gc.sh
