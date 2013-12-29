@@ -14,6 +14,8 @@ env:
   - BRANCH=release_3.0.1
   
 before_install:
+  - cd
+  - pwd
   - cat /proc/version && lsb_release -a && uname -mrs
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
@@ -49,8 +51,7 @@ before_script:
 # Setup GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-  - git status
-  - git log --pretty=format:"   Commit Date - %cd %n   Commit hash - %H %n        Author - %an %nCommit Message - %s"
+  - sh git-info.sh
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - /usr/bin/lupdate-qt4 src/src.pro
