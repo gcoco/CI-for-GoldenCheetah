@@ -18,7 +18,7 @@ before_install:
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
-  - sudo apt-get -y dist-upgrade
+  - sudo apt-get dist-upgrade -qq -y
   - sudo apt-get install -qq ubuntu-sdk
 #  - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
 #    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
