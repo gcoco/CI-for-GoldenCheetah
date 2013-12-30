@@ -10,8 +10,8 @@ compiler:
   - clang
   
 env:
-#  - BRANCH=master
-  - BRANCH=release_3.0.1
+  - BRANCH=master
+#  - BRANCH=release_3.0.1
 
 before_install:
   - brew update
