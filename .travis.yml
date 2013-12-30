@@ -29,9 +29,11 @@ before_install:
 #  - sudo apt-get install -qq liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 #  libkml-dev
 #  - sudo apt-get install -qq liburiparser-dev libexpat1-dev libboost-all-dev
-  - which qmake
-  - qmake -v
+  - ls -la /usr/bin/qmake
+  - which qtchooser
+  - qtchooser -v
   - which lupdate
+  - ls -la /usr/bin/lupdate
   - lupdate -v
   - /usr/lib/x86_64-linux-gnu/qt5/bin/qmake --help
 before_script:
