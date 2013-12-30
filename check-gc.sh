@@ -1,2 +1,5 @@
-#!/bin/sh
-if [ "$BRANCH" == "master" ]; then : $BRANCH/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version; fi
+#!/bin/bash
+if [ "$BRANCH" = "master" ]
+then
+  $TRAVIS_BUILD_DIR/$BRANCH/$BRANCH/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
+fi
