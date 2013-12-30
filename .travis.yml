@@ -24,7 +24,7 @@ before_install:
 # Qt4
 #  - sudo apt-get install -qq qt4-qmake qt4-dev-tools libqt4-dev
 # Qt5
-  - sudo apt-get install qt5-default qt5base-dev qt5base-dev-tools libqt5webkit5-dev libqt5svg5-dev
+  - sudo apt-get install qt5-default libqt5webkit5-dev libqt5svg5-dev
   # qtbase* qtwebkit* qttools* qtscript* qtsvg*
   - dpkg --get-selections
 # Extras
@@ -62,7 +62,6 @@ before_script:
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
 #  - /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate src/src.pro
-  - which lupdate
   - lupdate src/src.pro
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
 #  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
