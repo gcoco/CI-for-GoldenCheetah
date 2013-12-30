@@ -60,7 +60,7 @@ before_script:
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
 #  - /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate src/src.pro
-  - which lupdate | ls -la
+  - which lupdate
   - lupdate src/src.pro
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
 #  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
@@ -97,7 +97,7 @@ script:
 #  - cd ..
 # Build GoldenCheetah
   - cd $BRANCH
-  - /usr/lib/x86_64-linux-gnu/qt5/bin/qmake -recursive
+  - qmake -recursive
   - make qmake_all
   - make -j4 sub-qwt
   - make -j4 sub-src
