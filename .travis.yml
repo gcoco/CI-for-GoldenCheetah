@@ -29,12 +29,7 @@ before_install:
 #  - sudo apt-get install -qq liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 #  libkml-dev
 #  - sudo apt-get install -qq liburiparser-dev libexpat1-dev libboost-all-dev
-  - qtchooser -list-versions
   - export QT_SELECT=$QT
-  - which qmake
-  - ls -la /usr/bin/qmake
-  - qmake -qt=$QT -v
-  - qmake -qt=qt4 -v
 before_script:
 # Setup libkml
 #  - ls -la
@@ -64,7 +59,9 @@ before_script:
   - git status
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
-  - /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate src/src.pro
+#  - /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate src/src.pro
+  - lupdate -v
+  - lupdate src/src.pro
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
 #  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
 #  - sed -i "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
@@ -85,7 +82,7 @@ before_script:
 #  - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
 #  - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
 #  - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
-#  - cd ..
+  - cd ..
 
 script:
 # Build libkml
