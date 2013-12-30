@@ -11,7 +11,7 @@ compiler:
 
 env:
 #  - BRANCH=master QT=qt4
-  - BRANCH=master QT=5
+  - BRANCH=master QT=qt5
 
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
@@ -33,9 +33,8 @@ before_install:
   - export QT_SELECT=$QT
   - which qmake
   - ls -la /usr/bin/qmake
-  - qmake -v
   - qmake -qt=$QT -v
-  - qmake -qt=4 -v
+  - qmake -qt=qt4 -v
 before_script:
 # Setup libkml
 #  - ls -la
