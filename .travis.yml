@@ -24,7 +24,9 @@ before_install:
 # Qt4
 #  - sudo apt-get install -qq qt4-qmake qt4-dev-tools libqt4-dev
 # Qt5
-  - sudo apt-get install qtchooser qtbase-opensource-src* qtsvg-opensource-src* qttools-opensource-src* qtwebkit-opensource-src*
+#  - sudo apt-get install qtchooser qt5-default libqt5webkit5-dev libqt5svg5-dev qttools5-dev libgl1-mesa-dev
+#  - sudo apt-get build-dep qtbase-opensource-src qtwebkit-opensource-src qtsvg-opensource-src
+  - sudo apt-get install qt5-sdk
   # qtbase* qtwebkit* qttools* qtscript* qtsvg*
   - dpkg --get-selections
 # Extras
