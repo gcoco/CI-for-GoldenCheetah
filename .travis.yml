@@ -93,7 +93,7 @@ after_success:
   - ls -laR GoldenCheetah.app
   - sudo chown -R travis:staff GoldenCheetah.app
   - sudo chmod -R +rw GoldenCheetah.app
-  - cd
+  - cd $TRAVIS_BUILD_DIR
   - sh $TRAVIS_BUILD_DIR/check-gc.sh
   # Qt4
   #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
