@@ -24,10 +24,7 @@ before_install:
 # Qt4
 #  - sudo apt-get install -qq qt4-qmake qt4-dev-tools libqt4-dev
 # Qt5
-#  - sudo apt-get install qtchooser qt5-default libqt5webkit5-dev libqt5svg5-dev qttools5-dev libgl1-mesa-dev
-#  - sudo apt-get build-dep qtbase-opensource-src qtwebkit-opensource-src qtsvg-opensource-src
-  - sudo apt-get install ubuntu-sdk qtcreator-plugin-ubuntu-cordova
-  # qtbase* qtwebkit* qttools* qtscript* qtsvg*
+  - sudo apt-get install qtchooser qt5-default libqt5-dev libqt5webkit5-dev libqt5svg5-dev qttools5-dev libgl1-mesa-dev
   - dpkg --get-selections
 # Extras
 #  - sudo apt-get install -qq liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
