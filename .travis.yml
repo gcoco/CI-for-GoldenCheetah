@@ -11,7 +11,7 @@ compiler:
 
 env:
 #  - BRANCH=master QT=qt4
-  - BRANCH=master QT=qt5
+  - BRANCH=master QT=5
 
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
@@ -29,11 +29,13 @@ before_install:
 #  - sudo apt-get install -qq liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 #  libkml-dev
 #  - sudo apt-get install -qq liburiparser-dev libexpat1-dev libboost-all-dev
-  - qtchooser -qt=5
+  - qtchooser -list-versions
+  - export QT_SELECT=$QT
   - which qmake
   - ls -la /usr/bin/qmake
   - qmake -v
-  - /usr/lib/x86_64-linux-gnu/qt5/bin/qmake --help
+  - qmake -qt=$QT -v
+  - qmake -qt=4 -v
 before_script:
 # Setup libkml
 #  - ls -la
