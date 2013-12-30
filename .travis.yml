@@ -96,7 +96,7 @@ script:
 #  - cd ..
 # Build GoldenCheetah
   - cd $BRANCH
-  - qt5-qmake -recursive
+  - /usr/lib/x86_64-linux-gnu/qt5/bin/qmake -recursive
   - make qmake_all
   - make -j4 sub-qwt
   - make -j4 sub-src
