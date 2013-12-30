@@ -24,7 +24,7 @@ before_install:
 # Qt4
 #  - sudo apt-get install -qq qt4-qmake qt4-dev-tools libqt4-dev
 # Qt5
-  - sudo apt-get install qt5-default qttools5-dev libqt5webkit5-dev libqt5svg5-dev
+  - sudo apt-get install qtchooser qtbase-opensource-src qtsvg-opensource-src qttools-opensource-src qtwebkit-opensource-src
   # qtbase* qtwebkit* qttools* qtscript* qtsvg*
   - dpkg --get-selections
 # Extras
@@ -58,6 +58,7 @@ before_script:
 # Setup GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
+  - git branch
   - git status
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
