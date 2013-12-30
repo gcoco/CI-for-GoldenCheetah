@@ -16,7 +16,7 @@ env:
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
-  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo add-apt-repository --yes ppa:canonical-qt5-edgers/qt5-beta-proper
   - sudo apt-get update
 #  - sudo apt-get dist-upgrade -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
   - sudo apt-get dist-upgrade -qq -o Dpkg::Options::="--force-confnew"
@@ -25,7 +25,7 @@ before_install:
   - dpkg --get-selections > after.txt
   - diff before.txt after.txt
   - cat after.txt
-  - sudo apt-get install -qq ubuntu-sdk
+  - sudo apt-get install -qq qtbase*
 #  - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
 #    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 #    liburiparser-dev libexpat1-dev libboost-all-dev
