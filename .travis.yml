@@ -26,7 +26,7 @@ before_install:
 # Qt5
 #  - sudo apt-get install qtchooser qt5-default libqt5webkit5-dev libqt5svg5-dev qttools5-dev libgl1-mesa-dev
 #  - sudo apt-get build-dep qtbase-opensource-src qtwebkit-opensource-src qtsvg-opensource-src
-  - sudo apt-get install qt5-sdk
+  - sudo apt-get install ubuntu-sdk
   # qtbase* qtwebkit* qttools* qtscript* qtsvg*
   - dpkg --get-selections
 # Extras
