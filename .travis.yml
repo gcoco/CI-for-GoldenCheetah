@@ -16,6 +16,7 @@ env:
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
+  - sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
   - sudo apt-get dist-upgrade -qq -y
