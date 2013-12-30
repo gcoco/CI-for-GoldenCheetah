@@ -16,21 +16,20 @@ env:
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
-  - sudo add-apt-repository --yes ppa:canonical-qt5-edgers/qt5-beta-proper
-  - sudo apt-get update
-#  - sudo apt-get dist-upgrade -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
-  - sudo apt-get dist-upgrade -qq -o Dpkg::Options::="--force-confnew"
-  - dpkg --get-selections > before.txt
-  - sudo apt-get update
-  - dpkg --get-selections > after.txt
-  - diff before.txt after.txt
-  - cat after.txt
-  - sudo apt-get install -qq qtbase*
-#  - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
-#    liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
-#    liburiparser-dev libexpat1-dev libboost-all-dev
-  - qmake-qt5 --help
-  - seighoasgpaiwge
+#  - sudo add-apt-repository --yes ppa:canonical-qt5-edgers/qt5-beta-proper
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo apt-get dist-upgrade -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq flex bison 
+# Qt4
+#  - sudo apt-get install -qq qt4-qmake qt4-dev-tools libqt4-dev
+# Qt5
+  - sudo apt-get install -qq qtbase* qtwebkit*
+# Extras
+#  - sudo apt-get install -qq liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
+#  libkml-dev
+#  - sudo apt-get install -qq liburiparser-dev libexpat1-dev libboost-all-dev
+  - qt5-qmake --help
 before_script:
 # Setup libkml
 #  - ls -la
@@ -52,38 +51,36 @@ before_script:
 #  - sh ./autogen.sh
 #  - cd ..
 # Setup SRMIO
-  - git clone --depth 1 git://github.com/rclasen/srmio.git
-  - cd srmio && sh ./genautomake.sh && cd ..
+#  - git clone --depth 1 git://github.com/rclasen/srmio.git
+#  - cd srmio && sh ./genautomake.sh && cd ..
 # Setup GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
   - git status
-#  - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
-#QWT_CONFIG           += QwtDll
-  - sed -i "s|\(QWT_CONFIG           += QwtDll.*\)|#\1|" qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
-  - /usr/bin/lupdate-qt4 src/src.pro
+  - which lupdate
+  - /usr/bin/lupdate src/src.pro
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
-  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -loauth|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d-qt4|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d-qt4|" src/gcconfig.pri
+#  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+#  - sed -i "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
+#  - sed -i "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -loauth|" src/gcconfig.pri
+#  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
+#  - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d-qt4|" src/gcconfig.pri
+#  - sed -i "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d-qt4|" src/gcconfig.pri
 #  - sed -i "s|#\(KML_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
 #  - sed -i "s|#\(KML_LIBS    =.*\)|\1 -lkmlbase -lkmldom -lkmlconvenience -lkmlengine -luriparser -lminizip|" src/gcconfig.pri
 #BOOST_INCLUDE = /usr/include
-  - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
-  - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
-  - sed -i "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(VLC_LIBS    =.*\)|\1 -lvlc -lvlccore|" src/gcconfig.pri
-  - sed -i "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/include/CLucene /usr/lib|" src/gcconfig.pri
-  - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
-  - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
-  - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
-  - cd ..
+#  - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
+#  - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
+#  - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 /usr|" src/gcconfig.pri
+#  - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
+#  - sed -i "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
+#  - sed -i "s|#\(VLC_LIBS    =.*\)|\1 -lvlc -lvlccore|" src/gcconfig.pri
+#  - sed -i "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/include/CLucene /usr/lib|" src/gcconfig.pri
+#  - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
+#  - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
+#  - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
+#  - cd ..
 
 script:
 # Build libkml
@@ -92,13 +89,13 @@ script:
 #  - make -j4 && sudo make install-exec install-data
 #  - cd ..
 # Build SRMIO and install
-  - cd srmio
-  - ./configure --enable-static --disable-shared
-  - make -silent -j4 && sudo make -silent install
-  - cd ..
+#  - cd srmio
+#  - ./configure --enable-static --disable-shared
+#  - make -silent -j4 && sudo make -silent install
+#  - cd ..
 # Build GoldenCheetah
   - cd $BRANCH
-  - qmake-qt4 -recursive
+  - qt5-qmake -recursive
   - make qmake_all
   - make -j4 sub-qwt
   - make -j4 sub-src
