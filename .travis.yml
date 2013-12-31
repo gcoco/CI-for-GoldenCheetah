@@ -57,11 +57,10 @@ before_script:
 # Setup GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-  - git branch
-  - git status
+  - sh $TRAVIS_BUILD_DIR/git-info.sh
+  - sed -i "s|infile|exists(config.pri):infile|" qtsolutions/common.pri
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
-  - sed -i "s|infile|exists(config.pri):infile|" qtsolutions/common.pri
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 lrelease|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
