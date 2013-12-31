@@ -100,8 +100,8 @@ script:
   - cd $BRANCH
   - qmake -recursive
   - make qmake_all
-  - make -j4 sub-qwt
-  - make -j4 sub-src
+  - make -j2 sub-qwt
+  - make -j2 sub-src
 
 after_success:
   - ldd src/GoldenCheetah
