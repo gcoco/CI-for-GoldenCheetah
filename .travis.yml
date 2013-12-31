@@ -52,7 +52,7 @@ before_script:
   - sh $TRAVIS_BUILD_DIR/git-info.sh
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
-  - /usr/bin/lupdate-qt4 src/src.pro
+  - sed -i "s|infile|exists(config.pri):infile|" qtsolutions/common.pri
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
 #  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
 #  - sed -i "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
@@ -73,6 +73,7 @@ before_script:
 #  - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
 #  - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
 #  - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
+  - /usr/bin/lupdate-qt4 src/src.pro
   - cd ..
 
 script:
