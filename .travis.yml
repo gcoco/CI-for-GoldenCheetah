@@ -18,6 +18,9 @@ before_install:
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
+  - sed -i "s|infile|exists(config.pri):infile|" qtsolutions/common.pri
+  - cat qtsolutions/common.pri
+  - asdkjghlasdkgasd;
   - sudo apt-get update -qq
   - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
   #- sudo apt-get install liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
