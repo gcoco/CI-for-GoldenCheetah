@@ -12,7 +12,7 @@ compiler:
   
 env:
   - BRANCH=master
-#  - BRANCH=release_3.0.1
+  - BRANCH=release_3.0.1
 
 before_install:
   - brew update
