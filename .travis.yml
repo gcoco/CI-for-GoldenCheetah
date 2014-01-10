@@ -1,4 +1,3 @@
-#commit: d00ac93fb23f88b3b6aaf8b9edadaf66336ba9aa
 branches:
   only:
     - master
@@ -12,7 +11,7 @@ compiler:
   
 env:
   - BRANCH=master
-  - BRANCH=release_3.0.1
+#  - BRANCH=release_3.0.1
   
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
@@ -46,8 +45,11 @@ before_script:
   - git clone --depth 1 git://github.com/rclasen/srmio.git
   - cd srmio && sh ./genautomake.sh && cd ..
 # Setup GoldenCheetah
-  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - git clone --depth 25 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - cat commit | git checkout
   - cd $BRANCH
+  - sh $TRAVIS_BUILD_DIR/git-info.sh
+  - cat $TRAVIS_BUILD_DIR/commit | git checkout
   - sh $TRAVIS_BUILD_DIR/git-info.sh
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
