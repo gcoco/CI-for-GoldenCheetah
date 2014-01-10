@@ -46,10 +46,9 @@ before_script:
   - cd srmio && sh ./genautomake.sh && cd ..
 # Setup GoldenCheetah
   - git clone --depth 25 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
-  - cat commit | git checkout
   - cd $BRANCH
   - sh $TRAVIS_BUILD_DIR/git-info.sh
-  - cat $TRAVIS_BUILD_DIR/commit | git checkout
+  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
