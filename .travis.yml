@@ -12,7 +12,7 @@ compiler:
   
 env:
   - BRANCH=master
-  - BRANCH=release_3.0.1
+#  - BRANCH=release_3.0.1
 
 before_install:
   - brew update
@@ -93,16 +93,11 @@ after_success:
   - cp /usr/local/opt/qt/plugins/imageformats/libqjpeg.dylib GoldenCheetah.app/Contents/Plugins/imageformats
   - cp /usr/local/opt/qt/plugins/sqldrivers/libqsqlite.dylib GoldenCheetah.app/Contents/Plugins/sqldrivers
   - ls -laR GoldenCheetah.app
-  - sudo chown -R travis:staff GoldenCheetah.app
-  - sudo chmod -R +rw GoldenCheetah.app
-  - pwd
-  - cd $TRAVIS_BUILD_DIR
-  - pwd
   - sh $TRAVIS_BUILD_DIR/check-gc.sh
   # Qt4
-  #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
+  - /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   # Qt5
-  - /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
+  #- /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
   - brew remove qt
   - hdiutil mount GoldenCheetah.dmg
   - cd /Volumes/GoldenCheetah
