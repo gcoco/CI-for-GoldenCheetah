@@ -24,13 +24,14 @@ before_install:
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
   - brew install libkml --HEAD
+  # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
   - hdiutil mount D2XX1.2.2.dmg
   
 before_script:
   # Clone GoldenCheetah
-  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - git clone --depth 50 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
   - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
