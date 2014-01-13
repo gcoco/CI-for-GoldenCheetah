@@ -56,7 +56,7 @@ before_script:
   - git clone --depth 1 git://github.com/rclasen/srmio.git
   - cd srmio && sh ./genautomake.sh && cd ..
 # Setup GoldenCheetah
-  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - git clone --depth 50 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
   - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
