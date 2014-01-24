@@ -13,5 +13,8 @@ before_script:
   - wget http://download.opensuse.org/repositories/home:/garethcoco:/ubuntu/xUbuntu_12.04/amd64/goldencheetah_3.0.1-1_amd64.deb
 
 script:
- - sudo dpkg -i goldencheetah_3.0.1-1_amd64.deb
- - sudo apt-get -f install
+  - sudo dpkg -i goldencheetah_3.0.1-1_amd64.deb
+  - sudo apt-get -f install
+
+after_script:
+  - locate goldencheetah
