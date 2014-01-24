@@ -17,4 +17,5 @@ script:
   - sudo apt-get -f install
 
 after_script:
-  - locate goldencheetah
+  - ldd /usr/bin/GoldenCheetah
+  - ldd /usr/bin/goldencheetah
