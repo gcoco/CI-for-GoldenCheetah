@@ -7,7 +7,7 @@ compiler:
 
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
-  - sudo apt-get remove libqt4 -qq
+  - sudo apt-get remove libqt4-* -qq
   - sudo apt-get update -qq
 
 before_script:
@@ -19,4 +19,3 @@ script:
 
 after_script:
   - ldd /usr/bin/GoldenCheetah
-  - ldd /usr/bin/goldencheetah
