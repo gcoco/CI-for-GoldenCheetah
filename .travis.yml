@@ -81,7 +81,7 @@ script:
   # Qt5
   - /usr/local/opt/qt5/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
   - make qmake_all 
-  - make -j4 sub-qwt
+  - make -j4 sub-qwt -silent
   - make -j4 sub-src
 
 after_success:
