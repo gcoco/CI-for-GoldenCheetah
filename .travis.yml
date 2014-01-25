@@ -17,12 +17,12 @@ env:
 before_install:
   - brew update
   # Qt4
-  - brew install qt
+  #- brew install qt
   # Qt5
-  #-brew install qt5
+  - brew install qt5
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
-  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
+  #- brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
   - brew install libkml --HEAD
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
@@ -45,9 +45,9 @@ before_script:
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   # QT4
-  - /usr/local/bin/lupdate src/src.pro
+  #- /usr/local/bin/lupdate src/src.pro
   # Qt5
-  #- /usr/local/opt/qt5/bin/lupdate src/src.pro
+  - /usr/local/opt/qt5/bin/lupdate src/src.pro
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
@@ -77,9 +77,9 @@ before_script:
 script:
   - cd $BRANCH
   # Qt4
-  - /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  #- /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   # Qt5
-  #- /usr/local/opt/qt5/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - /usr/local/opt/qt5/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - make qmake_all 
   - make -j4 sub-qwt
   - make -j4 sub-src
@@ -96,10 +96,10 @@ after_success:
   - ls -laR GoldenCheetah.app
   - sh $TRAVIS_BUILD_DIR/check-gc.sh
   # Qt4
-  - /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
+  #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   # Qt5
-  #- /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=3 -dmg
-  - brew remove qt
+  - /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=1 -dmg
+  - brew remove qt5
   - hdiutil mount GoldenCheetah.dmg
   - cd /Volumes/GoldenCheetah
   - ls -laR GoldenCheetah.app
