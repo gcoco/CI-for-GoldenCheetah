@@ -79,7 +79,7 @@ script:
   # Qt4
   #- /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   # Qt5
-  - /usr/local/opt/qt5/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - /usr/local/opt/qt5/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
   - make qmake_all 
   - make -j4 sub-qwt
   - make -j4 sub-src
