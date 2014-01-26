@@ -11,7 +11,7 @@ compiler:
   
 env:
   - BRANCH=master
-#  - BRANCH=release_3.0.1
+  - BRANCH=release_3.0.1
   
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
@@ -47,8 +47,8 @@ before_script:
 # Setup GoldenCheetah
   - git clone --depth 50 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-  - sh $TRAVIS_BUILD_DIR/git-info.sh
-  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
+#  - sh $TRAVIS_BUILD_DIR/git-info.sh
+#  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
