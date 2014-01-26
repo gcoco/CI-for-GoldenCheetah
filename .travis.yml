@@ -86,22 +86,21 @@ script:
 
 after_success:
   - cd src
-  - mkdir GoldenCheetah.app/Contents/Frameworks
+#  - mkdir GoldenCheetah.app/Contents/Frameworks
 #  - cp ../D2XX/libftd2xx.1.2.2.dylib GoldenCheetah.app/Contents/Frameworks
-  - mkdir GoldenCheetah.app/Contents/Plugins
-  - mkdir GoldenCheetah.app/Contents/Plugins/imageformats
-  - mkdir GoldenCheetah.app/Contents/Plugins/sqldrivers
-  - cp /usr/local/opt/qt/plugins/imageformats/libqjpeg.dylib GoldenCheetah.app/Contents/Plugins/imageformats
-  - cp /usr/local/opt/qt/plugins/sqldrivers/libqsqlite.dylib GoldenCheetah.app/Contents/Plugins/sqldrivers
+#  - mkdir GoldenCheetah.app/Contents/Plugins
+#  - mkdir GoldenCheetah.app/Contents/Plugins/imageformats
+#  - mkdir GoldenCheetah.app/Contents/Plugins/sqldrivers
+#  - cp /usr/local/opt/qt/plugins/imageformats/libqjpeg.dylib GoldenCheetah.app/Contents/Plugins/imageformats
+#  - cp /usr/local/opt/qt/plugins/sqldrivers/libqsqlite.dylib GoldenCheetah.app/Contents/Plugins/sqldrivers
   - ls -laR GoldenCheetah.app
   - sh $TRAVIS_BUILD_DIR/check-gc.sh
   # Qt4
   #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   # Qt5
-  - /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=1 -dmg
+  - /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   - brew remove qt5
   - hdiutil mount GoldenCheetah.dmg
   - cd /Volumes/GoldenCheetah
   - ls -laR GoldenCheetah.app
-  - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
