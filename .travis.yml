@@ -1,6 +1,7 @@
 language: objective-c
 
 before_install:
+  - which xcodebuild
   - cat /usr/bin/xcodebuild
   - ksjdfkjsbvsalbdv
   - brew update
