@@ -1,6 +1,8 @@
 language: objective-c
 
 before_install:
+  - cat /usr/bin/xcodebuild
+  - ksjdfkjsbvsalbdv
   - brew update
 #  - brew install qt
 
