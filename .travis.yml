@@ -2,14 +2,16 @@ language: objective-c
 
 before_install:
   - brew update
-  - ls /usr/bin
-  - cat /usr/bin/xcodebuild
 #  - brew install qt
 
 script:
+  - ls /usr/bin
+  - cat /usr/bin/xcodebuild
   - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
 
 after_success:
+  - ls /usr/bin
+  - cat /usr/bin/xcodebuild
   - ls -laR /usr/local | egrep "qwt3d|qwtplot3d"
   - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
   - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
