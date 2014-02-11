@@ -33,7 +33,7 @@ before_script:
   # Clone GoldenCheetah
   - git clone --depth 50 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
+#  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
   # Copy in the libftd2xx libs/includes
   - mkdir D2XX
