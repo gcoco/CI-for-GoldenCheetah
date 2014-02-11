@@ -58,7 +58,7 @@ before_script:
 # Setup GoldenCheetah
   - git clone --depth 50 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
+#  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
   - sed -i "s|infile|exists(config.pri):infile|" qtsolutions/common.pri
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
