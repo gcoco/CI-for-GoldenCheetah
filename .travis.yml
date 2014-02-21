@@ -10,16 +10,17 @@ language:
 compiler:
   - clang
   
-env:
-  - BRANCH=master
-#  - BRANCH=release_3.0.1
-
+matrix:
+  include:
+    - BRANCH=master
+      QT=qt5
+      QT=qt4 
+    - BRANCH=release_3.0.1
+      QT=qt4
+      
 before_install:
   - brew update
-  # Qt4
-  #- brew install qt
-  # Qt5
-  - brew install qt5
+  - brew install $QT
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   #- brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
@@ -31,7 +32,7 @@ before_install:
   
 before_script:
   # Clone GoldenCheetah
-  - git clone --depth 50 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
 #  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
@@ -47,7 +48,7 @@ before_script:
   # QT4
   #- /usr/local/bin/lupdate src/src.pro
   # Qt5
-  - /usr/local/opt/qt5/bin/lupdate src/src.pro
+  - /usr/local/opt/$QT/bin/lupdate src/src.pro
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
@@ -79,7 +80,7 @@ script:
   # Qt4
   #- /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   # Qt5
-  - /usr/local/opt/qt5/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
+  - /usr/local/opt/$QT/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
   - make qmake_all 
   - make -j4 sub-qwt -silent
   - make -j4 sub-src
@@ -98,8 +99,8 @@ after_success:
   # Qt4
   #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   # Qt5
-  - /usr/local/opt/qt5/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
-  - brew remove qt5
+  - /usr/local/opt/$QT/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
+  - brew remove $QT
   - hdiutil mount GoldenCheetah.dmg
   - cd /Volumes/GoldenCheetah
   - ls -laR GoldenCheetah.app
