@@ -48,6 +48,7 @@ before_script:
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
   - curl https://github.com/GoldenCheetah/GoldenCheetah/pull/801.patch | git am
+  - git show --color
 #  - sh $TRAVIS_BUILD_DIR/git-info.sh
 #  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
