@@ -19,7 +19,8 @@ class Qwtplot3d < Formula
   def install
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
     system "cat qwtplot3d.pro"
-    system "/usr/local/opt/qt5/bin/qmake -makefile -spec unsupported/macx-clang"
+#    system "/usr/local/opt/qt/bin/qmake -makefile -spec unsupported/macx-clang"
+    system "/usr/local/opt/qt5/bin/qmake"
     system "make install"
   end
 end
