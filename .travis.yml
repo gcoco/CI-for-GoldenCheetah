@@ -7,9 +7,8 @@ compiler:
 
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
-  - sudo apt-get remove libqt4-* -qq
+  - sudo apt-get remove libqt4-* libqwtplot3d-* -qq
   - sudo apt-get update -qq
-  - sudo apt-get install libqwtplot3d-qt4-dev -qq
 
 before_script:
   - wget http://download.opensuse.org/repositories/home:/garethcoco:/ubuntu/xUbuntu_12.04/amd64/goldencheetah_3.0.1-1_amd64.deb
