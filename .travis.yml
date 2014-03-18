@@ -11,7 +11,7 @@ compiler:
   - clang
   
 env:
-    - BRANCH=master QT=qt5
+#    - BRANCH=master QT=qt5
     - BRANCH=master QT=qt4 
 #    - BRANCH=release_3.0.2
 #      QT=qt4
@@ -19,6 +19,8 @@ env:
 before_install:
   - brew update
   - brew install $QT
+  - ls -laR /usr/local/bin
+  - ls -laR /usr/local/opt
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
