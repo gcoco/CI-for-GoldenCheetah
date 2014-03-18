@@ -15,8 +15,8 @@ matrix:
     - BRANCH=master
       QT=qt5
       QT=qt4 
-    - BRANCH=release_3.0.1
-      QT=qt4
+#    - BRANCH=release_3.0.2
+#      QT=qt4
       
 before_install:
   - brew update
