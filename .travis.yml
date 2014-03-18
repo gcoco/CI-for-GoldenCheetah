@@ -10,11 +10,9 @@ language:
 compiler:
   - clang
   
-matrix:
-  include:
-    - BRANCH=master
-      QT=qt5
-      QT=qt4 
+env:
+    - BRANCH=master QT=qt5
+    - BRANCH=master QT=qt4 
 #    - BRANCH=release_3.0.2
 #      QT=qt4
       
