@@ -11,7 +11,7 @@ compiler:
   
 env:
   - BRANCH=master
-  - BRANCH=release_3.0.1
+#  - BRANCH=release_3.0.1
   
 before_install:
   - cat /proc/version && lsb_release -a && uname -mrs
