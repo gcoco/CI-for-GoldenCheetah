@@ -47,7 +47,7 @@ before_script:
   # QT4
   #- /usr/local/bin/lupdate src/src.pro
   # Qt5
-  - /usr/local/opt/$QT/bin/lupdate src/src.pro
+  - /usr/local/opt/$QT_PATH/bin/lupdate src/src.pro
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
