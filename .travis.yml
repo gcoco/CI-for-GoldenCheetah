@@ -11,16 +11,14 @@ compiler:
   - clang
   
 env:
-    - BRANCH=master QT=qt5 PATH=qt5
-    - BRANCH=master QT=qt4 PATH=qt
+    - BRANCH=master QT=qt5 QT_PATH=qt5
+    - BRANCH=master QT=qt4 QT_PATH=qt
 #    - BRANCH=release_3.0.2
 #      QT=qt4
       
 before_install:
   - brew update
-  - brew install $QT
-  - ls -laR /usr/local/bin
-  - ls -laR /usr/local/opt
+#  - brew install $QT
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
@@ -81,7 +79,7 @@ script:
   # Qt4
   #- /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   # Qt5
-  - /usr/local/opt/$PATH/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
+  - /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
   - make qmake_all 
   - make -j4 sub-qwt -silent
   - make -j4 sub-src
@@ -100,7 +98,7 @@ after_success:
   # Qt4
   #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   # Qt5
-  - /usr/local/opt/$PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
+  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   - brew remove $QT
   - hdiutil mount GoldenCheetah.dmg
   - cd /Volumes/GoldenCheetah
