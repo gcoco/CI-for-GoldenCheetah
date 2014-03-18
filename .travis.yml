@@ -11,8 +11,8 @@ compiler:
   - clang
   
 env:
-#    - BRANCH=master QT=qt5
-    - BRANCH=master QT=qt4 
+    - BRANCH=master QT=qt5 PATH=qt5
+    - BRANCH=master QT=qt4 PATH=qt
 #    - BRANCH=release_3.0.2
 #      QT=qt4
       
@@ -81,7 +81,7 @@ script:
   # Qt4
   #- /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   # Qt5
-  - /usr/local/opt/$QT/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
+  - /usr/local/opt/$PATH/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
   - make qmake_all 
   - make -j4 sub-qwt -silent
   - make -j4 sub-src
@@ -100,7 +100,7 @@ after_success:
   # Qt4
   #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   # Qt5
-  - /usr/local/opt/$QT/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
+  - /usr/local/opt/$PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   - brew remove $QT
   - hdiutil mount GoldenCheetah.dmg
   - cd /Volumes/GoldenCheetah
