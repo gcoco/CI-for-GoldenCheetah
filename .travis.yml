@@ -5,8 +5,6 @@ before_install:
 #  - brew install qt
 
 script:
-  - ls /usr/bin
-  - cat /usr/bin/xcodebuild
   - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d.rb
 
 after_success:
