@@ -5,7 +5,7 @@ class Qwtplot3d < Formula
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
-  depends_on 'qt'
+  depends_on 'qt5'
 
   def patches
     {
@@ -19,7 +19,7 @@ class Qwtplot3d < Formula
   def install
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
     system "cat qwtplot3d.pro"
-    system "qmake -makefile -spec unsupported/macx-clang"
+    system "/usr/local/opt/qt5/bin/qmake -makefile -spec unsupported/macx-clang"
     system "make install"
   end
 end
