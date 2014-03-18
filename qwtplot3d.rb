@@ -8,7 +8,7 @@ class Qwtplot3d < Formula
   option 'with-qt5', 'Build using Qt5 backend'
   
   if build.with? 'qt5'
-    qt_ver << build.with?('qt5') ? 'qt5' : 'qt4' )
+    qt_ver << ( build.with?('qt5') ? 'qt5' : 'qt4' )
   end
   
   depends_on "#{qt_ver}"
