@@ -18,7 +18,7 @@ env:
       
 before_install:
   - brew update
-#  - brew install $QT
+  - brew install $QT
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
