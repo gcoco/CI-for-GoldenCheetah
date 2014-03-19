@@ -22,6 +22,7 @@ class Qwtplot3d < Formula
   end
 
   def install
+    inreplace "qwtplot3d.pro", " qt ", " qt5 "
     inreplace "qwtplot3d.pro", "TARGET            = qwtplot3d", "TARGET            = qwtplot3d-#{qt-ver}"
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
     system "cat qwtplot3d.pro"
