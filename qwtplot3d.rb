@@ -19,14 +19,13 @@ class Qwtplot3d < Formula
   end
 
   def install
-    qt_path = "#{HOMEBREW_PREFIX}"
-    qt_ver = ( build.with?('qt5') ? 'qt5' : 'qt4' )
+    qt_path = ( build.with?('qt5') ? '#{Formula["qt5"].opt_prefix}' : '#{Formula["qt4"].opt_prefix}' )
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", *qt_path
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-" + ( build.with?('qt5') ? 'qt5' : 'qt4' )
     system "cat qwtplot3d.pro"
     #system *qt_path + "/bin/qmake"
     if build.with?('qt5')
-      system "#{Formula['qt5'].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
+      system "#{Formula['qt5'].opt_prefix}/bin/qmake"
     else
       system "#{Formula['qt4'].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
     end
