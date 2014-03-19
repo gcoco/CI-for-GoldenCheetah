@@ -7,7 +7,7 @@ class Qwtplot3d < Formula
 
   option 'with-qt5', 'Build using Qt5 backend'
 
-  depends_on "( build.with?('qt5') ? 'qt5' : 'qt4' )"
+  depends_on build.with?('qt5') ? 'qt5' : 'qt4'
 
   def patches
     {
