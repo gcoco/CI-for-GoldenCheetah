@@ -25,7 +25,11 @@ class Qwtplot3d < Formula
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-" + ( build.with?('qt5') ? 'qt5' : 'qt4' )
     system "cat qwtplot3d.pro"
     #system *qt_path + "/bin/qmake"
-    system "#{Formula['" + *qt_ver + "'].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
+    if build.with?('qt5')
+      system "#{Formula['qt5'].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
+    else
+      system "#{Formula['qt4'].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
+    end
     system "make install"
   end
 end
