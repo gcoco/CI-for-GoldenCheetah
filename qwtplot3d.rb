@@ -23,8 +23,8 @@ class Qwtplot3d < Formula
   end
 
   def install
-    qt_path = #{Formula["#{qt_ver}"].opt_prefix}/bin/qmake
-    #inreplace "qwtplot3d.pro", "TARGET            = qwtplot3d", "TARGET            = qwtplot3d-#{qt-ver}"
+    qt_path = '#{Formula["#{qt_ver}"].opt_prefix}/bin/qmake'
+    inreplace "qwtplot3d.pro", "TARGET            = qwtplot3d", "TARGET            = qwtplot3d-#{qt-ver}"
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
     system "cat qwtplot3d.pro"
     system "#{qt_path}/bin/qmake"
