@@ -19,12 +19,11 @@ class Qwtplot3d < Formula
   end
 
   def install
-    qt_path = #{Formula["( build.with?('qt5') ? 'qt5' : 'qt4' )"].opt_prefix}/bin/qmake
-    inreplace "qwtplot3d.pro", " qt ", " qt5 "
+    qt_path = #{Formula["( build.with?('qt5') ? 'qt5' : 'qt4' )"].opt_prefix}
     inreplace "qwtplot3d.pro", "TARGET            = qwtplot3d", "TARGET            = qwtplot3d-" + ( build.with?('qt5') ? 'qt5' : 'qt4' )
-    inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
+    inreplace "qwtplot3d.pro", "$$INSTALLBASE", *qt_path
     system "cat qwtplot3d.pro"
-    system "#{qt_path}/bin/qmake"
+    system *qt_path + "/bin/qmake"
     #system "#{Formula["qt"].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
     system "make install"
   end
