@@ -8,6 +8,7 @@ class Qwtplot3d < Formula
   option 'with-qt5', 'Build using Qt5 backend'
   
   qt_ver = ( build.with?('qt5') ? 'qt5' : 'qt4' )
+  qt_path = #{Formula["#{qt_ver}"].opt_prefix}/bin/qmake
   
   depends_on "#{qt_ver}"
 
@@ -21,12 +22,11 @@ class Qwtplot3d < Formula
   end
 
   def install
-    qt_path = #{Formula["#{qt_ver}"].opt_prefix}/bin/qmake
+    inreplace "qwtplot3d.pro", "TARGET            = qwtplot3d", "TARGET            = qwtplot3d-#{qt-ver}"
+    inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
     system "cat qwtplot3d.pro"
     system "#{qt_path}/bin/qmake"
     #system "#{Formula["qt"].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
-#    inreplace "qwtplot3d.pro", "TARGET            = qwtplot3d", "TARGET            = qwtplot3d-#{qt-ver}"
-#    inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
     system "make install"
   end
 end
