@@ -27,8 +27,6 @@ class Qwtplot3d < Formula
     system "cat qwtplot3d.pro"
     system "#{qt_path}/bin/qmake"
     #system "#{Formula["qt"].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
-    end
-    
     system "make install"
   end
 end
