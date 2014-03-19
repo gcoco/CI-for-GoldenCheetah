@@ -8,7 +8,7 @@ class Qwtplot3d < Formula
   option 'with-qt5', 'Build using Qt5 backend'
   
   qt_ver = ( build.with?('qt5') ? 'qt5' : 'qt4' )
-  qt_path = #{Formula["#{qt_ver}"].opt_prefix}/bin/qmake
+  qt_path = '#{Formula["#{qt_ver}"].opt_prefix}/bin/qmake'
   
   depends_on "#{qt_ver}"
 
