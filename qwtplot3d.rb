@@ -19,7 +19,7 @@ class Qwtplot3d < Formula
   end
 
   def install
-    qt_path = #{Formula["( build.with?('qt5') ? 'qt5' : 'qt4' )"].opt_prefix}
+    qt_path = "#{prefix}"
     inreplace "qwtplot3d.pro", "TARGET            = qwtplot3d", "TARGET            = qwtplot3d-" + ( build.with?('qt5') ? 'qt5' : 'qt4' )
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", *qt_path
     system "cat qwtplot3d.pro"
