@@ -1,13 +1,11 @@
 require 'formula'
 
-class Qwtplot3d < Formula
+class Qwtplot3d-qt5 < Formula
   homepage 'http://qwtplot3d.sourceforge.net/'
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
-  option 'with-qt5', 'Build using Qt5 backend'
-
-  depends_on build.with?('qt5') ? 'qt5' : 'qt4'
+  depends_on qt5
 
   def patches
     {
@@ -19,16 +17,10 @@ class Qwtplot3d < Formula
   end
 
   def install
-    qt_path = ( build.with?('qt5') ? '#{Formula["qt5"].opt_prefix}' : '#{Formula["qt4"].opt_prefix}' )
-    inreplace "qwtplot3d.pro", "$$INSTALLBASE", *qt_path
-    inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-" + ( build.with?('qt5') ? 'qt5' : 'qt4' )
+    inreplace "qwtplot3d.pro", "$$INSTALLBASE", #{prefix}
+    inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt5"
     system "cat qwtplot3d.pro"
-    #system *qt_path + "/bin/qmake"
-    if build.with?('qt5')
-      system "#{Formula['qt5'].opt_prefix}/bin/qmake"
-    else
-      system "#{Formula['qt4'].opt_prefix}/bin/qmake -makefile -spec unsupported/macx-clang"
-    end
+    system "#{Formula['qt5'].opt_prefix}/bin/qmake"
     system "make install"
   end
 end
