@@ -6,8 +6,8 @@ class Qwtplot3d < Formula
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
   option 'with-qt5', 'Build using Qt5 backend'
-  
-  depends_on "#{qt_ver}"
+
+  depends_on "( build.with?('qt5') ? 'qt5' : 'qt4' )"
 
   def patches
     {
