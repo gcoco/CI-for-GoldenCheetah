@@ -13,9 +13,7 @@ compiler:
 env:
     - BRANCH=master QT=qt5 QT_PATH=qt5
     - BRANCH=master QT=qt4 QT_PATH=qt
-#    - BRANCH=release_3.0.2
-#      QT=qt4
-      
+
 before_install:
   - brew update
   - brew install $QT
@@ -44,9 +42,6 @@ before_script:
   # Configure GoldenCheetah
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
-  # QT4
-  #- /usr/local/bin/lupdate src/src.pro
-  # Qt5
   - /usr/local/opt/$QT_PATH/bin/lupdate src/src.pro
   - sed -i "" "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
@@ -64,13 +59,7 @@ before_script:
   - sed -i "" "s|#\(KML_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(KML_LIBS    =.*\)|\1 -lkmldom -lkmlconvenience -lkmlengine -lkmlbase|" src/gcconfig.pri
   - sed -i "" "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/local/lib|" src/gcconfig.pri
-# clucene 0.9.21b
-#  - sed -i "" "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
-# clucene 2.3.3.4
   - sed -i "" "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene-core -lclucene-shared|" src/gcconfig.pri
-# Uncomment next two lines for Qt5
-#  - sed -i "" "s|LIBZ_INCLUDE =\).*|\1 -L/usr/local/opt/qt5/lib|" src/gcconfig.pri
-#  - sed -i "" "s|LIBZ_LIBS = \).*|\1 -I/usr/local/opt/qt5/include -lz|" src/gcconfig.pri
   - sed -i "" "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
   - sed -i "" "s|#\(PKGCONFIG = .*\)|\1 oauth libical clucene libusb|" src/gcconfig.pri
   - cd ..
@@ -83,22 +72,12 @@ script:
   - /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - make qmake_all 
   - make -j4 sub-qwt -silent
-  - make -j4 sub-src
+  - make -j4 sub-src -silent
 
 after_success:
   - cd src
-#  - mkdir GoldenCheetah.app/Contents/Frameworks
-#  - cp ../D2XX/libftd2xx.1.2.2.dylib GoldenCheetah.app/Contents/Frameworks
-#  - mkdir GoldenCheetah.app/Contents/Plugins
-#  - mkdir GoldenCheetah.app/Contents/Plugins/imageformats
-#  - mkdir GoldenCheetah.app/Contents/Plugins/sqldrivers
-#  - cp /usr/local/opt/qt/plugins/imageformats/libqjpeg.dylib GoldenCheetah.app/Contents/Plugins/imageformats
-#  - cp /usr/local/opt/qt/plugins/sqldrivers/libqsqlite.dylib GoldenCheetah.app/Contents/Plugins/sqldrivers
   - ls -laR GoldenCheetah.app
   - sh $TRAVIS_BUILD_DIR/check-gc.sh
-  # Qt4
-  #- /usr/local/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
-  # Qt5
   - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   - brew remove $QT
   - hdiutil mount GoldenCheetah.dmg
