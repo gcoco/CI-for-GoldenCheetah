@@ -17,7 +17,7 @@ class Qwtplot3dqt5 < Formula
   end
 
   def install
-    inreplace "qwtplot3d.pro", "$$INSTALLBASE", #{Formula['qt5'].opt_prefix}
+    inreplace "qwtplot3d.pro", "$$INSTALLBASE", *#{Formula['qt5'].opt_prefix}
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt5"
     system "cat qwtplot3d.pro"
     system "#{Formula['qt5'].opt_prefix}/bin/qmake"
