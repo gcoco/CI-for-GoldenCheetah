@@ -48,6 +48,7 @@ before_script:
   #- /usr/local/bin/lupdate src/src.pro
   # Qt5
   - /usr/local/opt/$QT_PATH/bin/lupdate src/src.pro
+  - sed -i "" "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
@@ -79,7 +80,7 @@ script:
   # Qt4
   #- /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   # Qt5
-  - /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive CONFIG+=release CONFIG+=static
+  - /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - make qmake_all 
   - make -j4 sub-qwt -silent
   - make -j4 sub-src
