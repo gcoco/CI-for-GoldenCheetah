@@ -5,7 +5,7 @@ class Qwtplot3dqt4 < Formula
   url 'http://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
   sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
-  depends_on qt4
+  depends_on qt
 
   def patches
     {
@@ -20,7 +20,7 @@ class Qwtplot3dqt4 < Formula
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{Formula['qt4'].opt_prefix}"
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt4"
     system "cat qwtplot3d.pro"
-    system "#{Formula['qt4'].opt_prefix}/bin/qmake"
+    system "#{Formula['qt'].opt_prefix}/bin/qmake"
     system "make install"
   end
 end
