@@ -17,7 +17,7 @@ class Qwtplot3dQt4 < Formula
   end
 
   def install
-    inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{Formula['qt'].opt_prefix}"
+    inreplace "qwtplot3d.pro", "$$INSTALLBASE", "#{prefix}"
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt4"
     system "cat qwtplot3d.pro"
     system "#{Formula['qt'].opt_prefix}/bin/qmake"
