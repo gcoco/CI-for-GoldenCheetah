@@ -49,7 +49,7 @@ before_script:
   - cd $BRANCH
 #  - sh $TRAVIS_BUILD_DIR/git-info.sh
 #  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
-  - sh $TRAVIS_BUILD_DIR/git-info.sh
+#  - sh $TRAVIS_BUILD_DIR/git-info.sh
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - sed -i "s|infile|exists(config.pri):infile|" qtsolutions/common.pri
