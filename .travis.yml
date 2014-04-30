@@ -5,6 +5,11 @@ before_install:
   - export MXE_DIR=~/tmp/mxe
   - rm -rf $MXE_DIR
   - git clone --depth=1 https://github.com/mxe/mxe.git $MXE_DIR
+  - sudo apt-get install \
+    autoconf automake bash bison bzip2 cmake flex gettext \
+    git g++ gperf intltool libffi-dev libtool libltdl-dev \
+    libssl-dev libxml-parser-perl make openssl patch perl \
+    pkg-config python ruby scons sed unzip wget xz-utils
   
 script:
   - make -C $MXE_DIR MXE_TARGETS="$TGT" gcc
