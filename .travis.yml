@@ -9,7 +9,7 @@ before_install:
     libssl-dev libxml-parser-perl make openssl patch perl pkg-config python ruby scons sed unzip wget xz-utils
   
 script:
-  - make -C $MXE_DIR MXE_TARGETS="$TGT" gcc JOBS=4
+  - travis_wait(30 make -C $MXE_DIR MXE_TARGETS="$TGT" gcc JOBS=4)
   
 after_success:
   - ls -laR $MXE_DIR
