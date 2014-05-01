@@ -17,7 +17,7 @@ script:
   - time make -C $MXE_DIR MXE_TARGETS="$TGT" gcc-mpfr JOBS=4
   - time make -C $MXE_DIR MXE_TARGETS="$TGT" gcc-mpc JOBS=4
   - time make -C $MXE_DIR MXE_TARGETS="$TGT" mingw-w64 JOBS=4
-  - travis_wait 30 time make -C $MXE_DIR MXE_TARGETS="$TGT" gcc JOBS=4
+  - travis_wait 30 make -C $MXE_DIR MXE_TARGETS="$TGT" gcc JOBS=4
 
 after_success:
   - ls -laR $MXE_DIR
