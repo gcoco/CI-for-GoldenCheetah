@@ -91,8 +91,8 @@ script:
   - cd $BRANCH
   - qmake-qt4 -recursive
   - make qmake_all
-  - make -j4 sub-qwt
-  - make -j4 sub-src
+  - make -j4 sub-qwt --silent
+  - make -j4 sub-src --silent
 
 after_success:
   - cd $TRAVIS_BUILD_DIR
