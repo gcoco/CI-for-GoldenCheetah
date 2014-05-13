@@ -71,8 +71,8 @@ script:
   # Qt5
   - /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - make qmake_all 
-  - make -j4 sub-qwt -silent
-  - make -j4 sub-src -silent
+  - make -j4 sub-qwt --silent
+  - make -j4 sub-src --silent
 
 after_success:
   - cd src
