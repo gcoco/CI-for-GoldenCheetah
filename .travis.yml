@@ -103,8 +103,8 @@ script:
   - cd $BRANCH
   - qmake -recursive
   - make qmake_all
-  - make -j2 sub-qwt
-  - make -j2 sub-src
+  - make -j2 sub-qwt --silent
+  - make -j2 sub-src --silent 
 
 after_success:
   - ldd src/GoldenCheetah
