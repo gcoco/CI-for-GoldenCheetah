@@ -36,7 +36,7 @@ class Libkml < Formula
 
   # Fix compilation with clang and gcc 4.7+
   # https://code.google.com/p/libkml/issues/detail?id=179
-  patch :DATA if build.stable
+  patch :DATA if build.stable?
 
   def install
     if build.head?
