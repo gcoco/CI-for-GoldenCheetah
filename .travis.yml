@@ -5,12 +5,8 @@ before_install:
 #  - brew install qt
 
 script:
-  - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-qt4.rb
-  - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-qt5.rb
+  - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
 
 after_success:
-  - ls -laR /usr/local | egrep "qwt3d|qwtplot3d"
-  - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-qt4.rb
-  - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-qt4.rb
-  - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-qt5.rb
-  - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-qt5.rb
+  - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
