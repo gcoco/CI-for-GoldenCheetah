@@ -5,7 +5,7 @@ before_install:
 #  - brew install qt
 
 script:
-  - brew install --verbose --debug --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
 
 after_success:
   - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
