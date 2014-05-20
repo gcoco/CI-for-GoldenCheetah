@@ -21,13 +21,15 @@ before_install:
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
   - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb
-  - brew install libkml --HEAD
+  #- brew install libkml --HEAD
+  - brew install --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
   - hdiutil mount D2XX1.2.2.dmg
   
 before_script:
+  - date
   # Clone GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
