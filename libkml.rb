@@ -40,7 +40,8 @@ class Libkml < Formula
 
   def install
     if build.head?
-      system "./autogen.sh"
+      system "ls -la"
+      system "sh" "./autogen.sh"
     end
 
     system "./configure", "--prefix=#{prefix}"
