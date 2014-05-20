@@ -21,7 +21,7 @@ class Libkml < Formula
 
 
   head do
-    url 'https://github.com/google/libkml'
+    url 'https://github.com/google/libkml.git', :branch => 'master'
 
     depends_on "autoconf" => :build
     depends_on "automake" => :build
