@@ -28,10 +28,11 @@ class Libkml < Formula
     depends_on "libtool" => :build
 
     # see stable patch
-    patch do
-      url "https://gist.githubusercontent.com/dakcarto/7420023/raw/65cdb088c91a7da844251e348eeda8df1d903f1d/libkml-svn-static-deps"
-      sha1 "9ef82d73199325e63596c28c6965ec8c151bf7c5"
-    end
+    #patch do
+    #  url "https://gist.githubusercontent.com/dakcarto/7420023/raw/65cdb088c91a7da844251e348eeda8df1d903f1d/libkml-svn-static-deps"
+    #  sha1 "9ef82d73199325e63596c28c6965ec8c151bf7c5"
+    #end
+    subst
   end
 
   # Fix compilation with clang and gcc 4.7+
@@ -41,6 +42,13 @@ class Libkml < Formula
   def install
     if build.head?
       system "ls -la"
+      inreplace "third_party/Makefile.am" do |s|
+        s.sub! /(lib_LTLIBRARIES =) libminizip.la liburiparser.la/, "\\1"
+        s.sub! /(noinst_LTLIBRARIES = libgtest.la libgtest_main.la)/,
+               "\\1 libminizip.la liburiparser.la"
+        s.sub! /(libminizip_la_LDFLAGS =)/, "\\1 -static"
+        s.sub! /(liburiparser_la_LDFLAGS =)/, "\\1 -static"
+      end
       system "sh", "./autogen.sh"
     end
 
