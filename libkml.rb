@@ -21,19 +21,12 @@ class Libkml < Formula
 
 
   head do
-    url 'https://github.com/google/libkml.git', :branch => 'master'
+    url 'https://github.com/google/libkml.git',
+        :revision => "9b50572641f671194e523ad21d0171ea6537426e"
 
     depends_on "autoconf" => :build
     depends_on "automake" => :build
     depends_on "libtool" => :build
-
-    inreplace "third_party/Makefile.am" do |s|
-      s.sub! /(lib_LTLIBRARIES =) libminizip.la liburiparser.la/, "\\1"
-      s.sub! /(noinst_LTLIBRARIES = libgtest.la libgtest_main.la)/,
-             "\\1 libminizip.la liburiparser.la"
-      s.sub! /(libminizip_la_LDFLAGS =)/, "\\1 -static"
-      s.sub! /(liburiparser_la_LDFLAGS =)/, "\\1 -static"
-    end
   end
 
   # Fix compilation with clang and gcc 4.7+
@@ -42,6 +35,13 @@ class Libkml < Formula
 
   def install
     if build.head?
+      inreplace "third_party/Makefile.am" do |s|
+        s.sub! /(lib_LTLIBRARIES =) libminizip.la liburiparser.la/, "\\1"
+        s.sub! /(noinst_LTLIBRARIES = libgtest.la libgtest_main.la)/,
+               "\\1 libminizip.la liburiparser.la"
+        s.sub! /(libminizip_la_LDFLAGS =)/, "\\1 -static"
+        s.sub! /(liburiparser_la_LDFLAGS =)/, "\\1 -static"
+      end
       system "./autogen.sh"
     end
 
