@@ -16,8 +16,8 @@ env:
 
 before_install:
   - date
-  - which clang && clang -V
-  - which clang++ && clang++ -V
+  - which clang && clang -v
+  - which clang++ && clang++ -v
   - brew update
   - brew install $QT
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
