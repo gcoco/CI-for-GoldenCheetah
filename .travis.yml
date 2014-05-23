@@ -17,7 +17,9 @@ env:
 before_install:
   - date
   - which clang && clang -v
+  - /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v
   - which clang++ && clang++ -v
+  - /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -v
   - brew update
   - brew install $QT
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
@@ -75,10 +77,10 @@ script:
   # Qt4
   #- /usr/local/bin/qmake -makefile -spec unsupported/macx-clang -recursive CONFIG+=release CONFIG+=static QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   # Qt5
-  - /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
-  - make qmake_all 
-  - make -j4 sub-qwt --silent
-  - make -j4 sub-src
+  - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - CC=clang CXX=clang++ make qmake_all 
+  - CC=clang CXX=clang++ make -j4 sub-qwt --silent
+  - CC=clang CXX=clang++ make -j4 sub-src
 
 after_success:
   - cd src
