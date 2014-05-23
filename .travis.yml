@@ -8,5 +8,7 @@ script:
   - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
 
 after_success:
+  - ls -laR /usr/local/Cellar/libkml
+  - otool -L /usr/local/lib/libkml*
   - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
