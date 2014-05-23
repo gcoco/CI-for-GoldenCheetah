@@ -5,10 +5,11 @@ before_install:
 #  - brew install qt
 
 script:
-  - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install --verbose --debug --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
 
 after_success:
   - ls -laR /usr/local/Cellar/libkml
-  - otool -L /usr/local/lib/libkml*
+  - otool -fahlL /usr/local/lib/libkml*
+  - lipo -info /usr/local/lib/libkml*
   - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
