@@ -9,7 +9,7 @@ script:
 
 after_success:
   - ls -laR /usr/local/Cellar/libkml
-  - otool -fahlL /usr/local/lib/libkml*
+  - otool -STL /usr/local/lib/libkml*
   - lipo -info /usr/local/lib/libkml*
   - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
