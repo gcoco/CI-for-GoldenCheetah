@@ -26,8 +26,8 @@ before_install:
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
   - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb
-  #- brew install libkml --HEAD
-  #- brew install --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install libkml --HEAD
+  - brew install --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
@@ -62,8 +62,8 @@ before_script:
   - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
   - sed -i "" "s|#\(LIBUSB_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
-  #- sed -i "" "s|#\(KML_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  #- sed -i "" "s|#\(KML_LIBS    =.*\)|\1 -lkmlxsd -lkmlregionator -lkmldom -lkmlconvenience -lkmlengine -lkmlbase|" src/gcconfig.pri
+  - sed -i "" "s|#\(KML_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(KML_LIBS    =.*\)|\1 -lkmlxsd -lkmlregionator -lkmldom -lkmlconvenience -lkmlengine -lkmlbase|" src/gcconfig.pri
   - sed -i "" "s|#\(QMAKE_CFLAGS_X86_64 +=\).*|\1 -mmacosx-version-min=10.7|" src/gcconfig.pri
   - sed -i "" "s|#\(QMAKE_CXXFLAGS_X86_64\).*|\1 += -mmacosx-version-min=10.7|" src/gcconfig.pri
   - sed -i "" "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/local/lib|" src/gcconfig.pri
