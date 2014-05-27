@@ -21,6 +21,7 @@ before_install:
   - which clang++ && clang++ -v
   - /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -v
   - brew update
+  - brew remove qt qt5
   - brew install $QT
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
