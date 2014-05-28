@@ -1,12 +1,13 @@
 language: objective-c
 
 env:
-  - FILE = qwtplot3d-0.3.1-qt5.rb
+  - FILE=qwtplot3d-0.3.1-qt5.rb
+  
 before_install:
   - brew update
 
 script:
-  - brew install --verbose --debug --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
+  - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
 
 after_success:
 #  - ls -laR /usr/local/Cellar/libkml
