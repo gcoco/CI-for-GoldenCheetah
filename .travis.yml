@@ -1,15 +1,16 @@
 language: objective-c
 
+env:
+  - FILE = qwtplot3d-0.3.1-qt5.rb
 before_install:
   - brew update
-#  - brew install qt
 
 script:
-  - brew install --verbose --debug --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install --verbose --debug --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
 
 after_success:
-  - ls -laR /usr/local/Cellar/libkml
-  - otool -L /usr/local/lib/libkml*
-  - lipo -info /usr/local/lib/libkml*
-  - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
-  - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+#  - ls -laR /usr/local/Cellar/libkml
+#  - otool -L /usr/local/lib/libkml*
+#  - lipo -info /usr/local/lib/libkml*
+  - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
+  - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
