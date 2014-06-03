@@ -17,17 +17,21 @@ env:
 before_install:
   - OS=`uname`
   - echo $OS
+  - if [ "$OS" = "Darwin" ];
+    then
+      brew update;
+      brew install $QT;
+      brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb;
+    fi
 
 before_script:
 
 script:
-  - if [ "$OS" = "Darwin" ];
-    then
-      echo "Darwin - " $QT;
-    fi
   - if [ "$OS" = "Linux" ];
     then
       echo "Linux - " $QT;
     fi
-  
+  - cd GoldenCheetah
+  - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
+
 after_script:
