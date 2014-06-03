@@ -8,8 +8,8 @@ os:
   - osx
   
 global:
-  - QT=qt4
-  - QT=qt5
+  - BRANCH=master QT=qt4
+  - BRANCH=master QT=qt5
 
 before_install:
 
@@ -17,6 +17,8 @@ before_install:
 before_script:
 
 script:
-  set
+  echo $BRANCH
+  echo $QT
+  
   
 after_script:
