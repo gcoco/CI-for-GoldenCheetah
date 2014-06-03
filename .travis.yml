@@ -24,7 +24,7 @@ before_install:
       brew update;
       brew install $QT;
       brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb;
-      QMAKE=/usr/local/opt/$QT/bin/qmake
+      QMAKE=/usr/local/opt/$QT/bin/qmake;
     fi
   - if [ "$OS" = "Linux" ];
     then
@@ -32,7 +32,7 @@ before_install:
       sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa;
       sudo apt-get update -qq;
       sudo apt-get install ${LINUX_${QT}};
-      export QT_SELECT=$QT
+      export QT_SELECT=$QT;
     fi
 
 before_script:
