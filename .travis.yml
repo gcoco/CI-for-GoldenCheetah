@@ -1,21 +1,22 @@
-language:
-  - cpp
+#language:
+#  - cpp
+#  
+#compiler:
+#  - gcc
+os:
+  - linux
+  - osx
   
-compiler:
-  - gcc
-  
+global:
+  - QT=qt4
+  - QT=qt5
 
 before_install:
-  - cat /proc/version && lsb_release -a && uname -mrs
-  - sudo apt-get remove libqt4-* libqwtplot3d-* -qq
-  - sudo apt-get update -qq
+
 
 before_script:
-  - wget http://download.opensuse.org/repositories/home:/garethcoco:/ubuntu/xUbuntu_12.04/amd64/goldencheetah_3.0.1-1_amd64.deb
 
 script:
-  - sudo dpkg -i goldencheetah_3.0.1-1_amd64.deb
-  - sudo apt-get -f install
-
+  set
+  
 after_script:
-  - ldd /usr/bin/GoldenCheetah
