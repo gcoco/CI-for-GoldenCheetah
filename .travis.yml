@@ -8,8 +8,11 @@ os:
   - osx
   
 global:
-  - BRANCH=master QT=qt4
-  - BRANCH=master QT=qt5
+  - BRANCH=master
+  
+env:
+  - QT=qt4
+  - QT=qt5
 
 before_install:
   - OS=`uname`
@@ -20,11 +23,11 @@ before_script:
 script:
   - if [ "$OS" = "Darwin" ];
     then
-      echo "Darwin - $QT";
+      echo "Darwin - " $QT;
     fi
   - if [ "$OS" = "Linux" ];
     then
-      echo "Linux - $QT";
+      echo "Linux - " $QT;
     fi
   
 after_script:
