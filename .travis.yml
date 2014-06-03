@@ -18,8 +18,13 @@ before_install:
 before_script:
 
 script:
-  echo $BRANCH
-  echo $QT
-  
+  - if [ "$OS" = "Darwin" ]
+    then
+      echo "Darwin - $QT"
+    fi
+  - if [ "$OS" = "Linux" ]
+    then
+      echo "Linux - $QT"
+    fi
   
 after_script:
