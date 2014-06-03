@@ -8,7 +8,7 @@ os:
   - osx
   
 global:
-  - BRANCH=master
+  - BRANCH="master"
   - LINUX_QT4="qt4-qmake qt4-dev-tools libqt4-dev libqwtplot3d-qt4"
   - LINUX_QT5="qt5-default qttools5-dev qttools5-dev-tools qtscript5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5webkit5-dev libqt5svg5-dev"
   
@@ -24,14 +24,14 @@ before_install:
       brew update;
       brew install $QT;
       brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb;
-      QMAKE=/usr/local/opt/$QT/bin/qmake;
+      export QMAKE=/usr/local/opt/$QT/bin/qmake;
     fi
   - if [ "$OS" = "Linux" ];
     then
       sudo apt-get update -qq;
       sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa;
       sudo apt-get update -qq;
-      QT_INSTALL=LINUX_$QT
+      export QT_INSTALL=LINUX_$QT
       sudo apt-get install $QT_INSTALL;
       export QT_SELECT=$QT;
     fi
