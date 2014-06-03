@@ -9,6 +9,8 @@ os:
   
 global:
   - BRANCH=master
+  - LINUX_QT4="qt4-qmake qt4-dev-tools libqt4-dev libqwtplot3d-qt4"
+  - LINUX_QT5="qt5-default qttools5-dev qttools5-dev-tools qtscript5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5webkit5-dev libqt5svg5-dev"
   
 env:
   - QT=qt4
@@ -22,16 +24,32 @@ before_install:
       brew update;
       brew install $QT;
       brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb;
+      QMAKE=/usr/local/opt/$QT/bin/qmake
+    fi
+  - if [ "$OS" = "Linux" ];
+    then
+      sudo apt-get update -qq;
+      sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa;
+      sudo apt-get update -qq;
+      sudo apt-get install ${LINUX_${QT}};
+      export QT_SELECT=$QT
     fi
 
 before_script:
 
 script:
+  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - cd $BRANCH
+  - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
+  - if [ "$OS" = "Darwin" ];
+    then
+      $QMAKE -recursive;
+      make -j4 sub-qwt;
+    fi
   - if [ "$OS" = "Linux" ];
     then
-      echo "Linux - " $QT;
+      qmake -recursive;
+      make -j4 sub-qwt;
     fi
-  - cd GoldenCheetah
-  - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
 
 after_script:
