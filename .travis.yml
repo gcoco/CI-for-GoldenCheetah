@@ -12,7 +12,8 @@ global:
   - BRANCH=master QT=qt5
 
 before_install:
-
+  - OS=`uname`
+  - echo $OS
 
 before_script:
 
