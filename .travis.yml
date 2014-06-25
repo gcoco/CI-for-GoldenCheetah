@@ -11,7 +11,7 @@ compiler:
 
 env:
   - REPO=GoldenCheetah BRANCH=master QT=qt5
-  - REPO=gcoco BRANCH=Lib_path_fail QT=qt5
+#  - REPO=gcoco BRANCH=Lib_path_fail QT=qt5
 
 before_install:
   - date
@@ -103,7 +103,7 @@ script:
   - qmake -recursive
   - make qmake_all
   - make -j2 sub-qwt --silent
-  - make -j2 sub-src --silent || make
+  - make -j2 sub-src
 
 after_success:
   - ldd src/GoldenCheetah
