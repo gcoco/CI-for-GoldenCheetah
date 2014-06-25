@@ -103,7 +103,7 @@ script:
   - qmake -recursive
   - make qmake_all
   - make -j2 sub-qwt --silent
-  - make -j2 sub-src --silent 
+  - make -j2 sub-src --silent || make
 
 after_success:
   - ldd src/GoldenCheetah
