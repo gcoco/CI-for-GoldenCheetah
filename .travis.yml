@@ -28,7 +28,8 @@ before_install:
   - sudo apt-get install qt5-default qttools5-dev qttools5-dev-tools qtscript5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5webkit5-dev libqt5svg5-dev 
   - dpkg --get-selections
 # Extras
-  - sudo apt-get install -qq liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev libpulse-dev
+  - sudo apt-get install -qq liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libclucene-dev libpulse-dev
+#  - sudo apt-get install -qq libvlc-dev libvlccore-dev 
 #  libkml-dev
 #  - sudo apt-get install -qq liburiparser-dev libexpat1-dev libboost-all-dev
   - export QT_SELECT=$QT
@@ -78,12 +79,13 @@ before_script:
   - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 /usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
-  - sed -i "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(VLC_LIBS    =.*\)|\1 -lvlc -lvlccore|" src/gcconfig.pri
+#  - sed -i "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
+#  - sed -i "s|#\(VLC_LIBS    =.*\)|\1 -lvlc -lvlccore|" src/gcconfig.pri
   - sed -i "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/include/CLucene /usr/lib|" src/gcconfig.pri
   - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
   - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
-  - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
+#  - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
+  - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb|" src/gcconfig.pri
   - lupdate src/src.pro
   - cd ..
 
@@ -103,7 +105,7 @@ script:
   - qmake -recursive
   - make qmake_all
   - make -j2 sub-qwt --silent
-  - make -j2 sub-src
+  - make -j2 sub-src --silent
 
 after_success:
   - ldd src/GoldenCheetah
