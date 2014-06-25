@@ -10,7 +10,7 @@ compiler:
   - gcc
 
 env:
-#  - REPO=GoldenCheetah BRANCH=master QT=qt5
+  - REPO=GoldenCheetah BRANCH=master QT=qt5
   - REPO=gcoco BRANCH=Lib_path_fail QT=qt5
 
 before_install:
