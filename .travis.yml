@@ -10,14 +10,13 @@ compiler:
   - gcc
 
 env:
-#  - BRANCH=master QT=qt4
-  - BRANCH=master QT=qt5
+#  - REPO=GoldenCheetah BRANCH=master QT=qt5
+  - REPO=gcoco BRANCH=Lib_path_fail QT=qt5
 
 before_install:
   - date
   - cat /proc/version && lsb_release -a && uname -mrs
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
-#  - sudo add-apt-repository --yes ppa:canonical-qt5-edgers/qt5-beta-proper
   - sudo apt-get update -qq
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
 #  - sudo apt-get dist-upgrade -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
@@ -57,7 +56,7 @@ before_script:
   - git clone --depth 1 git://github.com/rclasen/srmio.git
   - cd srmio && sh ./genautomake.sh && cd ..
 # Setup GoldenCheetah
-  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
+  - git clone --depth 1 -b $BRANCH git://github.com/$REPO/GoldenCheetah.git $BRANCH
   - cd $BRANCH
 #  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
   - sh $TRAVIS_BUILD_DIR/git-info.sh
