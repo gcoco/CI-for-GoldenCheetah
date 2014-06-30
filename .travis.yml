@@ -83,8 +83,10 @@ before_script:
   - sed -i "s|#\(VLC_LIBS    =.*\)|\1 -lvlc -lvlccore|" src/gcconfig.pri
   - sed -i "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/include/CLucene /usr/lib|" src/gcconfig.pri
   - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
+  - sed -i "s|#\(DEFINES += GC_VIDEO_VLC.*\)|\1|" src/gcconfig.pri
   - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
   - sed -i "s|#\(PKGCONFIG = .*\)|\1 oauth libical libusb libvlc vlc-plugin|" src/gcconfig.pri
+  - cat src/gcconfig.pri
   - lupdate src/src.pro
   - cd ..
 
