@@ -65,7 +65,7 @@ before_script:
   - sed -i "" "s|#\(QMAKE_CXXFLAGS_\).*|\1RELEASE += -mmacosx-version-min=10.7 -arch x86_64|" src/gcconfig.pri
   - sed -i "" "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/local/lib|" src/gcconfig.pri
   - sed -i "" "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene-core -lclucene-shared|" src/gcconfig.pri
-  - sed -i "s|#\(DEFINES += GC_VIDEO_QUICKTIME.*\)|\1|" src/gcconfig.pri
+  - sed -i "" "s|#\(DEFINES += GC_VIDEO_QUICKTIME.*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
   - sed -i "" "s|#\(PKGCONFIG = .*\)|\1 oauth libical clucene libusb|" src/gcconfig.pri
   - cat src/gcconfig.pri
