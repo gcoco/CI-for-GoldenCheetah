@@ -1,7 +1,7 @@
 language: objective-c
 
 env:
-  - FILE=clucene.rb
+  - FILE=qwtplot3d-0.3.1-qt5.rb
   
 before_install:
   - brew update
