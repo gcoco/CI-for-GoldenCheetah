@@ -12,6 +12,7 @@ class Qwtplot3d031Qt5 < Formula
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt5"
     inreplace "qwtplot3d.pro", "static", "release"
     inreplace "qwtplot3d.pro", "0.3.0", "0.3.1"
+    
      #inreplace "qwtplot3d.pro", "$$INSTALLBASE", prefix
     system "#{Formula['qt5'].opt_prefix}/bin/qmake"
     system "make"
