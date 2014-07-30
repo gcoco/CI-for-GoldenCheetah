@@ -17,6 +17,12 @@ env:
   - QT=qt5
 
 before_install:
+  - echo Apple > fruit.txt
+  - cat fruit.txt
+  - sed -i'' 's|Apple|Orange|g' fruit.txt
+  - cat fruit.txt
+  skdfjskjfd
+
   - OS=`uname`
   - echo $OS
   - if [ "$OS" = "Darwin" ];
@@ -41,9 +47,6 @@ before_script:
 script:
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-  - sed -i'' 's,#CONFIG,CONFIG,g' 'src/gcconfig.pri.in'
-  - cat src/gcconfig.pri.in
-  skdfjskjfd
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - if [ "$OS" = "Darwin" ];
     then
