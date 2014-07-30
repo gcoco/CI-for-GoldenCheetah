@@ -41,6 +41,9 @@ before_script:
 script:
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
+  - sed -i'' 's,#CONFIG,CONFIG,g' 'src/gcconfig.pri.in'
+  - cat src/gcconfig.pri.in
+  skdfjskjfd
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - if [ "$OS" = "Darwin" ];
     then
