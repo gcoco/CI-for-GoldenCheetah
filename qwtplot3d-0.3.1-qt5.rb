@@ -21,6 +21,5 @@ class Qwtplot3d031Qt5 < Formula
     inreplace "qwtplot3d.pro", "$$INSTALLBASE", prefix
     system "#{Formula['qt5'].opt_prefix}/bin/qmake"
     system "make install"
-    system "ls -lR /usr/local | grep qwtplot"
   end
 end
