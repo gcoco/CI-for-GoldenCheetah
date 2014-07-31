@@ -1,6 +1,6 @@
 require 'formula'
 
-class Qwtplot3d031Qt5 < Formula
+class Qwtplot3dQt5 < Formula
   homepage 'http://qwtplot3d.sourceforge.net/'
   url 'http://sintegrial.com/get.php?file=qwtplot3d_src'
   sha1 'e4ffbbe893359d3069475a1bdaa03fca302fc70d'
