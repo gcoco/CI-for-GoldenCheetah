@@ -16,7 +16,7 @@ env:
 
 before_install:
   - date
-  - echo Apple > fruit.txt
+  - echo "Apple" > fruit.txt
   - cat fruit.txt
   - sed -i'' 's|Apple|Orange|g' fruit.txt
   - cat fruit.txt
