@@ -7,7 +7,7 @@ class Qwtplot3d031Qt5 < Formula
   version '0.3.1'
 
   depends_on 'qt5'
-  
+
   def install
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt5"
     inreplace "qwtplot3d.pro", "static", "release"
