@@ -18,7 +18,7 @@ before_install:
   - cat fruit.txt
   - sed -i'' 's|Apple|Orange|g' fruit.txt
   - cat fruit.txt
-  skdfjskjfdghj
+  - skdfjskjfdghj
 
 
   - cat /proc/version && lsb_release -a && uname -mrs
