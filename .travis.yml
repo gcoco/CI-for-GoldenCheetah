@@ -14,7 +14,7 @@ global:
   
 env:
   - QT=qt4
-  - QT=qt5
+#  - QT=qt5
 
 before_install:
   - echo Apple > fruit.txt
