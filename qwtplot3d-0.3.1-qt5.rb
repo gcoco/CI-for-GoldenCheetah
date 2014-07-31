@@ -8,6 +8,15 @@ class Qwtplot3d031Qt5 < Formula
 
   depends_on 'qt5'
 
+  def patches
+    {
+      :p0 => [
+        "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
+      ]
+    }
+  end
+
+
 
   def install
     system "cat include/qwt3d_openglhelper.h.orig"
