@@ -20,8 +20,7 @@ before_install:
   - echo $OS
   - echo Apple > fruit.txt
   - cat fruit.txt
-  - sed --help
-  - sed -i'' 's|Apple|Orange|g' fruit.txt
+  - sed -i'' 's|Apple|Orange|g' fruit.txt || sed -i '' 's|Apple|Orange|g' fruit.txt
   - cat fruit.txt
   - skdfjskjfd
 
