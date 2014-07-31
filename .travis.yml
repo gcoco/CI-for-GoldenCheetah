@@ -16,6 +16,13 @@ env:
 
 before_install:
   - date
+  - echo Apple > fruit.txt
+  - cat fruit.txt
+  - sed -i'' 's|Apple|Orange|g' fruit.txt
+  - cat fruit.txt
+  skdfjskjfd
+
+
   - brew update
   - brew install $QT
   - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
