@@ -6,20 +6,8 @@ class Qwtplot3d031Qt5 < Formula
   sha1 'e4ffbbe893359d3069475a1bdaa03fca302fc70d'
   version '0.3.1'
 
-  depends_on 'qt5'
-
-  def patches
-    {
-      :p0 => [
-        "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
-      ]
-    }
-  end
-
-
-
   def install
-    system "cat include/qwt3d_openglhelper.h.orig"
+    system "cat include/qwt3d_openglhelper.h"
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt5"
     inreplace "qwtplot3d.pro", "static", "release"
     inreplace "qwtplot3d.pro", "0.3.0", "0.3.1"
