@@ -7,7 +7,7 @@ before_install:
   - brew update
 
 script:
-  - brew install --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
+  - brew install  --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
 
 after_success:
   - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
