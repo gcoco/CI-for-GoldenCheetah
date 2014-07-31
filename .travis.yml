@@ -9,6 +9,7 @@ language:
   
 compiler:
   - clang
+  - gcc
   
 env:
     - BRANCH=master QT=qt5 QT_PATH=qt5
@@ -23,7 +24,7 @@ before_install:
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
   - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb
   #- brew install libkml --HEAD
-  - brew install --HEAD --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
