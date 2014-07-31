@@ -14,7 +14,7 @@ env:
 #  - BRANCH=release_3.0.1
   
 before_install:
-  - echo Apple > fruit.txt
+  - echo "Apple" > fruit.txt
   - cat fruit.txt
   - sed -i'' 's|Apple|Orange|g' fruit.txt
   - cat fruit.txt
