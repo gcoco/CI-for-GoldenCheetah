@@ -1,8 +1,7 @@
-#language:
-#  - cpp
-#  
-#compiler:
-#  - gcc
+branches:
+  only:
+    - Linux-GC-Install
+    
 os:
   - linux
   - osx
