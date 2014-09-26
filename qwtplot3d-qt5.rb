@@ -3,8 +3,8 @@ require 'formula'
 class Qwtplot3dQt5 < Formula
   homepage 'http://qwtplot3d.sourceforge.net/'
   url 'http://sintegrial.com/get.php?file=qwtplot3d_src'
-  sha1 'e4ffbbe893359d3069475a1bdaa03fca302fc70d'
-  version '0.3.1'
+  sha1 '944596fbac3c5ff94e2e8e0908cc831855e917a1'
+  version '0.3.1_322'
 
   depends_on 'qt5'
 
