@@ -14,15 +14,6 @@ env:
 #  - BRANCH=release_3.0.1
   
 before_install:
-  - echo "Apple" > fruit.txt
-  - cat fruit.txt
-  - sed -i '' 's|Apple|Orange|g' 'fruit.txt'
-  - cat fruit.txt
-  - sed -i'' 's|Orange|Apple|g' 'fruit.txt'
-  - cat fruit.txt
-  - skdfjskjfdghj
-
-
   - cat /proc/version && lsb_release -a && uname -mrs
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
   - sudo apt-get update -qq
