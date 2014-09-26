@@ -9,16 +9,17 @@ class Qwtplot3dQt5 < Formula
   depends_on 'qt5'
 
   def install
-    inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt5"
-    inreplace "qwtplot3d.pro", "static", "release"
-    inreplace "qwtplot3d.pro", "0.3.0", "0.3.1"
+    inreplace "qwtplot3d.pri", "TARGET = qwtplot3d", "TARGET = qwtplot3d-qt5"
+    inreplace "config.pri", "static", "release"
     inreplace "include/qwt3d_openglhelper.h", "GL/glu.h", "OpenGL/glu.h"
-    system "echo target.path    = \\$\\$INSTALLBASE/lib >> qwtplot3d.pro"
-    system "echo headers.path   = \\$\\$INSTALLBASE/include/qwtplot3d-qt5 >> qwtplot3d.pro"
-    system "echo doc.path       = \\$\\$INSTALLBASE/share/qwt/doc >> qwtplot3d.pro"
-    system "echo headers.files  = \\$\\$HEADERS >> qwtplot3d.pro"
-    system "echo INSTALLS       = target headers doc >> qwtplot3d.pro"
-    inreplace "qwtplot3d.pro", "$$INSTALLBASE", prefix
+    system "echo VERSION = 0.3.1_322 >> config.pri""
+    system "echo target.path    = \\$\\$INSTALLBASE/lib >> config.pri"
+    system "echo headers.path   = \\$\\$INSTALLBASE/include/qwtplot3d-qt5 >> config.pri"
+    system "echo doc.path       = \\$\\$INSTALLBASE/share/qwt/doc >> config.pri"
+    system "echo headers.files  = \\$\\$HEADERS >> config.pri"
+    system "echo INSTALLS       = target headers doc >> config.pri"
+    system "cat config.pri qwtplot3d.pri"
+    inreplace "config.pri", "$$INSTALLBASE", prefix
     system "#{Formula['qt5'].opt_prefix}/bin/qmake"
     system "make install"
   end
