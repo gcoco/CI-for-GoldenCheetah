@@ -2,16 +2,16 @@ require 'formula'
 
 class Qwtplot3d031Qt5 < Formula
   homepage 'http://sintegrial.com/qwtplot'
-  url 'http://sintegrial.com/files/qwtplot3d-0.3.1-322-src.zip'
+  url 'http://sintegrial.com/files/qwtplot3d-0.3.1-311-src.zip'
   sha1 'e4ffbbe893359d3069475a1bdaa03fca302fc70d'
-  version '0.3.1_322'
+  version '0.3.1_311'
 
   depends_on 'qt5'
   
   def install
     inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt5"
     inreplace "qwtplot3d.pro", "static", "release"
-    inreplace "qwtplot3d.pro", "0.3.0", "0.3.1_322"
+    inreplace "qwtplot3d.pro", "0.3.0", "0.3.1_311"
     inreplace "include/qwt3d_openglhelper.h", "GL/glu.h", "OpenGL/glu.h"
     system "echo target.path    = \\$\\$INSTALLBASE/lib >> qwtplot3d.pro"
     system "echo headers.path   = \\$\\$INSTALLBASE/include/qwtplot3d-qt5 >> qwtplot3d.pro"
