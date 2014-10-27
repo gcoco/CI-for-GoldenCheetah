@@ -19,7 +19,12 @@ before_install:
   - date
   - brew update
   - brew install $QT
-  - brew install liboauth libical libusb libusb-compat boost pkgconfig srmio
+  - brew install liboauth
+  - brew install libical
+  - brew install libusb libusb-compat
+#  - brew install boost
+#  - brew install pkgconfig
+  - brew install srmio
   - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
 #  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb
