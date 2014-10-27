@@ -2,24 +2,23 @@ require 'formula'
 
 class Qwtplot3dQt5 < Formula
   homepage 'http://qwtplot3d.sourceforge.net/'
-  url 'http://sintegrial.com/get.php?file=qwtplot3d_src'
-  sha1 '944596fbac3c5ff94e2e8e0908cc831855e917a1'
-  version '0.3.1_322'
+  url 'https://downloads.sourceforge.net/sourceforge/qwtplot3d/qwtplot3d-0.2.7.tgz'
+  sha1 '4463fafb8420a91825e165da7a296aaabd70abea'
 
   depends_on 'qt5'
 
+  def patches
+    {
+      :p0 => [
+        "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-qwtplot3d.pro.diff",
+        "https://trac.macports.org/export/114349/trunk/dports/graphics/qwtplot3d/files/patch-include_qwt3d_openglhelper.h.diff"
+      ]
+    }
+  end
+
   def install
-    inreplace "qwtplot3d.pri", "TARGET = qwtplot3d", "TARGET = qwtplot3d-qt5"
-    inreplace "config.pri", "static", "release"
-    inreplace "include/qwt3d_openglhelper.h", "GL/glu.h", "OpenGL/glu.h"
-    system "echo VERSION = 0.3.1_322 >> config.pri""
-    system "echo target.path    = \\$\\$INSTALLBASE/lib >> config.pri"
-    system "echo headers.path   = \\$\\$INSTALLBASE/include/qwtplot3d-qt5 >> config.pri"
-    system "echo doc.path       = \\$\\$INSTALLBASE/share/qwt/doc >> config.pri"
-    system "echo headers.files  = \\$\\$HEADERS >> config.pri"
-    system "echo INSTALLS       = target headers doc >> config.pri"
-    system "cat config.pri qwtplot3d.pri"
-    inreplace "config.pri", "$$INSTALLBASE", prefix
+    inreplace "qwtplot3d.pro", "qwtplot3d", "qwtplot3d-qt5"
+    inreplace "qwtplot3d.pro", "$$INSTALLBASE", prefix
     system "#{Formula['qt5'].opt_prefix}/bin/qmake"
     system "make install"
   end
