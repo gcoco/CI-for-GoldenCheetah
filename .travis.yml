@@ -1,11 +1,11 @@
 language: objective-c
 
 compiler:
-  - clang
+#  - clang
   - gcc
 
 env:
-  - FILE=qwtplot3d-0.3.1-qt5.rb
+  - FILE=qwtplot3d-qt5.rb
   
 before_install:
   - brew update
