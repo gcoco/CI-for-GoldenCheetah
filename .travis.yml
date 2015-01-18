@@ -29,7 +29,7 @@ before_install:
   - sudo apt-get install qt5-default qttools5-dev qttools5-dev-tools qtscript5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5webkit5-dev libqt5svg5-dev 
   - dpkg --get-selections
 # Extras
-  - sudo apt-get install -qq liboauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libclucene-dev libpulse-dev
+  - sudo apt-get install -qq libkqoauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libclucene-dev libpulse-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev 
 #  libkml-dev
 #  - sudo apt-get install -qq liburiparser-dev libexpat1-dev libboost-all-dev
@@ -69,7 +69,7 @@ before_script:
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 lrelease|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -loauth|" src/gcconfig.pri
+  - sed -i "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -lkqoauth|" src/gcconfig.pri
 #  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
 #  - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d-qt4|" src/gcconfig.pri
 #  - sed -i "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d-qt4|" src/gcconfig.pri
