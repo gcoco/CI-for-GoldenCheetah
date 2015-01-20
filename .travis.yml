@@ -77,6 +77,7 @@ before_script:
   - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
   - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
   - sed -i "s|#\(PKGCONFIG = .*\)|\1 libical libusb libvlc vlc-plugin|" src/gcconfig.pri
+  - cat src/gcconfig.pri
   - /usr/bin/lupdate-qt4 src/src.pro
   - cd ..
 
@@ -96,7 +97,7 @@ script:
   - qmake-qt4 -recursive
   - make qmake_all
   - make -j4 sub-qwt --silent
-  - make -j4 sub-src --silent
+  - make -j4 sub-src
 
 after_success:
   - cd $TRAVIS_BUILD_DIR
