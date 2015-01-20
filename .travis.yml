@@ -59,6 +59,7 @@ before_script:
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "s|#\(KQOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
+  - sed -i "s|#\(KQOAUTH_INCLUDE =.*\)|\1 /usr/include|" src/gcconfig.pri
   - sed -i "s|#\(KQOAUTH_LIBS =.*\)|\1 -lkqoauth|" src/gcconfig.pri
   - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
   - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d-qt4|" src/gcconfig.pri
