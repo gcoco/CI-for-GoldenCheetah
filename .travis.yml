@@ -20,8 +20,9 @@ before_install:
   - sudo apt-get install -qq flex bison qt4-qmake qt4-dev-tools libqt4-dev
   - sudo apt-get install libqwtplot3d-qt4-dev libical-dev libusb-dev libvlc-dev libvlccore-dev libclucene-dev
 #    liburiparser-dev libexpat1-dev libboost-all-dev
+  - wget http://mirrors.kernel.org/ubuntu/pool/universe/k/kqoauth/libkqoauth0_0.98-0ubuntu1_amd64.deb
   - wget http://mirrors.kernel.org/ubuntu/pool/universe/k/kqoauth/libkqoauth-dev_0.98-0ubuntu1_amd64.deb
-  - sudo dpkg -i libkqoauth-dev_0.98-0ubuntu1_amd64.deb
+  - sudo dpkg -i libkqoauth0_0.98-0ubuntu1_amd64.deb libkqoauth-dev_0.98-0ubuntu1_amd64.deb
   
 before_script:
 # Setup libkml
