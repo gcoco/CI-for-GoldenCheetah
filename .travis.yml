@@ -50,7 +50,7 @@ before_script:
 # Setup GoldenCheetah
   - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
   - cd $BRANCH
-#  - sh $TRAVIS_BUILD_DIR/git-info.sh
+  - sh $TRAVIS_BUILD_DIR/git-info.sh
 #  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
 #  - sh $TRAVIS_BUILD_DIR/git-info.sh
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
