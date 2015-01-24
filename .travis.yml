@@ -19,17 +19,16 @@ before_install:
   - date
   - brew update
   - brew install $QT
-  - brew install liboauth
+#  - brew install liboauth
   - brew install libical
   - brew install libusb libusb-compat
-#  - brew install boost
+  - brew install boost
 #  - brew install pkgconfig
   - brew install srmio
-  - brew install https://raw.github.com/gcoco/homebrew/clucene-2.3.3.4/Library/Formula/clucene.rb
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
-  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb
+#  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb
   #- brew install libkml --HEAD
-#  - brew install --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
@@ -56,24 +55,22 @@ before_script:
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -L/usr/local/lib -loauth|" src/gcconfig.pri
-  - sed -i "" "s|#\(QWT3D_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/local/include/qwtplot3d-$QT|" src/gcconfig.pri
-  - sed -i "" "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d-$QT|" src/gcconfig.pri
+#  - sed -i "" "s|#\(KQOAUTH_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+#  - sed -i "" "s|#\(KQOAUTH_LIBS    =.*\)|\1 -L/usr/local/lib -loauth|" src/gcconfig.pri
+#  - sed -i "" "s|#\(QWT3D_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+#  - sed -i "" "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/local/include/qwtplot3d-$QT|" src/gcconfig.pri
+#  - sed -i "" "s|#\(QWT3D_LIBS    =.*\)|\1 -L/usr/local/lib -lqwtplot3d-$QT|" src/gcconfig.pri
   - sed -i "" "s|#\(ICAL_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
+  - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -L/usr/local/lib -lical|" src/gcconfig.pri
   - sed -i "" "s|#\(LIBUSB_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
-  #- sed -i "" "s|#\(KML_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  #- sed -i "" "s|#\(KML_LIBS    =.*\)|\1 -lkmlxsd -lkmlregionator -lkmldom -lkmlconvenience -lkmlengine -lkmlbase|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 -L/usr/local/lib -lusb|" src/gcconfig.pri
+  - sed -i "" "s|#\(KML_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(KML_LIBS    =.*\)|\1 -L/usr/local/lib -lkmlxsd -lkmlregionator -lkmldom -lkmlconvenience -lkmlengine -lkmlbase|" src/gcconfig.pri
   - sed -i "" "s|#\(QMAKE_CFLAGS_\).*|\1RELEASE += -mmacosx-version-min=10.7 -arch x86_64|" src/gcconfig.pri
   - sed -i "" "s|#\(QMAKE_CXXFLAGS_\).*|\1RELEASE += -mmacosx-version-min=10.7 -arch x86_64|" src/gcconfig.pri
-  - sed -i "" "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/local/lib|" src/gcconfig.pri
-  - sed -i "" "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene-core -lclucene-shared|" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_VIDEO_QUICKTIME.*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
-  - sed -i "" "s|#\(PKGCONFIG = .*\)|\1 oauth libical clucene libusb|" src/gcconfig.pri
+  - sed -i "" "s|#\(PKGCONFIG = .*\)|\1 libical libusb|" src/gcconfig.pri
   - cat src/gcconfig.pri
   - cd ..
   
