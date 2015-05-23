@@ -31,8 +31,12 @@ before_install:
   - sudo apt-get install qt5-default qttools5-dev qttools5-dev-tools qtscript5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5webkit5-dev libqt5svg5-dev 
   - dpkg --get-selections
 # Extras
-  - sudo apt-get install -qq libkqoauth-dev libqwtplot3d-qt4-dev libical-dev libusb-dev libclucene-dev libpulse-dev
-  - sudo apt-get install -qq libvlc-dev libvlccore-dev 
+  - sudo apt-get install -qq libqwtplot3d-qt4-dev libical-dev libusb-dev libclucene-dev libpulse-dev
+  - sudo apt-get install -qq libvlc-dev libvlccore-dev
+  - wget http://mirrors.kernel.org/ubuntu/pool/universe/k/kqoauth/libkqoauth0_0.98-0ubuntu1_amd64.deb
+  - wget http://mirrors.kernel.org/ubuntu/pool/universe/k/kqoauth/libkqoauth-dev_0.98-0ubuntu1_amd64.deb
+  - sudo dpkg -i libkqoauth0_0.98-0ubuntu1_amd64.deb libkqoauth-dev_0.98-0ubuntu1_amd64.deb
+
 #  libkml-dev
 #  - sudo apt-get install -qq liburiparser-dev libexpat1-dev libboost-all-dev
   - export QT_SELECT=$QT
