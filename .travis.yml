@@ -37,8 +37,8 @@ before_install:
   - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make qmake_all 
   - cd ..
-  - curl -o kQOAuth-0.98.tar.gz https://github.com/kypeli/kQOAuth/archive/0.98.tar.gz
-  - tar xzf kQOAuth-0.98.tar.gz
+  - curl -O kQOAuth-0.98.tar.gz https://github.com/kypeli/kQOAuth/archive/0.98.tar.gz
+  - tar xzf 0.98.tar.gz
   - cd kQOAuth-0.98
   - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make qmake_all 
