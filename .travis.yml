@@ -32,7 +32,7 @@ before_install:
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
-  - git clone --depth 1 https://github.com/sintegral/qwtplot3d/qwtplot3d.git
+  - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
   - cd qwtplot3d
   - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make qmake_all 
@@ -42,7 +42,7 @@ before_install:
   - cd kQOAuth-0.98
   - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make qmake_all 
-  - CC=clang CXX=clang++ make install
+  - CC=clang CXX=clang++ sudo make install
   - cd ..
   - hdiutil mount D2XX1.2.2.dmg
   
