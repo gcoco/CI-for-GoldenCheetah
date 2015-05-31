@@ -26,12 +26,24 @@ before_install:
 #  - brew install pkgconfig
   - brew install srmio
   # Have to get qwtplot3d into homebrew and support Qt4 and Qt5.
-  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb
+#  - brew install https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/qwtplot3d-$QT.rb
   #- brew install libkml --HEAD
   - brew install --HEAD https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
+  - git clone --depth 1 https://git.com/sintegral/qwtplot3d/qwtplot3d.git
+  - cd qwtplot3d
+  - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - CC=clang CXX=clang++ make qmake_all 
+  - cd ..
+  - curl -o kQOAuth-0.98.tar.gz https://github.com/kypeli/kQOAuth/archive/0.98.tar.gz
+  - tar xzf kQOAuth-0.98.tar.gz
+  - cd kQOAuth-0.98
+  - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - CC=clang CXX=clang++ make qmake_all 
+  - CC=clang CXX=clang++ make install
+  - cd ..
   - hdiutil mount D2XX1.2.2.dmg
   
 before_script:
@@ -55,9 +67,10 @@ before_script:
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
-#  - sed -i "" "s|#\(KQOAUTH_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-#  - sed -i "" "s|#\(KQOAUTH_LIBS    =.*\)|\1 -L/usr/local/lib -loauth|" src/gcconfig.pri
-#  - sed -i "" "s|#\(QWT3D_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(KQOAUTH_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+  - sed -i "" "s|#\(KQOAUTH_INCLUDE =.*\)|\1 \$\$[QT_INSTALL_LIBS]/kqoauth.framework/Headers|" src/gcconfig.pri
+  - sed -i "" "s|#\(KQOAUTH_LIBS    =.*\)|\1 -F\$\$[QT_INSTALL_LIBS] -framework kqoauth|" src/gcconfig.pri
+  - sed -i "" "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
 #  - sed -i "" "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/local/include/qwtplot3d-$QT|" src/gcconfig.pri
 #  - sed -i "" "s|#\(QWT3D_LIBS    =.*\)|\1 -L/usr/local/lib -lqwtplot3d-$QT|" src/gcconfig.pri
   - sed -i "" "s|#\(ICAL_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
