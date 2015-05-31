@@ -39,7 +39,8 @@ before_install:
   - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
   - cd qwtplot3d
   - qmake -recursive
-  - sude make install
+  - make
+  - sudo make install
   - cd ..
 
 #  libkml-dev
