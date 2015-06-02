@@ -33,7 +33,6 @@ before_install:
 # Extras
   - sudo apt-get install -qq libical-dev libusb-dev libclucene-dev libpulse-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
-  - sudo dpkg -i libkqoauth0_0.98-0ubuntu1_amd64.deb libkqoauth-dev_0.98-0ubuntu1_amd64.deb
   - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
   - cd qwtplot3d
   - qmake -recursive
