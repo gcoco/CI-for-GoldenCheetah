@@ -33,13 +33,17 @@ before_install:
 # Extras
   - sudo apt-get install -qq libical-dev libusb-dev libclucene-dev libpulse-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
-  - wget http://mirrors.kernel.org/ubuntu/pool/universe/k/kqoauth/libkqoauth0_0.98-0ubuntu1_amd64.deb
-  - wget http://mirrors.kernel.org/ubuntu/pool/universe/k/kqoauth/libkqoauth-dev_0.98-0ubuntu1_amd64.deb
   - sudo dpkg -i libkqoauth0_0.98-0ubuntu1_amd64.deb libkqoauth-dev_0.98-0ubuntu1_amd64.deb
   - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
   - cd qwtplot3d
   - qmake -recursive
   - make
+  - cd ..
+  - git clone --branch 0.98 https://github.com/kypeli/kQOAuth.git kQOAuth-0.98
+  - cd kQOAuth-0.98
+  - qmake -recursive
+  - make
+  - sudo make install
   - cd ..
 
 #  libkml-dev
