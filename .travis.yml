@@ -40,8 +40,6 @@ before_install:
   - cd qwtplot3d
   - qmake -recursive
   - make
-  - ls -laR
-  - pwd
   - cd ..
 
 #  libkml-dev
@@ -117,11 +115,10 @@ script:
   - cd ..
 # Build GoldenCheetah
   - cd $BRANCH
-  - pwd
   - qmake -recursive
   - make qmake_all
   - make -j2 sub-qwt --silent
-  - make -j2 sub-src --silent
+  - make -j2 sub-src
 
 after_success:
   - ldd src/GoldenCheetah
