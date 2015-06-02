@@ -40,7 +40,8 @@ before_install:
   - cd qwtplot3d
   - qmake -recursive
   - make
-  - sudo make install
+  - ls -laR
+  - pwd
   - cd ..
 
 #  libkml-dev
@@ -82,9 +83,9 @@ before_script:
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "s|#\(LIBOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBOAUTH_LIBS    =.*\)|\1 -lkqoauth|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d|" src/gcconfig.pri
+  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
+#  - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d|" src/gcconfig.pri
+#  - sed -i "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d|" src/gcconfig.pri
 #  - sed -i "s|#\(KML_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
 #  - sed -i "s|#\(KML_LIBS    =.*\)|\1 -lkmlbase -lkmldom -lkmlconvenience -lkmlengine -luriparser -lminizip|" src/gcconfig.pri
 #BOOST_INCLUDE = /usr/include
@@ -116,6 +117,7 @@ script:
   - cd ..
 # Build GoldenCheetah
   - cd $BRANCH
+  - pwd
   - qmake -recursive
   - make qmake_all
   - make -j2 sub-qwt --silent
