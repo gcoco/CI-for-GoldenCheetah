@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cat ${0}
+
 # Update brew
 brew update
 
