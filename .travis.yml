@@ -1,18 +1,23 @@
-language: objective-c
-
-compiler:
-#  - clang
-  - gcc
-
-env:
-  - FILE=qwtplot3d-qt5.rb
+os:
+  - linux
+  - osx
   
+env:
+  - QT=4
+  - QT=5
+
 before_install:
-  - brew update
+  - git clone --depth=1 https://github.com/GoldenCheetah/GoldenCheetah.git
+  - cd GoldenCheetah
+  - pwd
+  - sh travis-ci/$TRAVIS_OS_NAME/before_install_QT$QT.sh $TRAVIS_OS_NAME $QT
+  - sh travis-ci/$TRAVIS_OS_NAME/before_install_QT$QT.sh $TRAVIS_OS_NAME $QT
+
+before_script:
+  - sh travis-ci/$TRAVIS_OS_NAME/before_script_QT$QT.sh $TRAVIS_OS_NAME $QT
 
 script:
-  - brew install  --verbose --debug https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
+  - sh travis-ci/$TRAVIS_OS_NAME/script_QT$QT.sh $TRAVIS_OS_NAME $QT
 
 after_success:
-  - brew audit https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
-  - brew info https://raw.github.com/gcoco/CI-for-GoldenCheetah/master/$FILE
+  - sh travis-ci/$TRAVIS_OS_NAME/after_success_$QT.sh $TRAVIS_OS_NAME $QT
