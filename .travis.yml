@@ -11,7 +11,6 @@ before_install:
   - cd GoldenCheetah
   - pwd
   - sh travis-ci/$TRAVIS_OS_NAME/before_install_QT$QT.sh $TRAVIS_OS_NAME $QT
-  - sh travis-ci/$TRAVIS_OS_NAME/before_install_QT$QT.sh $TRAVIS_OS_NAME $QT
 
 before_script:
   - sh travis-ci/$TRAVIS_OS_NAME/before_script_QT$QT.sh $TRAVIS_OS_NAME $QT
