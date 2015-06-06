@@ -20,4 +20,4 @@ script:
   - sh travis-ci/$TRAVIS_OS_NAME/script_QT$QT.sh $TRAVIS_OS_NAME $QT
 
 after_success:
-  - sh travis-ci/$TRAVIS_OS_NAME/after_success_$QT.sh $TRAVIS_OS_NAME $QT
+  - sh travis-ci/$TRAVIS_OS_NAME/after_success_QT$QT.sh $TRAVIS_OS_NAME $QT
