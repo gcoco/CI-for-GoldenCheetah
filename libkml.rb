@@ -37,7 +37,10 @@ class Libkml < Formula
 
   def install
     if build.universal?
+      ENV.universal_binary
+      ENV.permit_arch_flags
       ENV["ARCHFLAGS"] = Hardware::CPU.universal_archs.as_arch_flags
+      ENV.append %w[CFLAGS CXXFLAGS LDFLAGS], "-arch #{Hardware::CPU.arch_32_bit} -arch #{Hardware::CPU.arch_64_bit}"
     end
     if build.head?
       inreplace "third_party/Makefile.am" do |s|
