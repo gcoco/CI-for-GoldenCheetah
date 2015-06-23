@@ -29,11 +29,16 @@ class Libkml < Formula
     depends_on "libtool" => :build
   end
 
+  option :universal
+  
   # Fix compilation with clang and gcc 4.7+
   # https://code.google.com/p/libkml/issues/detail?id=179
   patch :DATA if build.stable?
 
   def install
+    if build.universal?
+      ENV.universal_binary
+    end
     if build.head?
       inreplace "third_party/Makefile.am" do |s|
         s.sub! /(lib_LTLIBRARIES =) libminizip.la liburiparser.la/, "\\1"
