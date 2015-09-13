@@ -18,7 +18,7 @@ env:
 before_install:
   - date
   - brew update
-  - brew install $QT
+  - sh $TRAVIS_BUILD_DIR/install-qt.sh
 #  - brew install liboauth
   - brew install libical
   - brew install libusb libusb-compat
