@@ -17,7 +17,7 @@ sudo:
   - required
 
 dist:
-  - precise
+  - trusty
   
 before_install:
   - date
@@ -25,7 +25,7 @@ before_install:
   - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
   - sudo apt-get update -qq
 #  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa 
+#  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa 
 #  - sudo apt-get dist-upgrade -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
   - sudo apt-get update -qq
   - sudo apt-get install -qq flex bison 
