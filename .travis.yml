@@ -70,9 +70,7 @@ before_script:
 
 script:
   - qmake -recursive
-  - make qmake_all
-  - make -j3 sub-qwt --silent
-  - make -j3 sub-src --silent
+  - make -j3
 
 after_success:
   - ldd src/GoldenCheetah
