@@ -12,6 +12,14 @@ before_install:
   - sudo apt-get install -qq libssl-dev libical-dev libusb-1.0-0-dev libudev-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
+  # SRMIO build 
+  - wget http://www.zuto.de/project/files/srmio/srmio-0.1.1~git1.tar.gz -O srmio-0.1.1~git1.tar.gz
+  - tar xf srmio-0.1.1~git1.tar.gz
+  - ls
+  - cd srmio-0.1.1~git1.tar.gz
+  - ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
+  - make -j3 install
+  - cd ..
   # QWTPLOT3D build
   - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
   - cd qwtplot3d
@@ -33,13 +41,6 @@ before_script:
   - cd libusb-compat-0.1.5
   - ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
   - make -j3 install 
-  - cd ..
-  # SRMIO build 
-  - wget http://www.zuto.de/project/files/srmio/srmio-0.1.1~git1.tar.gz -O srmio-0.1.1~git1.tar.gz
-  - tar xf srmio-0.1.1~git1.tar.gz
-  - cd srmio-0.1.1~git1.tar.gz
-  - ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
-  - make -j3 install
   - cd ..
 # Setup GoldenCheetah
   - git clone --depth 1 git://github.com/$REPO/GoldenCheetah.git
