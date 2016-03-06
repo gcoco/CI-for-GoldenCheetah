@@ -44,7 +44,7 @@ before_script:
   - cd ..
 # Setup GoldenCheetah
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
-  - cd GoldenCheetan
+  - cd GoldenCheetah
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
