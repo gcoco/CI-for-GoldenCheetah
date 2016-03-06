@@ -53,7 +53,7 @@ before_script:
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
-  - sed -i "s|#\(KML_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
+  - sed -i "s|#\(KML_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
