@@ -1,6 +1,5 @@
 branches:
   only:
-    - master
     - Linux-QT5
 
 language:
@@ -9,125 +8,82 @@ language:
 compiler:
   - gcc
 
-env:
-  - REPO=GoldenCheetah BRANCH=master QT=qt5
-#  - REPO=gcoco BRANCH=Lib_path_fail QT=qt5
-
 sudo:
   - required
 
 dist:
-  - precise
+  - trusty
   
 before_install:
-  - date
-  - cat /proc/version && lsb_release -a && uname -mrs
-  - git config --global user.email "you@example.com" && git config --global user.name "Your Name"
+  - export QT_SELECT=qt5
   - sudo apt-get update -qq
-#  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-#  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa 
-#  - sudo apt-get dist-upgrade -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq flex bison 
-# Qt4
-#  - sudo apt-get install -qq qt4-qmake qt4-dev-tools libqt4-dev
-# Qt5
-  - sudo apt-get install qt5-default qttools5-dev qttools5-dev-tools qtscript5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5webkit5-dev libqt5svg5-dev libqt5serialport5-dev
-  - dpkg --get-selections
-# Extras
-  - sudo apt-get install -qq libical-dev libusb-dev libclucene-dev libpulse-dev
+  - sudo apt-get upgrade -qq
+  - sudo apt-get install -qq build-essential git cmake flex bison
+  - sudo apt-get install qt5-default qttools5-dev-tools
+  - sudo apt-get install libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev libudev-dev libqt5webkit5-dev
+  - sudo apt-get install -qq libssl-dev libical-dev libusb-1.0-0-dev libudev-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
+before_script:
+  # QWTPLOT3D build
   - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
   - cd qwtplot3d
+  - sed -i "s|examples||" qwtplot3d.pro
   - qmake -recursive
-  - make
+  - make -j3
+  # libkml build
   - cd ..
-  - git clone --branch 0.98 https://github.com/kypeli/kQOAuth.git kQOAuth-0.98
-  - cd kQOAuth-0.98
-  - qmake -recursive
-  - make
-  - sudo make install
+  - wget https://github.com/libkml/libkml/archive/1.3.0.tar.gz -O libkml-1.3.0.tar.gz
+  - tar xf libkml-1.3.0.tar.gz
+  - cd libkml.1.3.0
+  - mkdir build && cd build
+  - cmake .. -DBUILD_SHARED_LIBS=off -DCMAKE_INSTALL_PREFIX=`cd ../..; pwd;`/usr
+  - make -j3 install
+  - cd ../..
+  # libusb-compat build
+  - wget https://sourceforge.net/projects/libusb/files/libusb-compat-0.1/libusb-compat-0.1.5/libusb-compat-0.1.5.tar.bz2/download -O libusb-compat-0.1.5.tar.bz2
+  - tar xf libusb-compat-0.1.5.tar.bz2
+  - cd libusb-compat-0.1.5
+  - ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
+  - make -j3 install 
   - cd ..
-
-#  libkml-dev
-#  - sudo apt-get install -qq liburiparser-dev libexpat1-dev libboost-all-dev
-  - export QT_SELECT=$QT
-before_script:
-# Setup libkml
-#  - ls -la
-#  - svn checkout http://libkml.googlecode.com/svn/trunk/ libkml
-#  - cd libkml
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/kfreebsd.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/hurd.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/automake.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/clone.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/ld-as-needed.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/feature_view_test.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/geometry_test.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/swig.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/fix-ftbfs-gcc4.7.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/java-run-sh-shebang.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/automake-subdir-objects.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/libtool-archiver.diff;hb=HEAD" | patch -p1
-#  - curl "http://anonscm.debian.org/gitweb/?p=pkg-grass/libkml.git;a=blob_plain;f=debian/patches/dont-build-all.diff;hb=HEAD" | patch -p1
-#  - sh ./autogen.sh
-#  - cd ..
-# Setup SRMIO
-  - git clone --depth 1 git://github.com/rclasen/srmio.git
-  - cd srmio && sh ./genautomake.sh && cd ..
+  # SRMIO build 
+  - wget http://www.zuto.de/project/files/srmio/srmio-0.1.1~git1.tar.gz -O srmio-0.1.1_git1.tar.gz
+  - tar xf srmio-0.1.1~git1.tar.gz
+  - cd srmio-0.1.1~git1.tar.gz
+  - ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
+  - make -j3 install
+  - cd ..
 # Setup GoldenCheetah
-  - git clone --depth 1 -b $BRANCH git://github.com/$REPO/GoldenCheetah.git $BRANCH
-  - cd $BRANCH
-#  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
-  - sh $TRAVIS_BUILD_DIR/git-info.sh
-  - sed -i "s|infile|exists(config.pri):infile|" qtsolutions/common.pri
+  - git clone --depth 1 git://github.com/$REPO/GoldenCheetah.git
+  - cd GoldenCheetan
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 lrelease|" src/gcconfig.pri
-  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "s|#\(KQOAUTH_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(KQOAUTH_INCLUDE =.*\)|\1 /usr/include/QtKOAuth|" src/gcconfig.pri
-  - sed -i "s|#\(KQOAUTH_LIBS =.*\)|\1 -lkqoauth|" src/gcconfig.pri
+  - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
+  - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
-#  - sed -i "s|#\(QWT3D_INCLUDE =.*\)|\1 /usr/include/qwtplot3d|" src/gcconfig.pri
-#  - sed -i "s|#\(QWT3D_LIBS    =.*\)|\1 -lqwtplot3d|" src/gcconfig.pri
-#  - sed -i "s|#\(KML_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-#  - sed -i "s|#\(KML_LIBS    =.*\)|\1 -lkmlbase -lkmldom -lkmlconvenience -lkmlengine -luriparser -lminizip|" src/gcconfig.pri
-#BOOST_INCLUDE = /usr/include
+  - sed -i "s|#\(KML_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
-  - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 /usr|" src/gcconfig.pri
-  - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 -lusb|" src/gcconfig.pri
+  - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
+  - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 ../../usr/lib/libusb.a -lusb-1.0 -ldl -ludev|" src/gcconfig.pri
   - sed -i "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
   - sed -i "s|#\(VLC_LIBS    =.*\)|\1 -lvlc -lvlccore|" src/gcconfig.pri
-  - sed -i "s|#\(CLUCENE_INCLUDE =\).*|\1 /usr/include/CLucene /usr/lib|" src/gcconfig.pri
-  - sed -i "s|#\(CLUCENE_LIBS    =\).*|\1 -lclucene|" src/gcconfig.pri
+  - sed -i "s|#\(SAMPLERATE_INSTALL =\).*|\1 /usr|" src/gcconfig.pri
+  - sed -i "s|#\(SAMPLERATE_LIBS =\).*|\1 -lsamplerate|" src/gcconfig.pri
+  - sed -i "s|^#LIBZ_LIBS|LIBZ_LIBS|" src/gcconfig.pri
+  - sed -i "s|^#HTPATH|HTPATH|" src/gcconfig.pri
+  - sed -i "s|\(DEFINES += GC_VIDEO_NONE.*\)|#\1 |" src/gcconfig.pri
   - sed -i "s|#\(DEFINES += GC_VIDEO_VLC.*\)|\1|" src/gcconfig.pri
-  - sed -i "s|#\(CONFIG += link_pkgconfig\)|\1|" src/gcconfig.pri
-  - sed -i "s|#\(PKGCONFIG = .*\)|\1 libical libusb libvlc vlc-plugin|" src/gcconfig.pri
   - cat src/gcconfig.pri
   - lupdate src/src.pro
-  - cd ..
 
 script:
-# Build libkml
-#  - cd libkml
-#  - ./configure --enable-static --disable-shared --disable-swig --disable-python --disable-java
-#  - make -j4 && sudo make install-exec install-data
-#  - cd ..
-# Build SRMIO and install
-  - cd srmio
-  - ./configure --enable-static --disable-shared
-  - make -silent -j4 && sudo make -silent install
-  - cd ..
-# Build GoldenCheetah
-  - cd $BRANCH
   - qmake -recursive
   - make qmake_all
-  - make -j2 sub-qwt --silent
-  - make -j2 sub-src --silent
-  - make sub-src
+  - make -j3 sub-qwt --silent
+  - make -j3 sub-src --silent
 
 after_success:
   - ldd src/GoldenCheetah
