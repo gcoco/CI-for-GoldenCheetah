@@ -12,10 +12,10 @@ before_install:
   - sudo apt-get install -qq libssl-dev libical-dev libusb-1.0-0-dev libudev-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
+  - pwd
   # SRMIO build 
   - wget http://www.zuto.de/project/files/srmio/srmio-0.1.1~git1.tar.gz -O srmio-0.1.1~git1.tar.gz
   - tar xf srmio-0.1.1~git1.tar.gz
-  - ls
   - cd srmio-0.1.1~git1
   - ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
   - make -j3 install
@@ -26,8 +26,8 @@ before_script:
   - sed -i "s|examples||" qwtplot3d.pro
   - qmake -recursive
   - make -j3
-  # libkml build
   - cd ..
+  # libkml build
   - wget https://github.com/libkml/libkml/archive/1.3.0.tar.gz -O libkml-1.3.0.tar.gz
   - tar xf libkml-1.3.0.tar.gz
   - cd libkml-1.3.0
@@ -43,6 +43,7 @@ before_script:
   - make -j3 install 
   - cd ..
 # Setup GoldenCheetah
+  - pwd && ls
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
   - cd GoldenCheetah
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
