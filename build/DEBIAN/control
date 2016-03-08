@@ -2,7 +2,7 @@ Package: GoldenCheetah
 Version: VERSION
 Installed-Size: SIZE
 Source: https://github.com/GoldenCheetah/GoldenCheetah
-Maintainer: Travis-CI
+Maintainer: GoldenCheetah
 Section: misc
 Homepage: http://www.goldencheetah.org
 Priority: optional
