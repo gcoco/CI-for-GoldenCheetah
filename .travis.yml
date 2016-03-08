@@ -13,12 +13,6 @@ global:
   - secure: FXJzm98lwbc1R2eh9/CvVReVRHEPLDm+sCRjiV9HJgeCveIUauLasp9Skamz0c6OKLmkjLY8JERPT491ZgCG8YcQ9x1bM8HGbmRqnn9xSUxINIRzVmyTiLMBoT/ibHHeFjFpyiGfukOAkHwMNNsrSrbaekhiJuekaXo7iTwYQB0=
   
 before_install:
-  - export VERSION="4.0.0dev+`date +%Y%m%d`"
-  - touch file1-${VERSION}
-  - ls
-  - touch file1-`echo $VERSION`
-  - ls
-  - sdkjgs;dkljg
   - export QT_SELECT=qt5
   - sudo apt-get update -qq
   - sudo apt-get install -qq build-essential git cmake flex bison
@@ -105,5 +99,5 @@ after_success:
   - export VERSION="4.0.0dev+`date +%Y%m%d`"
   - sed -i 's/VERSION/'"$VERSION"'/g' build/DEBIAN/control
   - cat build/DEBIAN/control
-  - dpkg -b build/ GoldenCheetah_$VERSION_amd64.deb
-  - dpkg -c GoldenCheetah_$VERSION_amd64.deb
+  - dpkg -b build/ GoldenCheetah_${VERSION}_amd64.deb
+  - dpkg -c GoldenCheetah_${VERSION}_amd64.deb
