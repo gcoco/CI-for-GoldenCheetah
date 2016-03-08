@@ -1,0 +1,26 @@
+Package: GoldenCheetah
+Version: VERSION
+Installed-Size: SIZE
+Source: https://github.com/GoldenCheetah/GoldenCheetah
+Maintainer: Travis-CI
+Section: misc
+Homepage: http://www.goldencheetah.org
+Priority: optional
+Architecture: all
+Depends: libqt5core5a, libqt5gui5, libqt5xml5, libqt5sql5,
+         libqt5network5, libqt5concurrent5, libqt5serialport5,
+		 libqt5widgets5, libqt5webkit5, libqt5svg5, 
+		 libqt5opengl5, libqt5printsupport5, libqt5sensors5,
+		 libqt5quick5, libqt5qml5, libqt5positioning5,
+		 libsamplerate0, libical1, openssl, libusb-1.0-0, vlc
+Description: set of analysis tools for cycling performance
+ GoldenCheetah is a software package that:
+  * Downloads ride data directly from the CycleOps PowerTap and
+   the SRM PowerControl V. Support for SRM PowerControl VI and VII
+   is planned for the future.
+  * Imports ride data downloaded with other programs, including
+   TrainingPeaks WKO+ and the manufacturers' software for the Ergomo,
+   Garmin, Polar, PowerTap, and SRM devices.
+  * Provides a rich set of analysis tools, including a critical power graph,
+   BikeScore calculation, histogram analysis, a best interval finder, and
+   a pedal force versus pedal velocity chart, to name just a few.
