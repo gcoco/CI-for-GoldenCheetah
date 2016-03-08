@@ -93,10 +93,11 @@ after_success:
   - cd ..
   - chmod 755 build/DEBIAN/p*
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
-  - SIZE=`ls -l GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
+  - export SIZE=`ls -l GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' build/DEBIAN/control
   - cp GoldenCheetah/src/Resources/linux/51-garmin-usb.rules build/etc/udev/rules.d/
-  - VERSION="4.0.0dev+`date +%Y%m%d`"
+  - export VERSION="4.0.0dev+`date +%Y%m%d`"
   - sed -i 's/VERSION/'"$VERSION"'/g' build/DEBIAN/control
+  - cat build/DEBIAN/control
   - dpkg -b build/ GoldenCheetah_$VERSION_amd64.deb
   - dpkg -c GoldenCheetah_$VERSION_amd64.deb
