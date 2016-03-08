@@ -91,6 +91,7 @@ after_success:
   - ldd src/GoldenCheetah
   - src/GoldenCheetah --version
   - cd ..
+  - chmod 755 build/DEBIAN/p*
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
   - SIZE=`ls -l GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' build/DEBIAN/control
