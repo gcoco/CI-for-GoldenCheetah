@@ -9,10 +9,10 @@ Priority: optional
 Architecture: all
 Depends: libqt5core5a, libqt5gui5, libqt5xml5, libqt5sql5,
          libqt5network5, libqt5concurrent5, libqt5serialport5,
-		 libqt5widgets5, libqt5webkit5, libqt5svg5, 
-		 libqt5opengl5, libqt5printsupport5, libqt5sensors5,
-		 libqt5quick5, libqt5qml5, libqt5positioning5,
-		 libsamplerate0, libical1, openssl, libusb-1.0-0, vlc
+         libqt5widgets5, libqt5webkit5, libqt5svg5, 
+	 libqt5opengl5, libqt5printsupport5, libqt5sensors5,
+	 libqt5quick5, libqt5qml5, libqt5positioning5,
+	 libsamplerate0, libical1, openssl, libusb-1.0-0, vlc
 Description: set of analysis tools for cycling performance
  GoldenCheetah is a software package that:
   * Downloads ride data directly from the CycleOps PowerTap and
