@@ -20,7 +20,7 @@ before_install:
   - export GC_DATE=`git log -1 --date=iso --format=fuller | egrep ^CommitDate | cut -c 13-22`
   - export GC_INFO=${GC_DATE}':master@'${GC_COMMIT}
   - cp src/gcconfig.pri.in src/gcconfig.pri
-  - echo DEFINES += GV_VERSION=\\\\\"${GC_INFO}\\\\\" >> src/gcconfig.pri
+  - echo DEFINES += GC_VERSION=\\\\\\"${GC_INFO}\\\\\\" >> src/gcconfig.pri
   - cat src/gcconfig.pri
   - exit; sfsdf
   - sudo apt-get update -qq
@@ -68,7 +68,7 @@ before_script:
   - export GC_INFO=${GC_DATE}':master@'${GC_COMMIT}
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
-  - echo DEFINES += GV_VERSION=\\\\\"${GC_INFO}\\\\\" >> src/gcconfig.pri
+  - echo DEFINES += GC_VERSION=\\\\\\"${GC_INFO}\\\\\\" >> src/gcconfig.pri
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 lrelease|" src/gcconfig.pri
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
