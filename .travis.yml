@@ -14,15 +14,6 @@ global:
   
 before_install:
   - export QT_SELECT=qt5
-  - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
-  - cd GoldenCheetah
-  - export GC_COMMIT=`git rev-parse HEAD | cut -c 1-10`
-  - export GC_DATE=`git log -1 --date=iso --format=fuller | egrep ^CommitDate | cut -c 13-22`
-  - export GC_INFO=${GC_DATE}':master@'${GC_COMMIT}
-  - cp src/gcconfig.pri.in src/gcconfig.pri
-  - echo DEFINES += GC_VERSION=\\\\\\"${GC_INFO}\\\\\\" >> src/gcconfig.pri
-  - cat src/gcconfig.pri
-  - exit; sfsdf
   - sudo apt-get update -qq
   - sudo apt-get install -qq build-essential git cmake flex bison
   - sudo apt-get install -qq qt5-default qttools5-dev-tools
