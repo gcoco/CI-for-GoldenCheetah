@@ -109,7 +109,7 @@ deploy:
   provider: releases
   api_key:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
-  file: 'GoldenCheetah_*_amd64.deb'
+  file: 'GoldenCheetah_${VERSION}_amd64.deb'
   skip_cleanup: true
   on:
     tags: true
