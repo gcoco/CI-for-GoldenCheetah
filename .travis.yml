@@ -15,7 +15,7 @@ global:
 before_install:
   - export QT_SELECT=qt5
   - sudo apt-get update -qq
-  - sudo apt-get install -qq build-essential git cmake flex bison
+  - sudo apt-get install -qq build-essential cmake flex bison
   - sudo apt-get install -qq qt5-default qttools5-dev-tools
   - sudo apt-get install -qq libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev libudev-dev libqt5webkit5-dev
   - sudo apt-get install -qq libssl-dev libical-dev libusb-1.0-0-dev libudev-dev libsamplerate0-dev
