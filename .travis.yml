@@ -95,7 +95,7 @@ after_success:
   - src/GoldenCheetah --version
   - cd ..
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
-  - export SIZE=`ls -l GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
+  - export SIZE=`ls -l --block-size=1kB GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' build/DEBIAN/control
   - cp GoldenCheetah/src/Resources/linux/51-garmin-usb.rules build/etc/udev/rules.d/
   - export VERSION="4.0.0dev+`date +%Y%m%d`"
