@@ -2,3 +2,4 @@
 
 chmod a+x /opt/GoldenCheetah/GoldenCheetah
 ln -fs "/opt/GoldenCheetah/GoldenCheetah" "/usr/bin/GoldenCheetah"
+/usr/lib/vlc/vlc-cache-gen --force /usr/lib/vlc/plugins/
