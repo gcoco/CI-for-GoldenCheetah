@@ -18,7 +18,7 @@ before_install:
   - sudo apt-get install -qq build-essential cmake flex bison
   - sudo apt-get install -qq qt5-default qttools5-dev-tools
   - sudo apt-get install -qq libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev libudev-dev libqt5webkit5-dev
-  - sudo apt-get install -qq libssl-dev libical-dev libusb-1.0-0-dev libudev-dev libsamplerate0-dev
+  - sudo apt-get install -qq libssl-dev libusb-1.0-0-dev libudev-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
   - pwd
@@ -75,7 +75,7 @@ before_script:
   - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
   - sed -i "s|#\(KML_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
-#  - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 -lical|" src/gcconfig.pri
+  - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 ../../usr/lib/libical.a|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 ../../usr/lib/libusb.a -lusb-1.0 -ldl -ludev|" src/gcconfig.pri
   - sed -i "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
