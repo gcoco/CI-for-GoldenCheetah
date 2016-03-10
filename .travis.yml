@@ -42,7 +42,7 @@ before_script:
   - cd libkml-1.3.0
   - mkdir build && cd build
   - cmake .. -DBUILD_SHARED_LIBS=off -DCMAKE_INSTALL_PREFIX=`cd ../..; pwd;`/usr
-  - make -j3 install
+  - make install
   - cd ../..
   # libical build
   - wget https://github.com/libical/libical/releases/download/v1.0.1/libical-1.0.1.tar.gz -O libical-1.0.1.tar.gz
@@ -50,7 +50,7 @@ before_script:
   - cd libical-1.0.1
   - mkdir build && cd build
   - cmake .. -DSTATIC_ONLY=true -DCMAKE_INSTALL_PREFIX=`cd ../..; pwd;`/usr
-  - make -j3 install
+  - make install
   - cd ../..
   # libusb-compat build
   - wget https://sourceforge.net/projects/libusb/files/libusb-compat-0.1/libusb-compat-0.1.5/libusb-compat-0.1.5.tar.bz2/download -O libusb-compat-0.1.5.tar.bz2
