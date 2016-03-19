@@ -1,7 +1,6 @@
 #commit: d00ac93fb23f88b3b6aaf8b9edadaf66336ba9aa
 branches:
   only:
-    - master
     - Mac
 
 language: 
@@ -9,7 +8,6 @@ language:
   
 compiler:
   - clang
-  - gcc
   
 env:
     - BRANCH=master QT=qt4 QT_PATH=qt
@@ -56,7 +54,7 @@ before_script:
   - cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib D2XX
   - sudo cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib /usr/local/lib
   - cp /Volumes/release/D2XX/bin/*.h D2XX
-  - sed -i "" "s|libftd2xx.dylib|@executable_path/../Frameworks/libftd2xx.1.2.2.dylib|" src/D2XX.cpp
+  - sed -i "" "s|libftd2xx.dylib|@executable_path/../Frameworks/libftd2xx.1.2.2.dylib|" src/FileIO/D2XX.cpp
   # Configure GoldenCheetah
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
@@ -77,7 +75,7 @@ before_script:
   - sed -i "" "s|#\(ICAL_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -L/usr/local/lib -lical|" src/gcconfig.pri
   - sed -i "" "s|#\(LIBUSB_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 -L/usr/local/lib -lusb|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 -L/usr/local/lib -lusb -lusb-1.0|" src/gcconfig.pri
   - sed -i "" "s|#\(SAMPLERATE_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(SAMPLERATE_LIBS =\).*|\1 -L/usr/local/lib -lsamplerate|" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_HAVE_LION*\)|\1|" src/gcconfig.pri
@@ -106,6 +104,7 @@ after_success:
   - ls -laR GoldenCheetah.app
   - sh $TRAVIS_BUILD_DIR/check-gc.sh
   - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
+  - python ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/opt/$QT_PATH
   - brew remove $QT
   - hdiutil mount GoldenCheetah.dmg
   - cd /Volumes/GoldenCheetah
