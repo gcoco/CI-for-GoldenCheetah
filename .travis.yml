@@ -26,6 +26,7 @@ before_install:
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
   - pwd
+  - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
   - ./travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
 #  - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
