@@ -11,13 +11,17 @@ global:
   - secure: UkW6SpgeACb6enGZADTAtPPRe23Tffne/SRQoBsZ3kGbKzgv8kTCLY0G5N71B1xEGdLB/36piOa0yji2SMW1jbflxR7tdOsiNpfd9R5qYqWVZRulY0qite8ZCwU5dqgy87pp4ECC1hNSOTq17aa4Sc4G4egg9AOy8cntLBTtxJA=
   - secure: rb/MKPHEK8yOK5uYpXq2o+MQ7h65ft+c/xE9XmLFk1jLnK0oxe6+KeoSFlQ0n5UwLSsHrytMXVaUHex6EEt0TheXFlohi7BcNFWRWXr+wLucuaPjMnU49VErrSigjJ5VW/rcR7fORmnDwn5y06r3Rer9SC1hImCxf/pqF8hFZps=
   - secure: FXJzm98lwbc1R2eh9/CvVReVRHEPLDm+sCRjiV9HJgeCveIUauLasp9Skamz0c6OKLmkjLY8JERPT491ZgCG8YcQ9x1bM8HGbmRqnn9xSUxINIRzVmyTiLMBoT/ibHHeFjFpyiGfukOAkHwMNNsrSrbaekhiJuekaXo7iTwYQB0=
-  
+env:
+  - WEBKIT=1
+  - WEBKIT=0
 before_install:
   - export QT_SELECT=qt5
   - sudo apt-get update -qq
   - sudo apt-get install -qq build-essential cmake flex bison
   - sudo apt-get install -qq qt5-default qttools5-dev-tools
-  - sudo apt-get install -qq libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev libudev-dev libqt5webkit5-dev
+  - sudo apt-get install -qq libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev libudev-dev
+  - if [[ "$WEBKIT" == "1" ]]; then sudo apt-get install libqt5webkit5-dev; fi
+  - if [[ "$WEBKIT" == "0" ]]; then sudo apt-get install libqt5webkit5-dev; fi
   - sudo apt-get install -qq libssl-dev libusb-1.0-0-dev libudev-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
@@ -68,6 +72,7 @@ before_script:
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - echo DEFINES += GC_VERSION=\\\\\\\"${GC_INFO}\\\\\\\" >> src/gcconfig.pri
+  - if [[ "$WEBKIT" == "0" ]]; then echo DEFINES += NOWEBKIT >> src/gcconfig.pri; fi
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 lrelease|" src/gcconfig.pri
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
