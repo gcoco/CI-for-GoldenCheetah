@@ -30,8 +30,11 @@ before_install:
   # Download D2XX for MAC
   - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
   # Let's build our own QWTPLOT3D.
-  - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
+  - git clone --depth 1 https://github.com/gcoco/qwtplot3d.git qwtplot3d
   - cd qwtplot3d
+  - sed -i "" "s|examples||" qwtplot3d.pro
+  #- if [[ "$WEBENGINE" == "1" ]]; then sed -i "" "s|ordered|ordered c++11|" qwtplot3d.pro; fi
+  #- if [[ "$WEBENGINE" == "1" ]]; then sed -i "" "s| isnan| std::isnan|" include/qwt3d_types.h; fi
   - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make -j2 
   - cd ..
