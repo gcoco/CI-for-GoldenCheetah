@@ -1,10 +1,6 @@
 os:
  - osx
 
-compiler:
-  - clang
-  - gcc
-
 env:
   - QT_PATH=qt5 QT=qt5
   - QT_PATH=qt5 QT=qt5 QT_VER=5.5
@@ -22,7 +18,7 @@ script:
 
 after_script:
   - cd examples/bin
-  - ls
-  - otool -L ./axes
-  - otool -L ./mesh
+  - ls -R
+  - otool -L axes.app/Contents/MacOS/axes
+  - otool -L mesh.app/Content/MacOS/mesh
 
