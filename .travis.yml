@@ -6,11 +6,12 @@ compiler:
   - gcc
 
 env:
-  - QT_PATH=qt QT=qt4
-  - QT_PATH=qt5 QT=qt5 QT_VER=5.5
   - QT_PATH=qt5 QT=qt5
+  - QT_PATH=qt5 QT=qt5 QT_VER=5.5
+  - QT_PATH=qt QT=qt4
   
 before_install:
+  - brew update
   - sh ./install-qt.sh
   
 script:
