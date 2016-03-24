@@ -22,5 +22,5 @@ script:
 
 after_script:
   - cd examples/bin
-  - ldd axes
+  - otool -L axes
 
