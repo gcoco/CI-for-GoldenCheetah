@@ -1,5 +1,5 @@
 os:
- - mac
+ - osx
 
 compiler:
   - clang
