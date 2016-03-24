@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$QT" = "qt5.5" ]
+if [ "$QT_VER" = "5.5" ]
 then
   pwd
   workdir=`pwd`
