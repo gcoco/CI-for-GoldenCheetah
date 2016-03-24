@@ -11,7 +11,7 @@ env:
   - QT_PATH=qt5 QT=qt5
   
 before_install:
-  - install-qt.sh
+  - sh ./install-qt.sh
   
 script:
   - git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git qwtplot3d
