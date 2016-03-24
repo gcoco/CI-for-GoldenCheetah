@@ -5,8 +5,8 @@ compiler:
   - gcc
 
 env:
-  - QT=4
-  - QT=5
+  - QT=qt4
+  - QT=qt5
   
 before_install:
   - brew install $QT
