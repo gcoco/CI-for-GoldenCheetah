@@ -11,7 +11,7 @@ compiler:
   
 env:
     - BRANCH=master QT=qt5 QT_PATH=qt5 WEBENGINE=1
-    - BRANCH=master QT=qt5 QT_PATH=qt5
+    - BRANCH=master QT=qt5 QT_VER=5.5 QT_PATH=qt5
     - BRANCH=master QT=qt4 QT_PATH=qt
 
 before_install:
