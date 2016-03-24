@@ -17,10 +17,12 @@ before_install:
 script:
   - git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git qwtplot3d
   - cd qwtplot3d
-  - /usr/local/opt/$QT_PATH/bin/qmake -recursive
+  - /usr/local/opt/$QT_PATH/bin/qmake -recursive DEFINES+=C++11
   - make -j3
 
 after_script:
   - cd examples/bin
-  - otool -L axes
+  - ls
+  - otool -L ./axes
+  - otool -L ./mesh
 
