@@ -1,14 +1,7 @@
 #!/bin/bash
 if [ "$QT_VER" = "5.5" ]
 then
-  pwd
-  workdir=`pwd`
-  echo ${workdir}
-  cd $( brew --prefix )
-  pwd
-  # Select QT 5.5.1
-  git checkout fb64f6cd91ff Library/Formula/qt5.rb
-  cd ${workdir}
-  pwd
+ brew install https://raw.githubusercontent.com/Homebrew/homebrew/fb64f6cd91ff19d9c651b7851a74808bde6bc60f/Library/Formula/qt5.rb
+else
+ brew install $QT
 fi
-brew install $QT
