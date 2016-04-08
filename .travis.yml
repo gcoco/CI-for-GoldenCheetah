@@ -24,7 +24,7 @@ before_install:
   - if [[ "$WEBKIT" == "1" ]]; then sudo apt-get install -qq libqt5webkit5-dev; fi
 #  - if [[ "$WEBKIT" == "0" ]]; then sudo apt-get install -qq libqt5webengine5-dev; fi
   - wget https://github.com/gcoco/Qt5.5.1-Ubuntu14.04-64bit/releases/download/v1.0/Qt5.5.1.tar.gz
-  - tar xf Qt5.5.1.tar.gz
+  - tar xvf Qt5.5.1.tar.gz
   - sudo apt-get install -qq libssl-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
@@ -116,10 +116,10 @@ before_script:
   - sed -i "s/__GC_CYCLINGANALYTICS_CLIENT_SECRET__/"$GC_CYCLINGANALYTICS_CLIENT_SECRET"/" src/Core/Secrets.h
   - sed -i "s/__GC_TWITTER_CONSUMER_SECRET__/"$GC_TWITTER_CONSUMER_SECRET"/" src/Core/Secrets.h
   - cat src/gcconfig.pri
-  - ../Qt5.5.1/5.5/gcc64/bin/lupdate src/src.pro
+  - ../../Qt5.5.1/5.5/gcc64/bin/lupdate src/src.pro
 
 script:
-  - qmake -recursive
+  - ../../Qt5.5.1/5.5/gcc64/bin/qmake -recursive
   - make -j3
 
 after_success:
