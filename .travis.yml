@@ -16,22 +16,15 @@ env:
 #  - WEBKIT=0
 before_install:
   - export QT_SELECT=qt5
-  - date
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq build-essential cmake flex bison
-  - sudo apt-get install -qq qt5-default qttools5-dev-tools
-  - sudo apt-get install -qq libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev
+#  - date
+#  - sudo apt-get update -qq
+#  - sudo apt-get install -qq build-essential cmake flex bison
+#  - sudo apt-get install -qq qt5-default qttools5-dev-tools
+#  - sudo apt-get install -qq libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev
   - if [[ "$WEBKIT" == "1" ]]; then sudo apt-get install -qq libqt5webkit5-dev; fi
 #  - if [[ "$WEBKIT" == "0" ]]; then sudo apt-get install -qq libqt5webengine5-dev; fi
-  - pwd
-  - date
   - wget https://github.com/gcoco/Qt5.5.1-Ubuntu14.04-64bit/releases/download/v1.0/Qt5.5.1.tar.gz
-  - ls
   - tar xf Qt5.5.1.tar.gz
-  - date
-  - ls
-  - end
-  - sdklvsdlvkmsdvmsdvm
   - sudo apt-get install -qq libssl-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
@@ -39,7 +32,7 @@ before_script:
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
   - pwd
-  - ./travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
+ # - ./travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
   - pwd
 #  - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
 #  - cd qwtplot3d
@@ -90,7 +83,6 @@ before_script:
 #  - make -j3 install 
 #  - cd ..
 # Setup GoldenCheetah
-  - pwd
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
   - cd GoldenCheetah
   - export GC_COMMIT=`git rev-parse HEAD | cut -c 1-10`
@@ -104,7 +96,7 @@ before_script:
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 lrelease|" src/gcconfig.pri
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
+#  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
   - sed -i "s|#\(KML_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 ../../usr/lib/libical.a|" src/gcconfig.pri
@@ -124,7 +116,7 @@ before_script:
   - sed -i "s/__GC_CYCLINGANALYTICS_CLIENT_SECRET__/"$GC_CYCLINGANALYTICS_CLIENT_SECRET"/" src/Core/Secrets.h
   - sed -i "s/__GC_TWITTER_CONSUMER_SECRET__/"$GC_TWITTER_CONSUMER_SECRET"/" src/Core/Secrets.h
   - cat src/gcconfig.pri
-  - lupdate src/src.pro
+  - ../Qt5.5.1/5.5/gcc64/bin/lupdate src/src.pro
 
 script:
   - qmake -recursive
