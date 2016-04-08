@@ -31,7 +31,7 @@ before_install:
   - date
   - ls
   - end
-  sdklvsdlvkmsdvmsdvm
+  - sdklvsdlvkmsdvmsdvm
   - sudo apt-get install -qq libssl-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
