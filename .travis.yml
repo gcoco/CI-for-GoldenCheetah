@@ -76,7 +76,7 @@ before_script:
   - ../Qt5.5.1/5.5/gcc_64/bin/lupdate src/src.pro
 
 script:
-  - .../Qt5.5.1/5.5/gcc_64/bin/qmake -recursive
+  - ../Qt5.5.1/5.5/gcc_64/bin/qmake -recursive
   - make -j3 V=0
 
 after_success:
