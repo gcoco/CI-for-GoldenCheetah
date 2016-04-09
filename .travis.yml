@@ -28,61 +28,18 @@ before_install:
   - sudo apt-get install -qq libssl-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
-  - pwd
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
-  - pwd
- # - ./travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
-  - pwd
-#  - git clone --depth 1 https://github.com/sintegrial/qwtplot3d.git qwtplot3d
-#  - cd qwtplot3d
-#  - sed -i "s|examples||" qwtplot3d.pro
-#  - qmake -recursive
-#  - make -j3
-#  - cd ..
+  - ./travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
   # SRMIO build 
-  - pwd
   - ./travis/$TRAVIS_OS_NAME/install-srmio.sh
-  - pwd
-#  - wget http://www.zuto.de/project/files/srmio/srmio-0.1.1~git1.tar.gz -O srmio-0.1.1~git1.tar.gz
-#  - tar xf srmio-0.1.1~git1.tar.gz
-#  - cd srmio-0.1.1~git1
-#  - ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
-#  - make -j3 install
-#  - cd ..
   # libkml build
-  - pwd
   - ./travis/$TRAVIS_OS_NAME/install-libkml.sh
-  - pwd
-#  - wget https://github.com/libkml/libkml/archive/1.3.0.tar.gz -O libkml-1.3.0.tar.gz
-#  - tar xf libkml-1.3.0.tar.gz
-#  - cd libkml-1.3.0
-#  - mkdir build && cd build
-#  - cmake .. -DBUILD_SHARED_LIBS=off -DCMAKE_INSTALL_PREFIX=`cd ../..; pwd;`/usr
-#  - make install
-#  - cd ../..
   # libical build
-  - pwd
   - ./travis/$TRAVIS_OS_NAME/install-libical.sh
-  - pwd
-#  - wget https://github.com/libical/libical/releases/download/v1.0.1/libical-1.0.1.tar.gz -O libical-1.0.1.tar.gz
-#  - tar xf libical-1.0.1.tar.gz
-#  - cd libical-1.0.1
-#  - mkdir build && cd build
-#  - cmake .. -DSTATIC_ONLY=true -DCMAKE_INSTALL_PREFIX=`cd ../..; pwd;`/usr
-#  - make install
-#  - cd ../..
   # libusb-compat build
-  - pwd
   - ./travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
-  - pwd
-#  - wget https://sourceforge.net/projects/libusb/files/libusb-compat-0.1/libusb-compat-0.1.5/libusb-compat-0.1.5.tar.bz2/download -O libusb-compat-0.1.5.tar.bz2
-#  - tar xf libusb-compat-0.1.5.tar.bz2
-#  - cd libusb-compat-0.1.5
-#  - ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
-#  - make -j3 install 
-#  - cd ..
-# Setup GoldenCheetah
+  # Setup GoldenCheetah
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
   - cd GoldenCheetah
   - export GC_COMMIT=`git rev-parse HEAD | cut -c 1-10`
