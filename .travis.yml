@@ -116,10 +116,10 @@ before_script:
   - sed -i "s/__GC_CYCLINGANALYTICS_CLIENT_SECRET__/"$GC_CYCLINGANALYTICS_CLIENT_SECRET"/" src/Core/Secrets.h
   - sed -i "s/__GC_TWITTER_CONSUMER_SECRET__/"$GC_TWITTER_CONSUMER_SECRET"/" src/Core/Secrets.h
   - cat src/gcconfig.pri
-  - ../../Qt5.5.1/5.5/gcc64/bin/lupdate src/src.pro
+  - ../../Qt5.5.1/5.5/gcc_64/bin/lupdate src/src.pro
 
 script:
-  - ../../Qt5.5.1/5.5/gcc64/bin/qmake -recursive
+  - ../../Qt5.5.1/5.5/gcc_64/bin/qmake -recursive
   - make -j3
 
 after_success:
