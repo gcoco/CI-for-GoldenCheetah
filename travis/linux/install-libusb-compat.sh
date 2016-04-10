@@ -5,5 +5,5 @@ wget https://sourceforge.net/projects/libusb/files/libusb-compat-0.1/libusb-comp
 tar xf libusb-compat-0.1.5.tar.bz2
 cd libusb-compat-0.1.5
 ./configure --disable-shared --enable-static --prefix=`cd ..; pwd`/usr
-make V=0 -j3 install 
+make --silent -j3 install 
 cd ..
