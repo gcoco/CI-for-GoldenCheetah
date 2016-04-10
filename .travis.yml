@@ -81,11 +81,13 @@ script:
   - make -j3 V=0
 
 after_success:
-  - cp -R ../Qt5.5.1/5.5/gcc_64/{lib,plugins} src/
-  - ldd src/GoldenCheetah
-  - LD_LIBRARY_PATH=src/lib src/GoldenCheetah --version
   - cd ..
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
+  - cp -R Qt5.5.1/5.5/gcc_64/{lib,plugins} build/opt/GoldenCheetah/
+  - cd build/opt/GoldenCheetah
+  - LD_LIBRARY_PATH=lib ldd GoldenCheetah
+  - LD_LIBRARY_PATH=lib GoldenCheetah --version
+  - cd ../../..
   - export SIZE=`ls -l --block-size=1kB GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' build/DEBIAN/control
   - cp GoldenCheetah/src/Resources/linux/51-garmin-usb.rules build/etc/udev/rules.d/
