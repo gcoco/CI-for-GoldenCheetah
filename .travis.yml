@@ -78,15 +78,16 @@ before_script:
 
 script:
   - ../Qt5.5.1/5.5/gcc_64/bin/qmake -recursive
-  - make -j3 V=0
+  - make --silent -j3
 
 after_success:
   - cd ..
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
   - cp -R Qt5.5.1/5.5/gcc_64/{lib,plugins} build/opt/GoldenCheetah/
   - cd build/opt/GoldenCheetah
+  - chmod u+x GoldenCheetah
   - LD_LIBRARY_PATH=lib ldd GoldenCheetah
-  - LD_LIBRARY_PATH=lib GoldenCheetah --version
+  - LD_LIBRARY_PATH=lib ./GoldenCheetah --version
   - cd ../../..
   - export SIZE=`ls -l --block-size=1kB GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' build/DEBIAN/control
@@ -96,6 +97,7 @@ after_success:
   - cat build/DEBIAN/control
   - dpkg -b build/ GoldenCheetah_${VERSION}_amd64.deb
   - dpkg -c GoldenCheetah_${VERSION}_amd64.deb
+  - ls -l GoldenCheetah_${VERSION}_amd64.deb
   
 deploy:
   provider: releases
