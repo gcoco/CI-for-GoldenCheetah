@@ -20,8 +20,8 @@ global:
   - secure: lefpL3SB8yN0Vn1R2e0hAFpJgFnu4rJ/vn7DucSKQvJ61K7t3LrUHFXElDQGFZMbytx4OJDeYsJtrccrIHjcsSAEIyW8TTcwn5/JopnyeQ3ukV5AYpEoQusym09XKru9E7awqvnZrXz6mdoIum5JP7+H116mPN4vsvz5nkNWxeg=
   - secure: RAGPq/thN9x6STNueDbeJWGUN75OLNcUVUkLHI/eZwPrkMaiQPfxIaJ+8eO2PszDcBojw3eYVhzbRvLnLiXmHL3buwD6oXMTyYnxGzCZ61DeDQ2cQa8ynKmRim5JL3viKMqtdyasXVoGf/u0GqMsgaLcqN6e/vXuXMGu6kkUPEQ=
 env:
-  - WEBKIT=1, QTMAIN=5.5, QTMin=1
-  - WEBKIT=0, QTMAIN=5.6, QTMin=0
+  - WEBKIT=1, QTMAX=5.5, QTMin=1
+  - WEBKIT=0, QTMAX=5.6, QTMin=0
 before_install:
   - export QT_SELECT=qt5
 #  - date
@@ -39,7 +39,7 @@ before_install:
 before_script:
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
-  - ./travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
+  #- ./travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
   # SRMIO build 
   - ./travis/$TRAVIS_OS_NAME/install-srmio.sh
   # libkml build
@@ -62,7 +62,7 @@ before_script:
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 ../../Qt$QTMAX.$QTMin/$QTMax/gcc_64/bin/lrelease|" src/gcconfig.pri
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
+#  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
   - sed -i "s|#\(KML_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 ../../usr/lib/libical.a|" src/gcconfig.pri
