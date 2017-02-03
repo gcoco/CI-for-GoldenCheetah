@@ -90,16 +90,16 @@ before_script:
   - sed -i "s/__GC_GOOGLE_DRIVE_API_KEY__/"$GC_GOOGLE_DRIVE_API_KEY"/" src/Core/Secrets.h
   - sed -i "s/__GC_TODAYSPLAN_CLIENT_SECRET__/"$GC_TODAYSPLAN_CLIENT_SECRET"/" src/Core/Secrets.h
   - cat src/gcconfig.pri
-  - ../Qt$QTMAX.$QTMin/$QTMax/gcc_64/bin/lupdate src/src.pro
+  - ../Qt$QTMAX.$QTMin/$QTMAX/gcc_64/bin/lupdate src/src.pro
 
 script:
-  - ../Qt$QTMAX.$QTMin/$QTMax/gcc_64/bin/qmake -recursive
+  - ../Qt$QTMAX.$QTMin/$QTMAX/gcc_64/bin/qmake -recursive
   - make --silent -j3
 
 after_success:
   - cd ..
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
-  - cp -R Qt$QTMAX.$QTMin/$QTMax/gcc_64/{lib,plugins} build/opt/GoldenCheetah/
+  - cp -R Qt$QTMAX.$QTMin/$QTMAX/gcc_64/{lib,plugins} build/opt/GoldenCheetah/
   - cd build/opt/GoldenCheetah
   - chmod u+x GoldenCheetah
   - LD_LIBRARY_PATH=lib ldd GoldenCheetah
