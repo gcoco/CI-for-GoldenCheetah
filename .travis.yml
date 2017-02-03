@@ -13,7 +13,7 @@ global:
   - secure: FXJzm98lwbc1R2eh9/CvVReVRHEPLDm+sCRjiV9HJgeCveIUauLasp9Skamz0c6OKLmkjLY8JERPT491ZgCG8YcQ9x1bM8HGbmRqnn9xSUxINIRzVmyTiLMBoT/ibHHeFjFpyiGfukOAkHwMNNsrSrbaekhiJuekaXo7iTwYQB0=
 env:
   - WEBKIT=1
-#  - WEBKIT=0
+  - WEBKIT=0
 before_install:
   - export QT_SELECT=qt5
 #  - date
@@ -22,7 +22,7 @@ before_install:
 #  - sudo apt-get install -qq qt5-default qttools5-dev-tools
 #  - sudo apt-get install -qq libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev
   - if [[ "$WEBKIT" == "1" ]]; then sudo apt-get install -qq libqt5webkit5-dev; fi
-#  - if [[ "$WEBKIT" == "0" ]]; then sudo apt-get install -qq libqt5webengine5-dev; fi
+  - if [[ "$WEBKIT" == "0" ]]; then sudo apt-get install -qq libqt5webengine5-dev; fi
   - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT5.5.1/Qt5.5.1.tar.gz
   - tar xf Qt5.5.1.tar.gz
   - sudo apt-get install -qq libglu1-mesa-dev libgstreamer0.10-0 libgstreamer-plugins-base0.10-0
@@ -49,7 +49,7 @@ before_script:
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - echo DEFINES += GC_VERSION=\\\\\\\"${GC_INFO}\\\\\\\" >> src/gcconfig.pri
-#  - if [[ "$WEBKIT" == "0" ]]; then echo DEFINES += NOWEBKIT >> src/gcconfig.pri; fi
+  - if [[ "$WEBKIT" == "0" ]]; then echo DEFINES += NOWEBKIT >> src/gcconfig.pri; fi
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 ../../Qt5.5.1/5.5/gcc_64/bin/lrelease|" src/gcconfig.pri
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
@@ -92,7 +92,7 @@ after_success:
   - export SIZE=`ls -l --block-size=1kB GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' build/DEBIAN/control
   - cp GoldenCheetah/src/Resources/linux/51-garmin-usb.rules build/etc/udev/rules.d/
-  - export VERSION="4.0.0dev+`date +%Y%m%d`"
+  - export VERSION="3.4.1dev+`date +%Y%m%d`"
   - sed -i 's/VERSION/'"$VERSION"'/g' build/DEBIAN/control
   - cat build/DEBIAN/control
   - dpkg -b build/ GoldenCheetah_${VERSION}_amd64.deb
@@ -103,7 +103,7 @@ deploy:
   provider: releases
   api_key:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
-  file: 'GoldenCheetah_${VERSION}_amd64.deb'
+  file: 'GoldenCheetah_${VERSION}_${WEBKIT}_amd64.deb'
   skip_cleanup: true
   on:
     tags: true
