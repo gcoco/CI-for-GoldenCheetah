@@ -20,7 +20,7 @@ global:
   - secure: lefpL3SB8yN0Vn1R2e0hAFpJgFnu4rJ/vn7DucSKQvJ61K7t3LrUHFXElDQGFZMbytx4OJDeYsJtrccrIHjcsSAEIyW8TTcwn5/JopnyeQ3ukV5AYpEoQusym09XKru9E7awqvnZrXz6mdoIum5JP7+H116mPN4vsvz5nkNWxeg=
   - secure: RAGPq/thN9x6STNueDbeJWGUN75OLNcUVUkLHI/eZwPrkMaiQPfxIaJ+8eO2PszDcBojw3eYVhzbRvLnLiXmHL3buwD6oXMTyYnxGzCZ61DeDQ2cQa8ynKmRim5JL3viKMqtdyasXVoGf/u0GqMsgaLcqN6e/vXuXMGu6kkUPEQ=
 env:
-  - WEBKIT=0 QTMAX=5.5 QTMin=1
+  - WEBKIT=1 QTMAX=5.5 QTMin=1
   - WEBKIT=1 QTMAX=5.6 QTMin=0
 before_install:
   - export QT_SELECT=qt5
@@ -31,8 +31,8 @@ before_install:
 #  - sudo apt-get install -qq libqt5svg5-dev qtmultimedia5-dev libqt5serialport5-dev
 #  - if [[ "$WEBKIT" == "1" ]]; then sudo apt-get install -qq libqt5webkit5-dev; fi
 #  - if [[ "$WEBKIT" == "0" ]]; then sudo apt-get install -qq libqt5webengine5-dev; fi
-  - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT$QTMAX.$QTMin/Qt$QTMAX.$QTMin.tar.gz
-  - tar xf Qt$QTMAX.$QTMin.tar.gz
+  - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT${QTMAX}.${QTMin}/Qt${QTMAX}.${QTMin}.tar.gz
+  - tar xf Qt${QTMAX}.${QTMin}.tar.gz
   - sudo apt-get install -qq libglu1-mesa-dev libgstreamer0.10-0 libgstreamer-plugins-base0.10-0
   - sudo apt-get install -qq libssl-dev libsamplerate0-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
@@ -59,7 +59,7 @@ before_script:
   - echo DEFINES += GC_VERSION=\\\\\\\"${GC_INFO}\\\\\\\" >> src/gcconfig.pri
   - if [[ "$WEBKIT" == "0" ]]; then echo DEFINES += NOWEBKIT >> src/gcconfig.pri; fi
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
-  - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 ../../Qt$QTMAX.$QTMin/$QTMax/gcc_64/bin/lrelease|" src/gcconfig.pri
+  - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 ../../Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/bin/lrelease|" src/gcconfig.pri
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
 #  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
@@ -90,16 +90,16 @@ before_script:
   - sed -i "s/__GC_GOOGLE_DRIVE_API_KEY__/"$GC_GOOGLE_DRIVE_API_KEY"/" src/Core/Secrets.h
   - sed -i "s/__GC_TODAYSPLAN_CLIENT_SECRET__/"$GC_TODAYSPLAN_CLIENT_SECRET"/" src/Core/Secrets.h
   - cat src/gcconfig.pri
-  - ../Qt$QTMAX.$QTMin/$QTMAX/gcc_64/bin/lupdate src/src.pro
+  - ../Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/bin/lupdate src/src.pro
 
 script:
-  - ../Qt$QTMAX.$QTMin/$QTMAX/gcc_64/bin/qmake -recursive
+  - ../Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/bin/qmake -recursive
   - make --silent -j3
 
 after_success:
   - cd ..
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
-  - cp -R Qt$QTMAX.$QTMin/$QTMAX/gcc_64/{lib,plugins} build/opt/GoldenCheetah/
+  - cp -R Qt${QTMAX}.$QTMin}/${QTMAX}/gcc_64/{lib,plugins} build/opt/GoldenCheetah/
   - cd build/opt/GoldenCheetah
   - chmod u+x GoldenCheetah
   - LD_LIBRARY_PATH=lib ldd GoldenCheetah
