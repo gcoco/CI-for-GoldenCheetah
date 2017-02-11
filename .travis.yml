@@ -103,11 +103,11 @@ script:
 after_success:
   - cd ..
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
-  - cp -R Qt${QTMAX}.$QTMin}/${QTMAX}/gcc_64/{lib,plugins} build/opt/GoldenCheetah/
+  - cp -R Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/{libexec,lib,plugins,resources,translations} build/opt/GoldenCheetah/
   - cd build/opt/GoldenCheetah
   - chmod u+x GoldenCheetah
-  - LD_LIBRARY_PATH=lib ldd GoldenCheetah
-  - LD_LIBRARY_PATH=lib ./GoldenCheetah --version
+  - ldd GoldenCheetah
+  - ./GoldenCheetah --version
   - cd ../../..
   - export SIZE=`ls -l --block-size=1kB GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' build/DEBIAN/control
