@@ -20,7 +20,16 @@ before_install:
   - echo $OS
   - echo Apple > fruit.txt
   - cat fruit.txt
-  - sed -i'' 's|Apple|Orange|g' fruit.txt || sed -i '' 's|Apple|Orange|g' fruit.txt
+  - if [ "$OS" = "Darwin" ];
+    then
+      $SED = "sed -i'' "
+    fi
+  - if [ "$OS" = "Linux" ];
+    then
+      $SED = "sed -i '' "
+    fi
+  - cat sed = $SED
+  - $SED 's|Apple|Orange|g' fruit.txt
   - cat fruit.txt
   - skdfjskjfd
 
