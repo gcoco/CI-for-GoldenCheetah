@@ -21,7 +21,7 @@ global:
   - secure: RAGPq/thN9x6STNueDbeJWGUN75OLNcUVUkLHI/eZwPrkMaiQPfxIaJ+8eO2PszDcBojw3eYVhzbRvLnLiXmHL3buwD6oXMTyYnxGzCZ61DeDQ2cQa8ynKmRim5JL3viKMqtdyasXVoGf/u0GqMsgaLcqN6e/vXuXMGu6kkUPEQ=
 env:
   - WEBKIT=0 QTMAX=5.6 QTMin=0
-#  - WEBKIT=0 QTMAX=5.7 QTMin=1
+  - WEBKIT=0 QTMAX=5.7 QTMin=1
 before_install:
   - export QT_SELECT=qt5
 #  - date
