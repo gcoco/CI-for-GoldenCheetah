@@ -7,7 +7,7 @@ before_install:
   - brew update
 #  - sh ./install-qt.sh
   - brew tap homebrew/science
-  - brew install --verbose https://github.com/gcoco/CI-for-GoldenCheetah/blob/master/lmfit.rb
+  - brew install --verbose https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/lmfit.rb
 
 script:
   - ls -laR /usr/local
