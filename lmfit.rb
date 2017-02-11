@@ -23,3 +23,4 @@ class Lmfit < Formula
     system ENV.cc, (pkgshare/"demos/surface1.c"), "-I#{include}", "-L#{lib}", "-llmfit", "-o", "surface1"
     system "./surface1"
   end
+end
