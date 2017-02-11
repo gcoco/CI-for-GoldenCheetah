@@ -94,7 +94,7 @@ before_script:
 
 script:
   - ../Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/bin/qmake -recursive
-  - make --silent -j3
+  - make -j3
 
 after_success:
   - cd ..
