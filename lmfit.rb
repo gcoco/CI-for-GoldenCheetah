@@ -1,3 +1,5 @@
+require 'formula'
+
 class Lmfit < Formula
   homepage "http://apps.jcns.fz-juelich.de/doku/sc/lmfit"
   url "http://apps.jcns.fz-juelich.de/src/lmfit/lmfit-6.1.tgz"
