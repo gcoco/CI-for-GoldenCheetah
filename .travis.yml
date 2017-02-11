@@ -20,8 +20,8 @@ global:
   - secure: lefpL3SB8yN0Vn1R2e0hAFpJgFnu4rJ/vn7DucSKQvJ61K7t3LrUHFXElDQGFZMbytx4OJDeYsJtrccrIHjcsSAEIyW8TTcwn5/JopnyeQ3ukV5AYpEoQusym09XKru9E7awqvnZrXz6mdoIum5JP7+H116mPN4vsvz5nkNWxeg=
   - secure: RAGPq/thN9x6STNueDbeJWGUN75OLNcUVUkLHI/eZwPrkMaiQPfxIaJ+8eO2PszDcBojw3eYVhzbRvLnLiXmHL3buwD6oXMTyYnxGzCZ61DeDQ2cQa8ynKmRim5JL3viKMqtdyasXVoGf/u0GqMsgaLcqN6e/vXuXMGu6kkUPEQ=
 env:
-  - WEBKIT=0 QTMAX=5.5 QTMin=1
   - WEBKIT=0 QTMAX=5.6 QTMin=0
+#  - WEBKIT=0 QTMAX=5.7 QTMin=1
 before_install:
   - export QT_SELECT=qt5
 #  - date
@@ -34,7 +34,7 @@ before_install:
   - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT${QTMAX}.${QTMin}/Qt${QTMAX}.${QTMin}.tar.gz
   - tar xf Qt${QTMAX}.${QTMin}.tar.gz
   - sudo apt-get install -qq libglu1-mesa-dev libgstreamer0.10-0 libgstreamer-plugins-base0.10-0
-  - sudo apt-get install -qq libssl-dev libsamplerate0-dev
+  - sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
