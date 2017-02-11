@@ -48,6 +48,8 @@ before_script:
   - ./travis/$TRAVIS_OS_NAME/install-libical.sh
   # libusb-compat build
   - ./travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
+    # libusb-compat build
+  - ./travis/$TRAVIS_OS_NAME/install-lmfit.sh
   # Setup GoldenCheetah
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
   - cd GoldenCheetah
@@ -57,6 +59,7 @@ before_script:
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - echo DEFINES += GC_VERSION=\\\\\\\"${GC_INFO}\\\\\\\" >> src/gcconfig.pri
+  - echo QMAKE_LFLAGS += \"-Wl,-rpath,\\\'\\$\$ORIGIN/lib\\\'\" >> src/gcconfig.pri
   - if [[ "$WEBKIT" == "0" ]]; then echo DEFINES += NOWEBKIT >> src/gcconfig.pri; fi
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 ../../Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/bin/lrelease|" src/gcconfig.pri
@@ -66,6 +69,7 @@ before_script:
   - sed -i "s|#\(KML_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 ../../usr/lib/libical.a|" src/gcconfig.pri
+  - sed -i "s|#\(LMFIT_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 ../../usr/lib/libusb.a -lusb-1.0 -ldl -ludev|" src/gcconfig.pri
   - sed -i "s|#\(VLC_INSTALL =.*\)|\1 /usr|" src/gcconfig.pri
