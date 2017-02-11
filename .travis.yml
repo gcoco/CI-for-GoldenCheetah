@@ -5,9 +5,10 @@ env:
   
 before_install:
   - brew update
+  - brew update
 #  - sh ./install-qt.sh
   - brew tap homebrew/science
-  - brew install --verbose https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/lmfit.rb
+  - brew bump-formula-pr --strict --url=http://apps.jcns.fz-juelich.de/src/lmfit/lmfit-6.1.tgz --sha256=54366788400e3b1eb47cff44c9dae9906da079400cec2df2fb0b865c9e04c6a0 lmfit
 
 script:
   - ls -laR /usr/local
