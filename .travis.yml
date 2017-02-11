@@ -2,23 +2,12 @@ os:
  - osx
 
 env:
-  - QT_PATH=qt5 QT=qt5
-  - QT_PATH=qt5 QT=qt5 QT_VER=5.5
-  - QT_PATH=qt QT=qt4
   
 before_install:
   - brew update
-  - sh ./install-qt.sh
-  
+#  - sh ./install-qt.sh
+  - brew tap homebrew/science
+  - brew install lmfit
+
 script:
-  - git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git qwtplot3d
-  - cd qwtplot3d
-  - /usr/local/opt/$QT_PATH/bin/qmake -recursive
-  - make -j3
-
-after_script:
-  - cd examples/bin
-  - ls -R
-  - otool -L axes.app/Contents/MacOS/axes
-  - otool -L mesh.app/Content/MacOS/mesh
-
+  - ls -laR /usr/local
