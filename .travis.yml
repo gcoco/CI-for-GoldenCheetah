@@ -22,11 +22,11 @@ before_install:
   - cat fruit.txt
   - if [ "$OS" = "Darwin" ];
     then
-      $SED = "sed -i'' "
+      $SED = "sed -i'' ";
     fi
   - if [ "$OS" = "Linux" ];
     then
-      $SED = "sed -i '' "
+      $SED = "sed -i '' ";
     fi
   - cat sed = $SED
   - $SED 's|Apple|Orange|g' fruit.txt
