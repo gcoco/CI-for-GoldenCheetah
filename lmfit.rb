@@ -12,7 +12,7 @@ class Lmfit < Formula
   end
 
   def caveats
-    "Demo sources have been placed in " + (share/"lmfit/demos")
+    "Demo sources have been placed in " + (pkgshare/"lmfit/demos")
   end
 
   test do
