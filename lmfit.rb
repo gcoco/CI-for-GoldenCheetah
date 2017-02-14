@@ -6,8 +6,8 @@ class Lmfit < Formula
   url "http://apps.jcns.fz-juelich.de/src/lmfit/lmfit-6.1.tgz"
   sha256 "54366788400e3b1eb47cff44c9dae9906da079400cec2df2fb0b865c9e04c6a0"
   
-def install
- system "./configure", "--disable-dependency-tracking",
+ def install
+    system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"
     system "make", "install"
     (pkgshare/"demos").install Dir["demo/*.c"]
