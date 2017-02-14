@@ -1,5 +1,5 @@
 class Lmfit < Formula
-  desc "Library for Levenberg-Marquardt least-squares minimization and curve fitting."
+  desc "Levenberg-Marquardt least-squares minimization and curve fitting."
   homepage "http://apps.jcns.fz-juelich.de/doku/sc/lmfit"
   url "http://apps.jcns.fz-juelich.de/src/lmfit/lmfit-6.1.tgz"
   sha256 "54366788400e3b1eb47cff44c9dae9906da079400cec2df2fb0b865c9e04c6a0"
