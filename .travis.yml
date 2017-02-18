@@ -64,6 +64,7 @@ before_script:
 #  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
   - sed -i "s|#\(KML_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
+  - sed -i "s|#\(ICAL_INCLUDE =.*\)|\1 ../../usr/include/libical|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 ../../usr/lib/libical.a|" src/gcconfig.pri
   - sed -i "s|#\(LMFIT_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 ../../usr|" src/gcconfig.pri
