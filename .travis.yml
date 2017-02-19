@@ -21,8 +21,8 @@ global:
   - secure: RAGPq/thN9x6STNueDbeJWGUN75OLNcUVUkLHI/eZwPrkMaiQPfxIaJ+8eO2PszDcBojw3eYVhzbRvLnLiXmHL3buwD6oXMTyYnxGzCZ61DeDQ2cQa8ynKmRim5JL3viKMqtdyasXVoGf/u0GqMsgaLcqN6e/vXuXMGu6kkUPEQ=
 env:
 # Set HTML=WEBKIT to use WEBKIT or HTML=WEBENGINE to use WEBENGINE.
-  - HTML=WEBKIT QTMAX=5.5 QTMin=1
-#  - HTML=WEBKIT QTMAX=5.6 QTMin=0
+#  - HTML=WEBKIT QTMAX=5.5 QTMin=1
+  - HTML=WEBKIT QTMAX=5.6 QTMin=0
 #  - HTML=WEBKIT QTMAX=5.7 QTMin=1
   - HTML=WEBENGINE QTMAX=5.8 QTMin=0
 before_install:
@@ -46,7 +46,8 @@ before_script:
   - ./travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
     # libusb-compat build
   - ./travis/$TRAVIS_OS_NAME/install-lmfit.sh
-  # Setup GoldenCheetah
+# Setup GoldenCheetah
+  - ls -laR usr
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
   - cd GoldenCheetah
   - export GC_COMMIT=`git rev-parse HEAD | cut -c 1-10`
