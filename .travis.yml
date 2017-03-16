@@ -26,7 +26,7 @@ env:
 #  - HTML=WEBKIT QTMAX=5.7 QTMin=1
   - HTML=WEBENGINE QTMAX=5.8 QTMin=0
 before_install:
-  - QTPATH = ${TRAVIS_BUILD_DIR}/Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64
+  - export QTPATH=${TRAVIS_BUILD_DIR}/Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64
   - echo ${TRAVIS_BUILD_DIR}
   - pwd
   - export QT_SELECT=qt5
