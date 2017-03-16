@@ -26,6 +26,9 @@ env:
 #  - HTML=WEBKIT QTMAX=5.7 QTMin=1
   - HTML=WEBENGINE QTMAX=5.8 QTMin=0
 before_install:
+  - QTPATH = ${TRAVIS_BUILD_DIR}/Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64
+  - echo ${TRAVIS_BUILD_DIR}
+  - pwd
   - export QT_SELECT=qt5
   - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT${QTMAX}.${QTMin}/Qt${QTMAX}.${QTMin}.tar.gz
   - tar xf Qt${QTMAX}.${QTMin}.tar.gz
@@ -35,19 +38,19 @@ before_install:
 before_script:
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
-  #- ./travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
+  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
   # SRMIO build 
-  - ./travis/$TRAVIS_OS_NAME/install-srmio.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-srmio.sh
   # libkml build
-  - ./travis/$TRAVIS_OS_NAME/install-libkml.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libkml.sh
   # libical build
-  - ./travis/$TRAVIS_OS_NAME/install-libical.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libical.sh
   # libusb-compat build
-  - ./travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
     # libusb-compat build
-  - ./travis/$TRAVIS_OS_NAME/install-lmfit.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
 # Setup GoldenCheetah
-  - ls -laR usr
+  - cd ${TRAVIS_BUILD_DIR}
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
   - cd GoldenCheetah
   - export GC_COMMIT=`git rev-parse HEAD | cut -c 1-10`
@@ -59,7 +62,7 @@ before_script:
   - echo QMAKE_LFLAGS += \"-Wl,-rpath,\\\'\\$\$ORIGIN/lib\\\'\" >> src/gcconfig.pri
   - if [[ "$HTML" == "WEBENGINE" ]]; then echo DEFINES += NOWEBKIT >> src/gcconfig.pri; fi
   - sed -i "s|#\(CONFIG += release.*\)|\1 static|" src/gcconfig.pri
-  - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 ../../Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/bin/lrelease|" src/gcconfig.pri
+  - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 ${QTPATH}/bin/lrelease|" src/gcconfig.pri
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 ../../usr|" src/gcconfig.pri
 #  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
@@ -92,21 +95,21 @@ before_script:
   - sed -i "s/__GC_GOOGLE_DRIVE_API_KEY__/"$GC_GOOGLE_DRIVE_API_KEY"/" src/Core/Secrets.h
   - sed -i "s/__GC_TODAYSPLAN_CLIENT_SECRET__/"$GC_TODAYSPLAN_CLIENT_SECRET"/" src/Core/Secrets.h
   - cat src/gcconfig.pri
-  - ../Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/bin/lupdate src/src.pro
+  - ${QTPATH}/gcc_64/bin/lupdate src/src.pro
 
 script:
-  - ../Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/bin/qmake -recursive
+  - ${QTPATH}/bin/qmake -recursive
   - make --silent -j3
 
 after_success:
   - cd ..
   - cp GoldenCheetah/src/GoldenCheetah build/opt/GoldenCheetah/GoldenCheetah
-  - cp -R Qt${QTMAX}.${QTMin}/${QTMAX}/gcc_64/{libexec,lib,plugins,resources,translations} build/opt/GoldenCheetah/
+  - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} build/opt/GoldenCheetah/
   - cd build/opt/GoldenCheetah
   - chmod u+x GoldenCheetah
   - ldd GoldenCheetah
   - ./GoldenCheetah --version
-  - cd ../../..
+  - cd ${TRAVIS_BUILD_DIR}
   - export SIZE=`ls -l --block-size=1kB GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' build/DEBIAN/control
   - cp GoldenCheetah/src/Resources/linux/51-garmin-usb.rules build/etc/udev/rules.d/
