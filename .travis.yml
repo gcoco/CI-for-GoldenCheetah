@@ -37,7 +37,7 @@ before_install:
 before_script:
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
-  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
   # SRMIO build 
   - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-srmio.sh
   # libkml build
@@ -93,8 +93,8 @@ before_script:
   - sed -i "s/__GC_GOOGLE_DRIVE_CLIENT_SECRET__/"$GC_GOOGLE_DRIVE_CLIENT_SECRET"/" src/Core/Secrets.h
   - sed -i "s/__GC_GOOGLE_DRIVE_API_KEY__/"$GC_GOOGLE_DRIVE_API_KEY"/" src/Core/Secrets.h
   - sed -i "s/__GC_TODAYSPLAN_CLIENT_SECRET__/"$GC_TODAYSPLAN_CLIENT_SECRET"/" src/Core/Secrets.h
-  - cat src/gcconfig.pri
-  - ${QTPATH}/gcc_64/bin/lupdate src/src.pro
+#  - cat src/gcconfig.pri
+  - ${QTPATH}/bin/lupdate src/src.pro
 
 script:
   - ${QTPATH}/bin/qmake -recursive
@@ -102,6 +102,7 @@ script:
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
+  - tar cvzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ${TRAVIS_BUILD_DIR}/usr
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/GoldenCheetah
   - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/
   - cd ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah
@@ -124,6 +125,7 @@ deploy:
   api_key:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
   file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb'
+  file: '${TRAVIS_BUILD_DIR}/gc-libs.tar.gz'
   skip_cleanup: true
   on:
     tags: true
