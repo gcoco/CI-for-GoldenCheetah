@@ -67,7 +67,7 @@ before_script:
 #  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
   - sed -i "s|#\(KML_INSTALL =\).*|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
-  - sed -i "s|#\(ICAL_INCLUDE =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/include/libical|" src/gcconfig.pri
+  - sed -i "s|#\(ICAL_INCLUDE =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/include/libical -licuuc -licu18n|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/lib/libical.a|" src/gcconfig.pri
   - sed -i "s|#\(LMFIT_INSTALL =\).*|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
@@ -98,7 +98,8 @@ before_script:
 
 script:
   - ${QTPATH}/bin/qmake -recursive
-  - make --silent -j3
+#  - make --silent -j3
+  - make -j3
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
