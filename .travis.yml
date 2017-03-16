@@ -32,7 +32,7 @@ before_install:
   - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT${QTMAX}.${QTMin}/Qt${QTMAX}.${QTMin}.tar.gz
   - tar xf Qt${QTMAX}.${QTMin}.tar.gz
   - sudo apt-get install -qq libglu1-mesa-dev libgstreamer0.10-0 libgstreamer-plugins-base0.10-0
-  - sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev
+  - sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev libicu-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
