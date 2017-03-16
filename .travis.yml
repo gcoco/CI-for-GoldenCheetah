@@ -68,7 +68,7 @@ before_script:
   - sed -i "s|#\(KML_INSTALL =\).*|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INCLUDE =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/include/libical|" src/gcconfig.pri
-  - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/lib/libical.a -licuuc -licui18n|" src/gcconfig.pri
+  - sed -i "s|#\(ICAL_LIBS    =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/lib/libical.a ${TRAVIS_BUILD_DIR}/usr/lib/libicalss.a ${TRAVIS_BUILD_DIR}/usr/lib/libicalvcal.a -licuuc -licui18n|" src/gcconfig.pri
   - sed -i "s|#\(LMFIT_INSTALL =\).*|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_INSTALL =\).*|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(LIBUSB_LIBS    =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/lib/libusb.a -lusb-1.0 -ldl -ludev|" src/gcconfig.pri
