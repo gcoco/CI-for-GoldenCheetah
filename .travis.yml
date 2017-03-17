@@ -38,19 +38,22 @@ before_install:
   - sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
 before_script:
-  - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
+  #- chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
-  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
+  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
   # SRMIO build 
-  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-srmio.sh
+  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-srmio.sh
   # libkml build
-  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libkml.sh
+  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libkml.sh
   # libical build
-  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libical.sh
+  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libical.sh
   # libusb-compat build
-  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
+  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
     # libusb-compat build
-  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
+  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
+  - wget https://github.com/gcoco/CI-for-GoldenCheetah/releases/download/gc-libs/gc-libs.tar.gz gc-libs.tar.gz
+  - ls -lar usr
+  - ldknhldkfnh
 # Setup GoldenCheetah
   - cd ${TRAVIS_BUILD_DIR}
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
@@ -105,8 +108,8 @@ script:
 #  - make
   
 after_success:
-  - cd ${TRAVIS_BUILD_DIR}
-  - tar czf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
+  #- cd ${TRAVIS_BUILD_DIR}
+  #- tar czf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/GoldenCheetah
   - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/
   - cd ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah
