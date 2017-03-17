@@ -98,12 +98,17 @@ before_script:
 
 script:
   - ${QTPATH}/bin/qmake -recursive
-  - make --silent -j3
-  - make
-
+#  - make --silent -j3
+#  - make
+  - cd ${TRAVIS_BUILD_DIR}
+  - tar cvzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
+  - tar tzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
+  - sdalkhgalskhdg
+  
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
-  - tar cvzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ${TRAVIS_BUILD_DIR}/usr
+  - tar cvzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
+  - tar tzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/GoldenCheetah
   - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/
   - cd ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah
