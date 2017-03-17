@@ -106,7 +106,7 @@ script:
   
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
-  - tar cvzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
+  - tar czf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/GoldenCheetah
   - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/
   - cd ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah
