@@ -2,9 +2,6 @@ language: cpp
 compiler: gcc
 sudo: required
 dist: trusty
-cache:
-  directories:
-    - usr
 git:
   depth: 3
 global:
@@ -51,9 +48,9 @@ before_script:
   #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
     # libusb-compat build
   #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
-  - wget https://github.com/gcoco/CI-for-GoldenCheetah/releases/download/gc-libs/gc-libs.tar.gz -O gc-libs.tar.gz
-  - ls -laR usr
-  - ldknhldkfnh
+  - cd ${TRAVIS_BUILD_DIR}
+  - wget https://github.com/gcoco/CI-for-GoldenCheetah/releases/download/gc-libs/gc-libs.tar.gz -O ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
+  - tar xzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
 # Setup GoldenCheetah
   - cd ${TRAVIS_BUILD_DIR}
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
@@ -104,8 +101,8 @@ before_script:
 
 script:
   - ${QTPATH}/bin/qmake -recursive
-#  - make --silent -j3
-#  - make
+  - make --silent -j3
+  - make
   
 after_success:
   #- cd ${TRAVIS_BUILD_DIR}
@@ -132,7 +129,7 @@ deploy:
   api_key:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
   file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb'
-  file: '${TRAVIS_BUILD_DIR}/gc-libs.tar.gz'
+  # file: '${TRAVIS_BUILD_DIR}/gc-libs.tar.gz'
   skip_cleanup: true
   on:
     tags: true
