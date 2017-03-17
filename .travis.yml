@@ -52,7 +52,7 @@ before_script:
     # libusb-compat build
   #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
   - wget https://github.com/gcoco/CI-for-GoldenCheetah/releases/download/gc-libs/gc-libs.tar.gz -O gc-libs.tar.gz
-  - ls -lar usr
+  - ls -laR usr
   - ldknhldkfnh
 # Setup GoldenCheetah
   - cd ${TRAVIS_BUILD_DIR}
