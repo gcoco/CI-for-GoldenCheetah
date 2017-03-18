@@ -34,6 +34,7 @@ before_install:
   - sudo apt-get install -qq libglu1-mesa-dev libgstreamer0.10-0 libgstreamer-plugins-base0.10-0
   - sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
+  - sudo apt-get install -qq libusb-1.0-0-dev libudev-dev
 before_script:
   #- chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
