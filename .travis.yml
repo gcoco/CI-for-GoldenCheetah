@@ -36,7 +36,7 @@ before_install:
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
   - sudo apt-get install -qq libusb-1.0-0-dev libudev-dev
 before_script:
-  #- chmod u+x travis/$TRAVIS_OS_NAME/*.sh
+  - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
   # QWTPLOT3D build
   - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
   # SRMIO build 
