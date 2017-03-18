@@ -1,0 +1,28 @@
+From c48c44848c66d703e9bf0b51edb4f6cfc59b8766 Mon Sep 17 00:00:00 2001
+From: owner <owner@Ubuntu-14.04-Build>
+Date: Tue, 24 Jan 2017 22:22:36 -0500
+Subject: [PATCH] For qwtplot3d fix
+
+---
+ src/Charts/ModelPlot.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/Charts/ModelPlot.h b/src/Charts/ModelPlot.h
+index bd5569d..89aac6e 100644
+--- a/src/Charts/ModelPlot.h
++++ b/src/Charts/ModelPlot.h
+@@ -30,9 +30,9 @@
+ 
+ // sintegral fork of QwtPlot3D defines IS_NAN as isnan instead of std::isnan
+ // so we add a macro to fix that; this only applies when compiling on QT5.5.1
+-#if QT_VERSION >= 0x050501
+-#define isnan(x) std::isnan(x)
+-#endif
++//#if QT_VERSION >= 0x050501
++//#define isnan(x) std::isnan(x)
++//#endif
+ 
+ #include <qwt3d_global.h>
+ 
+-- 
+1.9.1
