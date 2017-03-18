@@ -37,7 +37,7 @@ before_install:
   - sudo apt-get install -qq libusb-1.0-0-dev libudev-dev
 before_script:
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
-  - mkdir ${TRAVIS_BUILD_DIR}/usr
+  - mkdir -p ${TRAVIS_BUILD_DIR}/usr/{lib,include}
   # FD2XX Install
   - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-ftd2xx.sh
   # QWTPLOT3D build
@@ -53,6 +53,7 @@ before_script:
   # libusb-compat build
   - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
   - cd ${TRAVIS_BUILD_DIR}
+  - tar cvzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
 #  - wget https://github.com/gcoco/CI-for-GoldenCheetah/releases/download/gc-libs/gc-libs.tar.gz -O ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
 #  - tar xzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
 # Setup GoldenCheetah
@@ -112,7 +113,6 @@ script:
   
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
-  - tar cvzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/GoldenCheetah
   - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/
   - cd ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah
@@ -135,7 +135,7 @@ deploy:
   api_key:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
   file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb'
-  # file: '${TRAVIS_BUILD_DIR}/gc-libs.tar.gz'
+  file: '${TRAVIS_BUILD_DIR}/gc-libs.tar.gz'
   skip_cleanup: true
   on:
     tags: true
