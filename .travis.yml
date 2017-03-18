@@ -37,21 +37,24 @@ before_install:
   - sudo apt-get install -qq libusb-1.0-0-dev libudev-dev
 before_script:
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
+  - mkdir ${TRAVIS_BUILD_DIR}/usr
+  # FD2XX Install
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-ftd2xx.sh
   # QWTPLOT3D build
   - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-qwtplot3d.sh
   # SRMIO build 
-  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-srmio.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-srmio.sh
   # libkml build
-  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libkml.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libkml.sh
   # libical build
-  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libical.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libical.sh
   # libusb-compat build
-  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
-    # libusb-compat build
-  #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-libusb-compat.sh
+  # libusb-compat build
+  - ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
   - cd ${TRAVIS_BUILD_DIR}
-  - wget https://github.com/gcoco/CI-for-GoldenCheetah/releases/download/gc-libs/gc-libs.tar.gz -O ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
-  - tar xzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
+#  - wget https://github.com/gcoco/CI-for-GoldenCheetah/releases/download/gc-libs/gc-libs.tar.gz -O ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
+#  - tar xzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
 # Setup GoldenCheetah
   - cd ${TRAVIS_BUILD_DIR}
   - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
@@ -69,7 +72,8 @@ before_script:
   - sed -i "s|#\(QMAKE_LRELEASE = \).*|\1 ${QTPATH}/bin/lrelease|" src/gcconfig.pri
   - sed -i "s|^#QMAKE_CXXFLAGS|QMAKE_CXXFLAGS|" src/gcconfig.pri
   - sed -i "s|#\(SRMIO_INSTALL =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
-  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
+  - sed -i "s|#\(D2XX_INCLUDE =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/include|" src/gcconfig.pri
+  - sed -i "s|#\(QWT3D_INSTALL =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(KML_INSTALL =\).*|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INSTALL =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr|" src/gcconfig.pri
   - sed -i "s|#\(ICAL_INCLUDE =.*\)|\1 ${TRAVIS_BUILD_DIR}/usr/include/libical|" src/gcconfig.pri
@@ -103,12 +107,12 @@ before_script:
 
 script:
   - ${QTPATH}/bin/qmake -recursive
-  - make --silent -j3
-  - make
+#  - make --silent -j3
+#  - make
   
 after_success:
-  #- cd ${TRAVIS_BUILD_DIR}
-  #- tar czf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
+  - cd ${TRAVIS_BUILD_DIR}
+  - tar cvzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz ./usr
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/GoldenCheetah
   - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/
   - cd ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah
