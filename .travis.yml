@@ -34,7 +34,7 @@ before_install:
   - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT5.8.0/Qt${QTMAX}.${QTMin}-gc-libs.tar.gz -O ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
   - tar xzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
   - sudo apt-get install -qq libglu1-mesa-dev libgstreamer0.10-0 libgstreamer-plugins-base0.10-0
-  - sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev
+  - sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev r-base-dev
   - sudo apt-get install -qq libvlc-dev libvlccore-dev
   - sudo apt-get install -qq libusb-1.0-0-dev libudev-dev
 before_script:
@@ -88,6 +88,7 @@ before_script:
   - sed -i "s|^#HTPATH|HTPATH|" src/gcconfig.pri
   - sed -i "s|\(DEFINES += GC_VIDEO_NONE.*\)|#\1 |" src/gcconfig.pri
   - sed -i "s|#\(DEFINES += GC_VIDEO_VLC.*\)|\1|" src/gcconfig.pri
+  - sed -i "s|#\(DEFINES += GC_WANT_R.*\)|\1|" src/gcconfig.pri
   - sed -i "s/__GC_GOOGLE_CALENDAR_CLIENT_SECRET__/"$GC_GOOGLE_CALENDAR_CLIENT_SECRET"/" src/Core/Secrets.h
   - sed -i "s/__GC_STRAVA_CLIENT_SECRET__/"$GC_STRAVA_CLIENT_SECRET"/" src/Core/Secrets.h
   - sed -i "s/__GC_DROPBOX_CLIENT_SECRET__/"$GC_DROPBOX_CLIENT_SECRET"/" src/Core/Secrets.h
@@ -106,9 +107,8 @@ before_script:
 
 script:
   - ${QTPATH}/bin/qmake -recursive
-  - make --silent -j3
-  - make
-  
+  - make --silent -j3 || make
+
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/GoldenCheetah
