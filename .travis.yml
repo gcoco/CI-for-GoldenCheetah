@@ -6,7 +6,8 @@ dist: trusty
 git:
   depth: 3
 addons:
-  packages:
+  apt:
+    packages:
     - libglu1-mesa-dev
     - libgstreamer0.10-0
     - libgstreamer-plugins-base0.10-0
