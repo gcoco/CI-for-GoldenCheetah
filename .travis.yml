@@ -1,9 +1,23 @@
 language: cpp
 compiler: gcc
-sudo: required
+#sudo: required
+sudo: none
 dist: trusty
 git:
   depth: 3
+addons:
+  packages:
+    - libglu1-mesa-dev
+    - libgstreamer0.10-0
+    - libgstreamer-plugins-base0.10-0
+    - libssl-dev
+    - libsamplerate0-dev
+    - libpulse-dev
+    - r-base-dev
+    - libvlc-dev
+    - libvlccore-dev
+    - libusb-1.0-0-dev
+    - libudev-dev
 global:
   - secure: iqYW7f3//ZkMVzeCEarYn0S0DqKjFU9juBh0KF6WTlUsKX902Jtsk7dFoJlNDYBf63HLgV+wW2Hc6MxI9sGiUkom0gY9/To/aeGIJFGEX2sLm/e0Ok3qN521FA0Q/OiCFsD0RC6J+yrHxzI+rf8Z1rujceUsz2KgsrfAjYYv+BY=
   - secure: C6f58PXwvvHeVOjCLbyDRjgyF0tk+bXjCNUDur8VJLhJEGNdnrt+rH+d3azYaX0n348ZnQZ14as4M4rHjN1A/3DRbdUdOS7PQZrkj/n363ck1tvYOG/tzYqkEcVoQyjIJ7ZoTuBXDQry/VJmLxQjM0glTa2upNFHMOMwqZNkF+I=
@@ -33,10 +47,10 @@ before_install:
   - tar xzf Qt${QTMAX}.${QTMin}.tar.gz
   - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT5.8.0/Qt${QTMAX}.${QTMin}-gc-libs.tar.gz -O ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
   - tar xzf ${TRAVIS_BUILD_DIR}/gc-libs.tar.gz
-  - sudo apt-get install -qq libglu1-mesa-dev libgstreamer0.10-0 libgstreamer-plugins-base0.10-0
-  - sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev r-base-dev
-  - sudo apt-get install -qq libvlc-dev libvlccore-dev
-  - sudo apt-get install -qq libusb-1.0-0-dev libudev-dev
+  #- sudo apt-get install -qq libglu1-mesa-dev libgstreamer0.10-0 libgstreamer-plugins-base0.10-0
+  #- sudo apt-get install -qq libssl-dev libsamplerate0-dev libpulse-dev r-base-dev
+  #- sudo apt-get install -qq libvlc-dev libvlccore-dev
+  #- sudo apt-get install -qq libusb-1.0-0-dev libudev-dev
 before_script:
   - mkdir -p ${TRAVIS_BUILD_DIR}/usr/{lib,include}
   - chmod u+x travis/$TRAVIS_OS_NAME/*.sh
