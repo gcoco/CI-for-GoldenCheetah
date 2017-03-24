@@ -5,9 +5,8 @@ env:
   
 before_install:
   - brew update
-  - brew update
-  - brew install libz
-  - brew install --verbose https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew tap dsogari/packages
+  - brew install dsogari/packages/libkml
 
 script:
   - ls -laR /usr/local/
