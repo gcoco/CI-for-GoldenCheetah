@@ -6,7 +6,7 @@ env:
 before_install:
   - brew update
   - brew update
-  - brew install zlib
+  - brew install libz
   - brew install --verbose https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
 
 script:
