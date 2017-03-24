@@ -3,7 +3,8 @@ class Libkml < Formula
   homepage "https://github.com/google/libkml"
   url "https://github.com/libkml/libkml/archive/1.3.0.tar.gz"
   sha256 "8892439e5570091965aaffe30b08631fdf7ca7f81f6495b4648f0950d7ea7963"
-  head "https://github.com/libkml/libkml.git"
+  ## head "https://github.com/libkml/libkml.git"
+  head "https://github.com/rashadkm/libkml.git"
 
   depends_on :python => :recommended
   depends_on "cmake" => :build
