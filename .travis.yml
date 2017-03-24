@@ -5,8 +5,7 @@ env:
   
 before_install:
   - brew update
-  - brew tap dsogari/packages
-  - brew install dsogari/packages/libkml
+  - brew install --HEAD https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/lmfit.rb
 
 script:
   - ls -laR /usr/local/
