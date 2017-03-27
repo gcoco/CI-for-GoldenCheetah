@@ -4,8 +4,7 @@ os:
 env:
   
 before_install:
-  - brew update
-  - brew install --HEAD https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install --verbose --with-static https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
 
 script:
   - ls -laR /usr/local/
