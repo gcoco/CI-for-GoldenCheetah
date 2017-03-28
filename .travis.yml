@@ -100,16 +100,19 @@ script:
 
 after_success:
   - cd src
-  - ls -laR GoldenCheetah.app
+#  - ls -laR GoldenCheetah.app
   - sh $TRAVIS_BUILD_DIR/check-gc.sh
-  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
+#  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
+  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=0 -dmg
   - python ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/opt/$QT_PATH
+  - cp GoldenCheetah.dmg ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
+  - rm -rf /usr/local/Cellar/qt5/5.8.0_1/lib/kqoauth.framework
   - brew remove $QT
   - hdiutil mount GoldenCheetah.dmg
   - cd /Volumes/GoldenCheetah
-  - ls -laR GoldenCheetah.app
+#  - ls -laR GoldenCheetah.app
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
-  - cp GoldenCheetah.dmg ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
+  
     
 deploy:
   provider: releases
