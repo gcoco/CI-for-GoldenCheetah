@@ -120,6 +120,7 @@ deploy:
       github_token: $GITHUB_TOKEN
       on:
         repo: gcoco/gcoco.github.io
+        local_dir: nightly
         branch: Mac
         cron: true
   - provider: releases
