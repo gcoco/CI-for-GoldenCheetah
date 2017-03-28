@@ -60,6 +60,7 @@ before_script:
   - cp /Volumes/release/D2XX/bin/*.h D2XX
   - sed -i "" "s|libftd2xx.dylib|@executable_path/../Frameworks/libftd2xx.1.2.2.dylib|" src/FileIO/D2XX.cpp
   # Configure GoldenCheetah
+  - git am https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/Linux-QT5/0001-For-qwtplot3d-fix.patch
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - /usr/local/opt/$QT_PATH/bin/lupdate src/src.pro
