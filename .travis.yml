@@ -10,7 +10,7 @@ compiler:
   - clang
   
 env:
-    - BRANCH=master QT=qt5 QT_PATH=qt5 WEBENGINE=1
+    - BRANCH=master QT=qt5 QT_VER=5.8.0 QT_PATH=qt5 WEBENGINE=1
 #    - BRANCH=master QT=qt5 QT_VER=5.5 QT_PATH=qt5
 #    - BRANCH=master QT=qt4 QT_PATH=qt
 
@@ -118,3 +118,18 @@ after_success:
   - cd /Volumes/GoldenCheetah
   - ls -laR GoldenCheetah.app
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
+
+after_success:
+  - cd ${TRAVIS_BUILD_DIR}
+  - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah.dmg ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
+    
+deploy:
+  provider: releases
+  api_key:
+    secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
+  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: gcoco/CI-for-GoldenCheetah
+    branch: Mac
