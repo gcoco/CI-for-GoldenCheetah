@@ -11,8 +11,8 @@ compiler:
   
 env:
     - BRANCH=master QT=qt5 QT_PATH=qt5 WEBENGINE=1
-    - BRANCH=master QT=qt5 QT_VER=5.5 QT_PATH=qt5
-    - BRANCH=master QT=qt4 QT_PATH=qt
+#    - BRANCH=master QT=qt5 QT_VER=5.5 QT_PATH=qt5
+#    - BRANCH=master QT=qt4 QT_PATH=qt
 
 before_install:
   - date
@@ -24,7 +24,7 @@ before_install:
 #  - brew install pkgconfig
   - brew install srmio
   - brew install libsamplerate
-#  - brew install --HEAD https://raw.githubusercontent.com/GoldenCheetah/GoldenCheetah/master/travis/libkml.rb
+  - brew install --with-static https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/travis/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   # Download D2XX for MAC
