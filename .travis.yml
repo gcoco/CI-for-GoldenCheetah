@@ -113,6 +113,15 @@ after_success:
 #  - ls -laR GoldenCheetah.app
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
   
+before_deploy:
+  provider: pages
+  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
+  skip_cleanup: true
+  github_token: ${GITHUB_PAGES_TOKEN}
+  on:
+    cron: true
+    repo: gcoco/gcoco.github.io
+    branch: Mac
     
 
 deploy:
@@ -125,14 +134,4 @@ deploy:
     tags: true
     cron: true
     repo: gcoco/CI-for-GoldenCheetah
-    branch: Mac
- deploy:
-  provider: pages
-  api_key:
-    secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
-  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
-  skip_cleanup: true
-  on:
-    cron: true
-    repo: gcoco/gcoco.github.io
     branch: Mac
