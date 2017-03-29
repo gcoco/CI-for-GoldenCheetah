@@ -117,7 +117,7 @@ after_success:
 deploy:
   - provider: pages
       skip_cleanup: true
-      github_token: ${GITHUB_PAGES_TOKEN}
+      github_token: GITHUB_PAGES_TOKEN
       on:
         repo: gcoco/gcoco.github.io
         local_dir: nightly
