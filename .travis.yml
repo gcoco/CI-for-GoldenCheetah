@@ -115,13 +115,24 @@ after_success:
   
     
 
-deploy: 
+deploy:
   provider: releases
-    api_key:
-      secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
-    file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
-    skip_cleanup: true
-    on:
-      tags: true
-      repo: gcoco/CI-for-GoldenCheetah
-      branch: Mac
+  api_key:
+    secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
+  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
+  skip_cleanup: true
+  on:
+    tags: true
+    cron: true
+    repo: gcoco/CI-for-GoldenCheetah
+    branch: Mac
+ deploy:
+  provider: pages
+  api_key:
+    secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
+  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
+  skip_cleanup: true
+  on:
+    cron: true
+    repo: gcoco/gcoco.github.io
+    branch: Mac
