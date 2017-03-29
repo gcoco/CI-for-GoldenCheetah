@@ -116,7 +116,6 @@ after_success:
     
 deploy:
   - provider: pages
-      github_token: ${GITHUB_PAGES_TOKEN}
       on:
         repo: gcoco/gcoco.github.io
         local_dir: nightly
