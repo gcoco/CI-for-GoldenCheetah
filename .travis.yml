@@ -123,6 +123,5 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
-      cron: true
       repo: gcoco/CI-for-GoldenCheetah
       branch: Mac
