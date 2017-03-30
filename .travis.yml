@@ -1,6 +1,5 @@
 language: cpp
 compiler: gcc
-#sudo: required
 sudo: none
 dist: trusty
 git:
@@ -130,18 +129,17 @@ after_success:
   - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/
   - cd ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah
   - chmod u+x GoldenCheetah
-  - ldd GoldenCheetah
-  - ./GoldenCheetah --version
+  - ./GoldenCheetah --version || ldd GoldenCheetah
   - cd ${TRAVIS_BUILD_DIR}
   - export SIZE=`ls -l --block-size=1kB ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah | cut -d " " -f5`
   - sed -i 's/SIZE/'"$SIZE"'/g' ${TRAVIS_BUILD_DIR}/build/DEBIAN/control
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/Resources/linux/51-garmin-usb.rules ${TRAVIS_BUILD_DIR}/build/etc/udev/rules.d/
   - export VERSION="3.5.0dev+`date +%Y%m%d`"
   - sed -i 's/VERSION/'"$VERSION"'/g' ${TRAVIS_BUILD_DIR}/build/DEBIAN/control
-  - cat ${TRAVIS_BUILD_DIR}/build/DEBIAN/control
+#  - cat ${TRAVIS_BUILD_DIR}/build/DEBIAN/control
   - dpkg -b ${TRAVIS_BUILD_DIR}/build/ ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb
   - dpkg -c ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb
-  - ls -l ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb
+#  - ls -l ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb
   
 deploy:
   provider: releases
@@ -152,6 +150,6 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    cron: true
     repo: gcoco/CI-for-GoldenCheetah
-    branch: Linux-QT5
-
+ 
