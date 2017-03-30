@@ -1,8 +1,3 @@
-#commit: d00ac93fb23f88b3b6aaf8b9edadaf66336ba9aa
-branches:
-  only:
-    - Mac
-
 language: 
   - objective-c
   
@@ -10,7 +5,7 @@ compiler:
   - clang
   
 env:
-    - BRANCH=master QT=qt5 QT_VER=5.8.0 QT_PATH=qt5 WEBENGINE=1
+  - BRANCH=master QT=qt5 QT_VER=5.8.0 QT_PATH=qt5 WEBENGINE=1
 
 before_install:
   - date
@@ -113,25 +108,22 @@ after_success:
 #  - ls -laR GoldenCheetah.app
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
   
-before_deploy:
-  provider: pages
-  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
-  skip_cleanup: true
-  github_token: ${GITHUB_PAGES_TOKEN}
-  on:
-    cron: true
-    repo: gcoco/gcoco.github.io
-    branch: Mac
-    
-
 deploy:
-  provider: releases
-  api_key:
-    secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
-  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
-  skip_cleanup: true
-  on:
-    tags: true
-    cron: true
-    repo: gcoco/CI-for-GoldenCheetah
-    branch: Mac
+  - provider: releases
+    api_key:
+      secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
+    file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
+    skip_cleanup: true
+    on:
+      tags: true
+      cron: true
+      repo: gcoco/CI-for-GoldenCheetah
+      branch: Mac
+  - provider: pages
+    file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
+    skip_cleanup: true
+    github_token: ${GITHUB_PAGES_TOKEN}
+    on:
+      cron: true
+      repo: gcoco/gcoco.github.io
+      branch: master
