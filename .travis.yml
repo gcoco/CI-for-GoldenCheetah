@@ -8,7 +8,6 @@ env:
   - BRANCH=master QT=qt5 QT_VER=5.8.0 QT_PATH=qt5 WEBENGINE=1
 
 before_install:
-  - date
   - brew update
   - sh $TRAVIS_BUILD_DIR/install-qt.sh
   - brew install libical
@@ -19,34 +18,34 @@ before_install:
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   # Download D2XX for MAC
-  - curl -O http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg
-  # Let's build our own QWTPLOT3D.
-  - git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git qwtplot3d
-  - cd qwtplot3d
+  - curl http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg -o ${TRAVIS_BUILD_DIR}/D2XX1.2.2.dmg
+  - hdiutil mount ${TRAVIS_BUILD_DIR}/D2XX1.2.2.dmg
+  # Let's build our own QWTPLOT3D.  # Let's build our own QWTPLOT3D.
+  - git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git ${TRAVIS_BUILD_DIR}/qwtplot3d
+  - cd ${TRAVIS_BUILD_DIR}/qwtplot3d
   - sed -i "" "s|examples||" qwtplot3d.pro
   - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make -j2 
-  - cd ..
+  - cd ${TRAVIS_BUILD_DIR}
   # Lets build our own kQOAuth
-  - git clone --branch 0.98 https://github.com/kypeli/kQOAuth.git kQOAuth-0.98
-  - cd kQOAuth-0.98
+  - git clone --branch 0.98 https://github.com/kypeli/kQOAuth.git ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
+  - cd ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
   - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make -j2 qmake_all 
   - CC=clang CXX=clang++ sudo make install
-  - cd ..
-  - hdiutil mount D2XX1.2.2.dmg
-  
+  - cd ${TRAVIS_BUILD_DIR}/
+
 before_script:
   # Clone GoldenCheetah
-  - git clone --depth 1 -b $BRANCH git://github.com/GoldenCheetah/GoldenCheetah.git $BRANCH
-  - cd $BRANCH
+  - git clone --depth 1 -b ${BRANCH} git://github.com/GoldenCheetah/GoldenCheetah.git  ${TRAVIS_BUILD_DIR}/${BRANCH}
+  - cd  ${TRAVIS_BUILD_DIR}/${BRANCH}
 #  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
 #  - sh $TRAVIS_BUILD_DIR/git-info.sh
   # Copy in the libftd2xx libs/includes
-  - mkdir D2XX
-  - cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib D2XX
+  - mkdir -p  ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
+  - cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
   - sudo cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib /usr/local/lib
-  - cp /Volumes/release/D2XX/bin/*.h D2XX
+  - cp /Volumes/release/D2XX/bin/*.h ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
   - sed -i "" "s|libftd2xx.dylib|@executable_path/../Frameworks/libftd2xx.1.2.2.dylib|" src/FileIO/D2XX.cpp
   # Configure GoldenCheetah
   - curl https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/Linux-QT5/0001-For-qwtplot3d-fix.patch | git apply -
@@ -82,34 +81,34 @@ before_script:
   - sed -i "" "s|^#LIBZ|LIBZ|" src/gcconfig.pri
   - if [[ "$WEBENGINE" == "1" ]]; then echo DEFINES += NOWEBKIT >> src/gcconfig.pri; fi
   - echo "QMAKE_CFLAGS_RELEASE += -mmacosx-version-min=10.7 -arch x86_64" >> src/gcconfig.pri
-  
   - cat src/gcconfig.pri
-  - cd ..
+  - cd  ${TRAVIS_BUILD_DIR}
 
 script:
-  - cd $BRANCH
+  - cd  ${TRAVIS_BUILD_DIR}/${BRANCH}
   - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make qmake_all 
   - CC=clang CXX=clang++ make -j4 sub-qwt --silent
   - CC=clang CXX=clang++ make -j4 sub-src --silent || CC=clang CXX=clang++ make sub-src
 
 after_success:
-  - cd src
+  - cd ${TRAVIS_BUILD_DIR}/${BRANCH}/src
 #  - ls -laR GoldenCheetah.app
-  - sh $TRAVIS_BUILD_DIR/check-gc.sh
+  - sh ${TRAVIS_BUILD_DIR}/check-gc.sh
 #  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=0 -dmg
   - python ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/opt/$QT_PATH
   - cp GoldenCheetah.dmg ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
-  - rm -rf /usr/local/Cellar/qt5/5.8.0_1/lib/kqoauth.framework
+  - sudo rm -rf /usr/local/Cellar/qt5/5.8.0_1/lib/kqoauth.framework
   - brew remove $QT
-  - hdiutil mount GoldenCheetah.dmg
+  - hdiutil mount ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
   - cd /Volumes/GoldenCheetah
 #  - ls -laR GoldenCheetah.app
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
+  - cd ${TRAVIS_BUILD_DIR}
   
 deploy:
-  - provider: releases
+  provider: releases
     api_key:
       secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
     file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
@@ -117,13 +116,4 @@ deploy:
     on:
       tags: true
       cron: true
-      repo: gcoco/CI-for-GoldenCheetah
-      branch: Mac
-  - provider: pages
-    file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
-    skip_cleanup: true
-    github_token: ${GITHUB_PAGES_TOKEN}
-    on:
-      cron: true
-      repo: gcoco/gcoco.github.io
-      branch: master
+      repo: gcoco/CI-for-GoldenCheetah 
