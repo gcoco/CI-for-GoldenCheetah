@@ -6,7 +6,7 @@ env:
 
 before_install:
   - brew update
-  - sh $TRAVIS_BUILD_DIR}/install-qt.sh
+  - sh ${TRAVIS_BUILD_DIR}/install-qt.sh
   - export QT_PREFIX=`/usr/local/opt/${QT}/bin/qmake -query "QT_INSTALL_PREFIX"`
   - echo ${QT_PREFIX}
   - brew install libical
