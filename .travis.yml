@@ -93,8 +93,8 @@ after_success:
 #  - ls -laR GoldenCheetah.app
   - sh ${TRAVIS_BUILD_DIR}/check-gc.sh
 #  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
-  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=0 -dmg
   - python ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/opt/$QT_PATH
+  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=0 -dmg
   - cp GoldenCheetah.dmg ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
   - sudo rm -rf /usr/local/Cellar/qt5/5.8.0_1/lib/kqoauth.framework
   - brew remove $QT
