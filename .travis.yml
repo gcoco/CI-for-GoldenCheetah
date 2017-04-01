@@ -6,7 +6,7 @@ env:
 
 before_install:
   - brew update
-  - sh $TRAVIS_BUILD_DIR/install-qt.sh
+  - sh $TRAVIS_BUILD_DIR}/install-qt.sh
   - export QT_PREFIX=`/usr/local/opt/${QT}/bin/qmake -query "QT_INSTALL_PREFIX"`
   - echo ${QT_PREFIX}
   - brew install libical
@@ -50,7 +50,7 @@ before_script:
   - curl https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/Linux-QT5/0001-For-qwtplot3d-fix.patch | git apply -
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
-  - /usr/local/opt/$QT_PATH/bin/lupdate src/src.pro
+  - ${QT_PREFIX}/bin/lupdate src/src.pro
   - sed -i "" "s|#\(CONFIG += release.*\)|\1 static |" src/gcconfig.pri
 #  - sed -i "" "s|#\(QMAKE_LFLAGS\).*|\1_RELEASE += -mmacosx-version-min=10.7 -arch x86_64|" src/gcconfig.pri
   - sed -i "" "s|#\(QMAKE_LRELEASE\).*|\1 += ${QT_PREFIX}/bin/lrelease|" src/gcconfig.pri
@@ -91,11 +91,13 @@ script:
   - CC=clang CXX=clang++ make -j4 sub-src --silent || CC=clang CXX=clang++ make sub-src
 
 after_success:
+  - tar czf ${TRAVIS_BUILD_DIR}/usr-local.tar.gz /usr/local
+  - tar czf ${TRAVIS_BUILD_DIR}/gc-build.tar.gz ${TRAVIS_BUILD_DIR}/${BRANCH}
   - cd ${TRAVIS_BUILD_DIR}/${BRANCH}/src
 #  - ls -laR GoldenCheetah.app
   - sh ${TRAVIS_BUILD_DIR}/check-gc.sh
 #  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
-  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah.app -verbose=0 -dmg
+  - ${QT_PREFIX}/bin/macdeployqt ./GoldenCheetah.app -verbose=2 -dmg
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
 #  - python -v ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/Cellar/Qt5/${QT_VER}
   - python -v ${TRAVIS_BUILD_DIR}/macdeployqtfix.py GoldenCheetah.app ${QT_PREFIX}
@@ -114,6 +116,8 @@ deploy:
   api_key:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
   file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
+  file: '${TRAVIS_BUILD_DIR}/usr-local.tar.gz'
+  file: '${TRAVIS_BUILD_DIR}/gc-build.tar.gz'
   skip_cleanup: true
   on:
     tags: true
