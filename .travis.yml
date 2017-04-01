@@ -7,6 +7,8 @@ env:
 before_install:
   - brew update
   - sh $TRAVIS_BUILD_DIR/install-qt.sh
+  - export QT_PREFIX=`/usr/local/opt/${QT}/bin/qmake -query "QT_INSTALL_PREFIX"
+  - echo ${QT_PREFIX}
   - brew install libical
   - brew install libusb libusb-compat
   - brew install srmio
@@ -21,13 +23,13 @@ before_install:
   - git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git ${TRAVIS_BUILD_DIR}/qwtplot3d
   - cd ${TRAVIS_BUILD_DIR}/qwtplot3d
   - sed -i "" "s|examples||" qwtplot3d.pro
-  - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make -j2 
   - cd ${TRAVIS_BUILD_DIR}
   # Lets build our own kQOAuth
   - git clone --branch 0.98 https://github.com/kypeli/kQOAuth.git ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
   - cd ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
-  - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make -j2 qmake_all 
   - CC=clang CXX=clang++ sudo make install
   - cd ${TRAVIS_BUILD_DIR}/
@@ -51,7 +53,7 @@ before_script:
   - /usr/local/opt/$QT_PATH/bin/lupdate src/src.pro
   - sed -i "" "s|#\(CONFIG += release.*\)|\1 static |" src/gcconfig.pri
 #  - sed -i "" "s|#\(QMAKE_LFLAGS\).*|\1_RELEASE += -mmacosx-version-min=10.7 -arch x86_64|" src/gcconfig.pri
-  - sed -i "" "s|#\(QMAKE_LRELEASE\).*|\1 += /usr/local/opt/$QT_PATH/bin/lrelease|" src/gcconfig.pri
+  - sed -i "" "s|#\(QMAKE_LRELEASE\).*|\1 += ${QT_PREFIX}/bin/lrelease|" src/gcconfig.pri
   - sed -i "" "s|#\(QMAKE_CXXFLAGS\).*|\1_RELEASE += -mmacosx-version-min=10.7 -arch x86_64|" src/gcconfig.pri
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
@@ -83,7 +85,7 @@ before_script:
 
 script:
   - cd  ${TRAVIS_BUILD_DIR}/${BRANCH}
-  - CC=clang CXX=clang++ /usr/local/opt/$QT_PATH/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make qmake_all 
   - CC=clang CXX=clang++ make -j4 sub-qwt --silent
   - CC=clang CXX=clang++ make -j4 sub-src --silent || CC=clang CXX=clang++ make sub-src
@@ -93,14 +95,14 @@ after_success:
 #  - ls -laR GoldenCheetah.app
   - sh ${TRAVIS_BUILD_DIR}/check-gc.sh
 #  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
-  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=0 -dmg
+  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah.app -verbose=0 -dmg
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
 #  - python -v ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/Cellar/Qt5/${QT_VER}
-  - python -v ${TRAVIS_BUILD_DIR}/macdeployqtfix.py GoldenCheetah.app /usr/local/Cellar/qt5/${QT_VER}_1
+  - python -v ${TRAVIS_BUILD_DIR}/macdeployqtfix.py GoldenCheetah.app ${QT_PREFIX}
   - cat ./macdeployqtfix.log
   - cp GoldenCheetah.dmg ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
-  - sudo rm -rf /usr/local/Cellar/qt5/5.8.0_1/lib/kqoauth.framework
-  - brew remove $QT
+  - sudo rm -rf ${QT_PREFIX}/lib/kqoauth.framework
+  - brew remove ${QT}
   - hdiutil mount ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
   - cd /Volumes/GoldenCheetah
 #  - ls -laR GoldenCheetah.app
