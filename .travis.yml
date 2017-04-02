@@ -14,7 +14,7 @@ before_install:
   - brew install libusb libusb-compat
   - brew install srmio
   - brew install libsamplerate
-  - brew install https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install --with-static https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   # Download D2XX for MAC
@@ -68,9 +68,9 @@ before_script:
   - sed -i "" "s|#\(ICAL_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -L/usr/local/lib -lical|" src/gcconfig.pri
   - sed -i "" "s|#\(LIBUSB_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 -L/usr/local/lib -lusb -lusb-1.0|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 /usr/local/lib/libusb.a /usr/local/lib/libusb-1.0.a|" src/gcconfig.pri
   - sed -i "" "s|#\(SAMPLERATE_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(SAMPLERATE_LIBS =\).*|\1 -L/usr/local/lib -lsamplerate|" src/gcconfig.pri
+  - sed -i "" "s|#\(SAMPLERATE_LIBS =\).*|\1 /usr/local/lib/libsamplerate.a|" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_HAVE_LION*\)|\1|" src/gcconfig.pri
   - sed -i "" "s|#\(HTPATH = ../httpserver.*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_DROPBOX*\)|\1 |" src/gcconfig.pri
@@ -92,17 +92,20 @@ script:
   - CC=clang CXX=clang++ make -j4 sub-src --silent || CC=clang CXX=clang++ make sub-src
 
 after_success:
-  - tar czf ${TRAVIS_BUILD_DIR}/usr-local.tar.gz /usr/local
-  - tar czf ${TRAVIS_BUILD_DIR}/gc-build.tar.gz ${TRAVIS_BUILD_DIR}/${BRANCH}
+  - cd /usr
+  - tar czf ${TRAVIS_BUILD_DIR}/usr-local.tar.gz local/
   - cd ${TRAVIS_BUILD_DIR}/${BRANCH}/src
-#  - ls -laR GoldenCheetah.app
+  - tar czf ${TRAVIS_BUILD_DIR}/gc-build.tar.gz GoldenCheetah.app/
+  - ls -laR GoldenCheetah.app
   - ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
 #  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
   - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app -verbose=2
+  - ls -laR GoldenCheetah.app
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
 #  - python -v ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/Cellar/Qt5/${QT_VER}
   - python ${TRAVIS_BUILD_DIR}/macdeployqtfix.py -v ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${QT_PREFIX}
-  - cat ./macdeployqtfix.log
+  - tar czf ${TRAVIS_BUILD_DIR}/gc-build-after.tar.gz GoldenCheetah.app/
+  - ls -laR GoldenCheetah.app
   - hdiutil create -srcfolder GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
   - sudo rm -rf ${QT_PREFIX}/lib/kqoauth.framework
   - brew remove ${QT}
@@ -119,7 +122,8 @@ deploy:
   file: 
     - '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
     - '${TRAVIS_BUILD_DIR}/usr-local.tar.gz'
-    - '${TRAVIS_BUILD_DIR}/gc-build.tar.gz'
+    - '${TRAVIS_BUILD_DIR}/gc-build-before.tar.gz'
+    - '${TRAVIS_BUILD_DIR}/gc-build-after.tar.gz'
   skip_cleanup: true
   on:
     tags: true
