@@ -96,9 +96,9 @@ after_success:
   - tar czf ${TRAVIS_BUILD_DIR}/gc-build.tar.gz ${TRAVIS_BUILD_DIR}/${BRANCH}
   - cd ${TRAVIS_BUILD_DIR}/${BRANCH}/src
 #  - ls -laR GoldenCheetah.app
-  - sh ${TRAVIS_BUILD_DIR}/check-gc.sh
+  - ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
 #  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
-  - ${QT_PREFIX}/bin/macdeployqt ./GoldenCheetah.app -verbose=2
+  - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app -verbose=2
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
 #  - python -v ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/Cellar/Qt5/${QT_VER}
   - python ${TRAVIS_BUILD_DIR}/macdeployqtfix.py -v ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${QT_PREFIX}
