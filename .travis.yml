@@ -101,7 +101,7 @@ after_success:
   - ${QT_PREFIX}/bin/macdeployqt ./GoldenCheetah.app -verbose=2
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
 #  - python -v ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/Cellar/Qt5/${QT_VER}
-  - python ${TRAVIS_BUILD_DIR}/macdeployqtfix.py -v GoldenCheetah.app ${QT_PREFIX}
+  - python ${TRAVIS_BUILD_DIR}/macdeployqtfix.py -v ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${QT_PREFIX}
   - cat ./macdeployqtfix.log
   - hdiutil create -srcfolder GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
   - sudo rm -rf ${QT_PREFIX}/lib/kqoauth.framework
