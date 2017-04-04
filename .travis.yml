@@ -127,7 +127,7 @@ after_success:
   - cd ${TRAVIS_BUILD_DIR}
   - cp ${TRAVIS_BUILD_DIR}/GoldenCheetah/src/GoldenCheetah ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/GoldenCheetah
   - cp -R ${QTPATH}/{libexec,lib,plugins,resources,translations} ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/
-  - cp ${TRAVIS_BUILD_DIR}/libftd2xx-x86_64-1.3.6/release/build/libftd2xx.so.1.3.6  ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/lib/libftd2xx.so
+  - cp ${TRAVIS_BUILD_DIR}/usr/lib/libftd2xx.so ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah/lib/
   - cd ${TRAVIS_BUILD_DIR}/build/opt/GoldenCheetah
   - chmod u+x GoldenCheetah
   - ./GoldenCheetah --version || ldd GoldenCheetah
