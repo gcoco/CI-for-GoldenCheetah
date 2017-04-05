@@ -14,8 +14,7 @@ before_install:
   - brew install libusb libusb-compat
   - brew install srmio
   - brew install libsamplerate
-# - brew install --with-static https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
-  - brew install --verbose --with-static ${TRAVIS_BUILD_DIR}/libkml.rb
+  - brew install --with-static ${TRAVIS_BUILD_DIR}/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   # Download D2XX for MAC
@@ -97,15 +96,11 @@ after_success:
 # - tar czf ${TRAVIS_BUILD_DIR}/usr-local.tar.gz local/
   - cd ${TRAVIS_BUILD_DIR}/${BRANCH}/src
   - tar czf ${TRAVIS_BUILD_DIR}/gc-build-before.tar.gz GoldenCheetah.app/
-  - ls -laR GoldenCheetah.app
   - ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
-#  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
-#  - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app -verbose=2
-#  - ls -laR GoldenCheetah.app
+  - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app -verbose=2
+  - ls -laR GoldenCheetah.app
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
-#  - python -v ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/Cellar/Qt5/${QT_VER}
   - python ${TRAVIS_BUILD_DIR}/macdeployqtfix.py -v ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah ${QT_PREFIX}
-  - tar czf ${TRAVIS_BUILD_DIR}/gc-build-after.tar.gz GoldenCheetah.app/
   - ls -laR GoldenCheetah.app
   - hdiutil create -srcfolder GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
   - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app -verbose=2 -dmg
@@ -114,9 +109,16 @@ after_success:
   - brew remove ${QT}
   - hdiutil mount ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
   - cd /Volumes/GoldenCheetah
-#  - ls -laR GoldenCheetah.app
+  - ls -laR GoldenCheetah.app
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
   - cd ${TRAVIS_BUILD_DIR}
+  - hdiutil unmount /Volumes/GoldenCheetah
+  - hdiutil mount ${TRAVIS_BUILD_DIR}/GoldenCheetah.dmg
+  - cd /Volumes/GoldenCheetah
+  - ls -laR GoldenCheetah.app
+  - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
+  - cd ${TRAVIS_BUILD_DIR}
+  - hdiutil unmount /Volumes/GoldenCheetah
   
 deploy:
   provider: releases
@@ -125,9 +127,7 @@ deploy:
   file: 
     - '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
     - '${TRAVIS_BUILD_DIR}/GoldenCheetah.dmg'
-    - '${TRAVIS_BUILD_DIR}/usr-local.tar.gz'
     - '${TRAVIS_BUILD_DIR}/gc-build-before.tar.gz'
-    - '${TRAVIS_BUILD_DIR}/gc-build-after.tar.gz'
   skip_cleanup: true
   on:
     tags: true
