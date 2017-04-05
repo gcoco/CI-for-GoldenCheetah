@@ -14,7 +14,8 @@ before_install:
   - brew install libusb libusb-compat
   - brew install srmio
   - brew install libsamplerate
-  - brew install --with-static https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+# - brew install --with-static https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/master/libkml.rb
+  - brew install --with-static ${TRAVIS_BUILD_DIR}/libkml.rb
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   # Download D2XX for MAC
@@ -92,8 +93,8 @@ script:
   - CC=clang CXX=clang++ make -j4 sub-src --silent || CC=clang CXX=clang++ make sub-src
 
 after_success:
-  - cd /usr
-  - tar czf ${TRAVIS_BUILD_DIR}/usr-local.tar.gz local/
+# - cd /usr
+# - tar czf ${TRAVIS_BUILD_DIR}/usr-local.tar.gz local/
   - cd ${TRAVIS_BUILD_DIR}/${BRANCH}/src
   - tar czf ${TRAVIS_BUILD_DIR}/gc-build-before.tar.gz GoldenCheetah.app/
   - ls -laR GoldenCheetah.app
