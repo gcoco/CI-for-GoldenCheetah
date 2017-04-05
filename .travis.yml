@@ -99,14 +99,16 @@ after_success:
   - ls -laR GoldenCheetah.app
   - ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah --version
 #  - /usr/local/opt/$QT_PATH/bin/macdeployqt GoldenCheetah.app -verbose=2 -dmg
-  - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app -verbose=2
-  - ls -laR GoldenCheetah.app
+#  - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app -verbose=2
+#  - ls -laR GoldenCheetah.app
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
 #  - python -v ../travis/macdeployqtfix.py GoldenCheetah.app /usr/local/Cellar/Qt5/${QT_VER}
-  - python ${TRAVIS_BUILD_DIR}/macdeployqtfix.py -v ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${QT_PREFIX}
+  - python ${TRAVIS_BUILD_DIR}/macdeployqtfix.py -v ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah ${QT_PREFIX}
   - tar czf ${TRAVIS_BUILD_DIR}/gc-build-after.tar.gz GoldenCheetah.app/
   - ls -laR GoldenCheetah.app
   - hdiutil create -srcfolder GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
+  - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app -verbose=2 -dmg
+  - mv GoldenCheetah.dmg ${TRAVIS_BUILD_DIR}
   - sudo rm -rf ${QT_PREFIX}/lib/kqoauth.framework
   - brew remove ${QT}
   - hdiutil mount ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg
@@ -121,6 +123,7 @@ deploy:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
   file: 
     - '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
+    - '${TRAVIS_BUILD_DIR}/GoldenCheetah.dmg'
     - '${TRAVIS_BUILD_DIR}/usr-local.tar.gz'
     - '${TRAVIS_BUILD_DIR}/gc-build-before.tar.gz'
     - '${TRAVIS_BUILD_DIR}/gc-build-after.tar.gz'
