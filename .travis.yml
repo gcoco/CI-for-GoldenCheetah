@@ -72,6 +72,7 @@ before_script:
   - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 /usr/local/lib/libusb.a /usr/local/lib/libusb-1.0.a|" src/gcconfig.pri
   - sed -i "" "s|#\(SAMPLERATE_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
   - sed -i "" "s|#\(SAMPLERATE_LIBS =\).*|\1 /usr/local/lib/libsamplerate.a|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBZ_LIBS    =\).*|\1 /usr/local/lib/libz.a|" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_HAVE_LION*\)|\1|" src/gcconfig.pri
   - sed -i "" "s|#\(HTPATH = ../httpserver.*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_DROPBOX*\)|\1 |" src/gcconfig.pri
@@ -79,7 +80,6 @@ before_script:
   - sed -i "" "s|\(DEFINES += GC_VIDEO_NONE.*\)|#\1 |" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_VIDEO_QUICKTIME.*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s|^#CloudDB|CloudDB|" src/gcconfig.pri
-  - sed -i "" "s|^#(LIBZ_LIBS    =\).*|/usr/local/lib/libz.a|" src/gcconfig.pri
   - if [[ "$WEBENGINE" == "1" ]]; then echo DEFINES += NOWEBKIT >> src/gcconfig.pri; fi
   - echo "QMAKE_CFLAGS_RELEASE += -mmacosx-version-min=10.7 -arch x86_64" >> src/gcconfig.pri
   - cat src/gcconfig.pri
