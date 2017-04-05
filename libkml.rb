@@ -9,9 +9,9 @@ class Libkml < Formula
 #  option "with-python", "Build with python support"
 
   depends_on "cmake" => :build
-  depends_on "boost" => :build
-  depends_on "minizip" => :run
-  depends_on "uriparser" => :run
+#  depends_on "boost" => :build
+#  depends_on "minizip" => :run
+#  depends_on "uriparser" => :run
 #  depends_on "python" => :optional
 #  depends_on "swig" => :build if build.with? "python"
 
