@@ -3,6 +3,8 @@ compiler: clang
 
 env:
   # QT_VER = 5.5.1, 5.6.2, 5.7.1, 5.8.0 or nothing for latest from Homebrew
+  - BRANCH=master QT=qt5 QT_VER=5.6.2 QT_PATH=qt5 WEBENGINE=1
+  - BRANCH=master QT=qt5 QT_VER=5.7.1 QT_PATH=qt5 WEBENGINE=1
   - BRANCH=master QT=qt5 QT_VER=5.8.0 QT_PATH=qt5 WEBENGINE=1
 
 global:
@@ -131,22 +133,21 @@ after_success:
   - ${QT_PREFIX}/bin/macdeployqt ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
   - python ${TRAVIS_BUILD_DIR}/macdeployqtfix.py ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app/Contents/MacOS/GoldenCheetah ${QT_PREFIX}
-  - hdiutil create -fs HFS+ -volname GoldenCheetah -srcfolder ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${TRAVIS_TAG}.dmg
+  - hdiutil create -fs HFS+ -volname GoldenCheetah -srcfolder ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg
   - sudo rm -rf ${QT_PREFIX}/lib/kqoauth.framework
   - brew remove ${QT}
-  - hdiutil mount ${TRAVIS_BUILD_DIR}/GoldenCheetah_${TRAVIS_TAG}.dmg
+  - hdiutil mount ${TRAVIS_BUILD_DIR}/GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg
   - cd /Volumes/GoldenCheetah
   - ls -laR GoldenCheetah.app
   - GoldenCheetah.app/Contents/MacOS/GoldenCheetah --help
   - cd ${TRAVIS_BUILD_DIR}
-  - hdiutil unmount ${TRAVIS_BUILD_DIR}/GoldenCheetah_${TRAVIS_TAG}.dmg
   
 deploy:
   provider: releases
   api_key:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
   file: 
-    - '${TRAVIS_BUILD_DIR}/GoldenCheetah_${TRAVIS_TAG}.dmg'
+    - '${TRAVIS_BUILD_DIR}/GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg'
   skip_cleanup: true
   on:
     tags: true
