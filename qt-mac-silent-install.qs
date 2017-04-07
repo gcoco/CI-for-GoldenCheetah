@@ -1,5 +1,6 @@
 function Controller() {
     installer.autoRejectMessageBoxes();
+    installer.setMessageBoxAutomaticAnswer("OverwriteTargetDirectory", QMessageBox.Yes);
     installer.installationFinished.connect(function() {
         gui.clickButton(buttons.NextButton);
     })
@@ -18,18 +19,18 @@ Controller.prototype.IntroductionPageCallback = function() {
 }
 
 Controller.prototype.TargetDirectoryPageCallback = function() {
-    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("HomeDir") + "/Qt");
+    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("InstallerDir") + "/Qt");
     gui.clickButton(buttons.NextButton);
 }
 
 Controller.prototype.ComponentSelectionPageCallback = function() {
     var widget = gui.currentPageWidget();
 
-    widget.deselectAll();
-    widget.selectComponent("qt.58.clang_64");
-    widget.selectComponent("qt.58.qtwebengine");
-    widget.selectComponent("qt.58.qtscript");
-
+    widget.selectAll();
+    widget.deselectComponent("qt.58.src");
+    widget.deselectComponent("qt.extras");
+    widget.deselectComponent("qt.tools.doc");
+    widget.deselectComponent("qt.tools.examples");
     gui.clickButton(buttons.NextButton);
 }
 
