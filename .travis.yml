@@ -2,20 +2,23 @@ os:
  - osx
 
 env:
-  - QT_V=5.6 QT_M=2
-  - QT_V=5.7 QT_M=1
+#  - QT_V=5.6 QT_M=2
+#  - QT_V=5.7 QT_M=1
   - QT_V=5.8 QT_M=0
   
 before_install:
-  - export QTDIR="${HOME}/Qt/${QT_V}.{QT_M}/clang_64";
+  - pwd
+  - echo TRAVIS_BUILD_DIR = ${TRAVIS_BUILD_DIR}
+  - export QTDIR="${TRAVIS_BUILD_DIR}/Qt/${QT_V}.${QT_M}/clang_64";
   - brew outdated openssl || brew upgrade openssl;
   - QT_INSTALLER_FILE_NAME=qt-opensource-mac-x64-clang-${QT_V}.${QT_M};
   - wget "http://download.qt.io/official_releases/qt/${QT_V}/${QT_V}.${QT_M}/${QT_INSTALLER_FILE_NAME}.dmg";
   - hdiutil attach -noverify ${QT_INSTALLER_FILE_NAME}.dmg;
   - QT_INSTALLER=/Volumes/${QT_INSTALLER_FILE_NAME}/${QT_INSTALLER_FILE_NAME}.app/Contents/MacOS/${QT_INSTALLER_FILE_NAME};
   - echo "Silently installing Qt...";
-  - travis_wait ${QT_INSTALLER} --script ${TRAVIS_BUILD_DIR}/qt-mac-silent-install.qs;
+  - export QT_QPA_PLATFORM=minimal
+  - travis_wait ${QT_INSTALLER} --verbose --script ${TRAVIS_BUILD_DIR}/qt-mac-silent-install.qs;
 
 script:
-  - ls -laR
-  - $QTDIR}/bin/qmake -query
+  - ${QTDIR}/bin/qmake -query
+  - tar czf QT${QT_V}.${QT_M}.tar.gz ./QT/
