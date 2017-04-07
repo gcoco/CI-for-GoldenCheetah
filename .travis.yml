@@ -13,9 +13,12 @@ before_install:
   - brew outdated openssl || brew upgrade openssl;
   - QT_INSTALLER_FILE_NAME=qt-opensource-mac-x64-clang-${QT_V}.${QT_M};
   - wget "http://download.qt.io/official_releases/qt/${QT_V}/${QT_V}.${QT_M}/${QT_INSTALLER_FILE_NAME}.dmg";
-  - hdiutil attach -noverify ${QT_INSTALLER_FILE_NAME}.dmg;
+  - hdiutil mount -noverify ${QT_INSTALLER_FILE_NAME}.dmg;
+  - ls -laR /Volumes/${QT_INSTALLER_FILE_NAME}
   - QT_INSTALLER=/Volumes/${QT_INSTALLER_FILE_NAME}/${QT_INSTALLER_FILE_NAME}.app/Contents/MacOS/${QT_INSTALLER_FILE_NAME};
-  - echo "Silently installing Qt...";
+  - echo "Silently installing Qt... - ${QT_INSTALLER}";
+  - otool -L ${QT_INSTALLER}
+  - cat ${TRAVIS_BUILD_DIR}/qt-mac-silent-install.qs
   - export QT_QPA_PLATFORM=minimal
   - travis_wait ${QT_INSTALLER} --verbose --script ${TRAVIS_BUILD_DIR}/qt-mac-silent-install.qs;
 
