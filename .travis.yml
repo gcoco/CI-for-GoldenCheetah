@@ -3,8 +3,8 @@ compiler: clang
 
 env:
   # QT_VER = 5.5.1, 5.6.2, 5.7.1, 5.8.0 or nothing for latest from Homebrew
-  - BRANCH=master QT=qt5 QT_VER=5.6.2 QT_PATH=qt5 WEBENGINE=1
-  - BRANCH=master QT=qt5 QT_VER=5.7.1 QT_PATH=qt5 WEBENGINE=1
+#  - BRANCH=master QT=qt5 QT_VER=5.6.2 QT_PATH=qt5 WEBENGINE=1
+#  - BRANCH=master QT=qt5 QT_VER=5.7.1 QT_PATH=qt5 WEBENGINE=1
   - BRANCH=master QT=qt5 QT_VER=5.8.0 QT_PATH=qt5 WEBENGINE=1
 
 global:
@@ -24,9 +24,12 @@ global:
   - secure: RAGPq/thN9x6STNueDbeJWGUN75OLNcUVUkLHI/eZwPrkMaiQPfxIaJ+8eO2PszDcBojw3eYVhzbRvLnLiXmHL3buwD6oXMTyYnxGzCZ61DeDQ2cQa8ynKmRim5JL3viKMqtdyasXVoGf/u0GqMsgaLcqN6e/vXuXMGu6kkUPEQ=
 
 before_install:
+  - curl https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT5.8.0/Qt5.8.0-macosx.tar.gz -o ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
+  - travis_wait tar xzf ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
+  - QT_PREFIX=${TRAVIS_BUILD_DIR}/Qt5.8.0/5.8/clang_64
   - brew update
-  - sh ${TRAVIS_BUILD_DIR}/install-qt.sh
-  - export QT_PREFIX=`/usr/local/opt/${QT}/bin/qmake -query "QT_INSTALL_PREFIX"`
+#  - sh ${TRAVIS_BUILD_DIR}/install-qt.sh
+#  - export QT_PREFIX=`/usr/local/opt/${QT}/bin/qmake -query "QT_INSTALL_PREFIX"`
   - echo ${QT_PREFIX}
   - brew install libical
   - brew install libusb libusb-compat
@@ -136,7 +139,8 @@ after_success:
   - python macdeployqtfix.py -v GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah ${QT_PREFIX}
   - hdiutil create -fs HFS+ -volname GoldenCheetah_${QT_VER} -srcfolder GoldenCheetah_${QT_VER}.app GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg
   - sudo rm -rf ${QT_PREFIX}/lib/kqoauth.framework
-  - brew remove ${QT}
+#  - brew remove ${QT}
+  - mv ${TRAVIS_BUILD_DIR}/Qt5.8.0 mv ${TRAVIS_BUILD_DIR}/Qt5.8.0_tmp
   - hdiutil mount GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg
   - cd /Volumes/GoldenCheetah_${QT_VER}
   - ls -laR GoldenCheetah_${QT_VER}.app
