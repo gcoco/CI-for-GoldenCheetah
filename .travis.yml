@@ -30,36 +30,36 @@ before_install:
   - travis_wait tar xzf ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
   - QT_PREFIX=${TRAVIS_BUILD_DIR}/Qt5.8.0/5.8/clang_64
   - ls -la ${QT_PREFIX}
-  - brew update
+#  - brew update
 #  - sh ${TRAVIS_BUILD_DIR}/install-qt.sh
 #  - export QT_PREFIX=`/usr/local/opt/${QT}/bin/qmake -query "QT_INSTALL_PREFIX"`
   - echo ${QT_PREFIX}
-  - brew install libical
-  - brew install libusb libusb-compat
-  - brew install srmio
-  - brew install libsamplerate
-  - brew install --with-static ${TRAVIS_BUILD_DIR}/libkml.rb
-  - brew tap homebrew/science
-  - brew install r
-  - brew install lmfit
+ # - brew install libical
+ # - brew install libusb libusb-compat
+ # - brew install srmio
+ # - brew install libsamplerate
+ # - brew install --with-static ${TRAVIS_BUILD_DIR}/libkml.rb
+ # - brew tap homebrew/science
+ # - brew install r
+ # - brew install lmfit
   # Need to set +w on brew files or macdeployqt fails
   - sudo chmod -R +w /usr/local
   # Download D2XX for MAC
-  - curl http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg -o ${TRAVIS_BUILD_DIR}/D2XX1.2.2.dmg
-  - hdiutil mount ${TRAVIS_BUILD_DIR}/D2XX1.2.2.dmg
+ # - curl http://www.ftdichip.com/Drivers/D2XX/MacOSX/D2XX1.2.2.dmg -o ${TRAVIS_BUILD_DIR}/D2XX1.2.2.dmg
+ # - hdiutil mount ${TRAVIS_BUILD_DIR}/D2XX1.2.2.dmg
   # Let's build our own QWTPLOT3D.  # Let's build our own QWTPLOT3D.
-  - git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git ${TRAVIS_BUILD_DIR}/qwtplot3d
-  - cd ${TRAVIS_BUILD_DIR}/qwtplot3d
-  - sed -i "" "s|examples||" qwtplot3d.pro
-  - CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
-  - CC=clang CXX=clang++ make -j2 
-  - cd ${TRAVIS_BUILD_DIR}
+  #- git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git ${TRAVIS_BUILD_DIR}/qwtplot3d
+  #- cd ${TRAVIS_BUILD_DIR}/qwtplot3d
+  #- sed -i "" "s|examples||" qwtplot3d.pro
+  #- CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  #- CC=clang CXX=clang++ make -j4 
+  #- cd ${TRAVIS_BUILD_DIR}
   # Lets build our own kQOAuth
-  - git clone --branch 0.98 https://github.com/kypeli/kQOAuth.git ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
-  - cd ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
-  - CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
-  - CC=clang CXX=clang++ make -j2 qmake_all 
-  - CC=clang CXX=clang++ sudo make install
+  #- git clone --branch 0.98 https://github.com/kypeli/kQOAuth.git ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
+  #- cd ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
+  #- CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  #- CC=clang CXX=clang++ make -j4 qmake_all 
+  #- CC=clang CXX=clang++ sudo make install
   - cd ${TRAVIS_BUILD_DIR}/
 
 before_script:
@@ -69,13 +69,13 @@ before_script:
 #  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
 #  - sh $TRAVIS_BUILD_DIR/git-info.sh
   # Copy in the libftd2xx libs/includes
-  - mkdir -p  ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
-  - cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
-  - sudo cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib /usr/local/lib
-  - cp /Volumes/release/D2XX/bin/*.h ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
-  - sed -i "" "s|libftd2xx.dylib|@executable_path/../Frameworks/libftd2xx.1.2.2.dylib|" src/FileIO/D2XX.cpp
+ # - mkdir -p  ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
+ # - cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
+ # - sudo cp /Volumes/release/D2XX/Object/10.5-10.7/x86_64/libftd2xx.1.2.2.dylib /usr/local/lib
+ # - cp /Volumes/release/D2XX/bin/*.h ${TRAVIS_BUILD_DIR}/${BRANCH}/D2XX
+ # - sed -i "" "s|libftd2xx.dylib|@executable_path/../Frameworks/libftd2xx.1.2.2.dylib|" src/FileIO/D2XX.cpp
   # Configure GoldenCheetah
-  - curl https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/Linux-QT5/0001-For-qwtplot3d-fix.patch | git apply -
+ # - curl https://raw.githubusercontent.com/gcoco/CI-for-GoldenCheetah/Linux-QT5/0001-For-qwtplot3d-fix.patch | git apply -
   - cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
   - cp src/gcconfig.pri.in src/gcconfig.pri
   - ${QT_PREFIX}/bin/lupdate src/src.pro
@@ -84,30 +84,31 @@ before_script:
   - sed -i "" "s|#\(QMAKE_LRELEASE\).*|\1 += ${QT_PREFIX}/bin/lrelease|" src/gcconfig.pri
   - sed -i "" "s|#\(QMAKE_CXXFLAGS\).*|\1_RELEASE += -mmacosx-version-min=10.7 -arch x86_64|" src/gcconfig.pri
   - sed -i "" "s|#\(SRMIO_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
-  - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
-  - sed -i "" "s|#\(KQOAUTH_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(KQOAUTH_INCLUDE =.*\)|\1 \$\$[QT_INSTALL_LIBS]/kqoauth.framework/Headers|" src/gcconfig.pri
-  - sed -i "" "s|#\(KQOAUTH_LIBS =.*\)|\1 -F\$\$[QT_INSTALL_LIBS] -framework kqoauth|" src/gcconfig.pri
-  - sed -i "" "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
-  - sed -i "" "s|#\(KML_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(KML_LIBS    =.*\)|\1 -L/usr/local/lib -lkmlxsd -lkmlregionator -lkmldom -lkmlconvenience -lkmlengine -lkmlbase|" src/gcconfig.pri
-  - sed -i "" "s|#\(ICAL_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -L/usr/local/lib -lical|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBUSB_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 /usr/local/lib/libusb.a /usr/local/lib/libusb-1.0.a|" src/gcconfig.pri
-  - sed -i "" "s|#\(SAMPLERATE_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(SAMPLERATE_LIBS =\).*|\1 /usr/local/lib/libsamplerate.a|" src/gcconfig.pri
-  - sed -i "" "s|#\(LMFIT_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
-  - sed -i "" "s|#\(LIBZ_LIBS    =\).*|\1 /usr/local/lib/libz.a|" src/gcconfig.pri
+ # - sed -i "" "s|#\(D2XX_INCLUDE =.*\)|\1 ../D2XX|" src/gcconfig.pri
+ # - sed -i "" "s|#\(D2XX_LIBS    =.*\)|\1 -L../D2XX -lftd2xx.1.2.2|" src/gcconfig.pri
+#  - sed -i "" "s|#\(KQOAUTH_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+#  - sed -i "" "s|#\(KQOAUTH_INCLUDE =.*\)|\1 \$\$[QT_INSTALL_LIBS]/kqoauth.framework/Headers|" src/gcconfig.pri
+#  - sed -i "" "s|#\(KQOAUTH_LIBS =.*\)|\1 -F\$\$[QT_INSTALL_LIBS] -framework kqoauth|" src/gcconfig.pri
+ # - sed -i "" "s|#\(QWT3D_INSTALL =.*\)|\1 ../../qwtplot3d|" src/gcconfig.pri
+ # - sed -i "" "s|#\(KML_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
+ # - sed -i "" "s|#\(KML_LIBS    =.*\)|\1 -L/usr/local/lib -lkmlxsd -lkmlregionator -lkmldom -lkmlconvenience -lkmlengine -lkmlbase|" src/gcconfig.pri
+ # - sed -i "" "s|#\(ICAL_INSTALL =.*\)|\1 /usr/local|" src/gcconfig.pri
+ # - sed -i "" "s|#\(ICAL_LIBS    =.*\)|\1 -L/usr/local/lib -lical|" src/gcconfig.pri
+ # - sed -i "" "s|#\(LIBUSB_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
+ # - sed -i "" "s|#\(LIBUSB_LIBS    =.*\)|\1 /usr/local/lib/libusb.a /usr/local/lib/libusb-1.0.a|" src/gcconfig.pri
+ # - sed -i "" "s|#\(SAMPLERATE_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
+ # - sed -i "" "s|#\(SAMPLERATE_LIBS =\).*|\1 /usr/local/lib/libsamplerate.a|" src/gcconfig.pri
+ # - sed -i "" "s|#\(LMFIT_INSTALL =\).*|\1 /usr/local|" src/gcconfig.pri
+ # - sed -i "" "s|#\(LIBZ_LIBS    =\).*|\1 /usr/local/lib/libz.a|" src/gcconfig.pri
+  - sed -i "" "s|#\(LIBZ_LIBS    =\).*|\1 -lz|" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_HAVE_LION*\)|\1|" src/gcconfig.pri
   - sed -i "" "s|#\(HTPATH = ../httpserver.*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_DROPBOX*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s|#\(DEFINES += GC_WANT_ROBOT.*\)|\1 |" src/gcconfig.pri
-  - sed -i "" "s|\(DEFINES += GC_VIDEO_NONE.*\)|#\1 |" src/gcconfig.pri
-  - sed -i "" "s|#\(DEFINES += GC_VIDEO_QUICKTIME.*\)|\1 |" src/gcconfig.pri
+ # - sed -i "" "s|\(DEFINES += GC_VIDEO_NONE.*\)|#\1 |" src/gcconfig.pri
+ # - sed -i "" "s|#\(DEFINES += GC_VIDEO_QUICKTIME.*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s|^#CloudDB|CloudDB|" src/gcconfig.pri
-  - sed -i "" "s|#\(DEFINES += GC_WANT_R.*\)|\1 |" src/gcconfig.pri
+ # - sed -i "" "s|#\(DEFINES += GC_WANT_R.*\)|\1 |" src/gcconfig.pri
   - sed -i "" "s/__GC_GOOGLE_CALENDAR_CLIENT_SECRET__/"$GC_GOOGLE_CALENDAR_CLIENT_SECRET"/" src/Core/Secrets.h
   - sed -i "" "s/__GC_STRAVA_CLIENT_SECRET__/"$GC_STRAVA_CLIENT_SECRET"/" src/Core/Secrets.h
   - sed -i "" "s/__GC_DROPBOX_CLIENT_SECRET__/"$GC_DROPBOX_CLIENT_SECRET"/" src/Core/Secrets.h
@@ -130,8 +131,8 @@ script:
   - cd  ${TRAVIS_BUILD_DIR}/${BRANCH}
   - CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make qmake_all 
-  - CC=clang CXX=clang++ make -j4 sub-qwt --silent
-  - CC=clang CXX=clang++ make -j4 sub-src --silent || CC=clang CXX=clang++ make sub-src
+  - CC=clang CXX=clang++ make -j8 sub-qwt --silent
+  - CC=clang CXX=clang++ make -j8 sub-src --silent || CC=clang CXX=clang++ make sub-src
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
