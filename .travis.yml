@@ -140,7 +140,8 @@ after_success:
   - cd ${TRAVIS_BUILD_DIR}
   - mv ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.app
   - GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah --version
-  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -executable=GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah -qmldir=../GoldenCheetah_${QT_VER}
+  #- ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -executable=GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah -qmldir=../GoldenCheetah_${QT_VER}
+  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -dmg
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
   - python macdeployqtfix.py -v GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah ${QT_PREFIX}
   - hdiutil create -fs HFS+ -volname GoldenCheetah_${QT_VER} -srcfolder GoldenCheetah_${QT_VER}.app GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg
@@ -159,6 +160,7 @@ deploy:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
   file: 
     - '${TRAVIS_BUILD_DIR}/GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg'
+    - '${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.dmg'
   skip_cleanup: true
   on:
     tags: true
