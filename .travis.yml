@@ -24,6 +24,8 @@ global:
   - secure: RAGPq/thN9x6STNueDbeJWGUN75OLNcUVUkLHI/eZwPrkMaiQPfxIaJ+8eO2PszDcBojw3eYVhzbRvLnLiXmHL3buwD6oXMTyYnxGzCZ61DeDQ2cQa8ynKmRim5JL3viKMqtdyasXVoGf/u0GqMsgaLcqN6e/vXuXMGu6kkUPEQ=
 
 before_install:
+  - export CC=clang
+  - export CXX=clang++
   - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT5.8.0/Qt5.8.0-macosx.tar.gz -O ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
 #  - cat ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
   - ls -lah
@@ -51,15 +53,15 @@ before_install:
   #- git clone --depth 1 --branch Qt5.6 https://github.com/gcoco/qwtplot3d.git ${TRAVIS_BUILD_DIR}/qwtplot3d
   #- cd ${TRAVIS_BUILD_DIR}/qwtplot3d
   #- sed -i "" "s|examples||" qwtplot3d.pro
-  #- CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
-  #- CC=clang CXX=clang++ make -j4 
+  #- ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  #- make -j3 
   #- cd ${TRAVIS_BUILD_DIR}
   # Lets build our own kQOAuth
   #- git clone --branch 0.98 https://github.com/kypeli/kQOAuth.git ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
   #- cd ${TRAVIS_BUILD_DIR}/kQOAuth-0.98
-  #- CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
-  #- CC=clang CXX=clang++ make -j4 qmake_all 
-  #- CC=clang CXX=clang++ sudo make install
+  #- ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  #- make -j3 qmake_all 
+  #- sudo make install
   - cd ${TRAVIS_BUILD_DIR}/
 
 before_script:
@@ -129,10 +131,10 @@ before_script:
 
 script:
   - cd  ${TRAVIS_BUILD_DIR}/${BRANCH}
-  - CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
-  - CC=clang CXX=clang++ make qmake_all 
-  - travis_wait CC=clang CXX=clang++ make -j3 sub-qwt --silent
-  - travis_wait CC=clang CXX=clang++ make -j3 sub-src --silent || CC=clang CXX=clang++ make sub-src
+  - ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
+  - make qmake_all 
+  - make -j3 sub-qwt --silent
+  - make -j3 sub-src --silent || make sub-src
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
