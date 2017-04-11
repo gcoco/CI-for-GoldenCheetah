@@ -131,8 +131,8 @@ script:
   - cd  ${TRAVIS_BUILD_DIR}/${BRANCH}
   - CC=clang CXX=clang++ ${QT_PREFIX}/bin/qmake -makefile -recursive QMAKE_CXXFLAGS_WARN_ON+=-Wno-unused-private-field
   - CC=clang CXX=clang++ make qmake_all 
-  - CC=clang CXX=clang++ make -j8 sub-qwt --silent
-  - CC=clang CXX=clang++ make -j8 sub-src --silent || CC=clang CXX=clang++ make sub-src
+  - travis_wait CC=clang CXX=clang++ make -j3 sub-qwt --silent
+  - travis_wait CC=clang CXX=clang++ make -j3 sub-src --silent || CC=clang CXX=clang++ make sub-src
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
