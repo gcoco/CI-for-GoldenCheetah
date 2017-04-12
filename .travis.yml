@@ -26,15 +26,15 @@ global:
 before_install:
   - export CC=clang
   - export CXX=clang++
-  - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT5.8.0/Qt5.8.0-macosx.tar.gz -O ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
+#  - wget https://github.com/gcoco/Qt-Ubuntu-64bit/releases/download/QT5.8.0/Qt5.8.0-macosx.tar.gz -O ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
 #  - cat ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
-  - ls -lah
-  - travis_wait tar xzf ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
-  - QT_PREFIX=${TRAVIS_BUILD_DIR}/Qt5.8.0/5.8/clang_64
-  - ls -la ${QT_PREFIX}
+#  - ls -lah
+#  - travis_wait tar xzf ${TRAVIS_BUILD_DIR}/Qt5.8.0-macosx.tar.gz
+ # - QT_PREFIX=${TRAVIS_BUILD_DIR}/Qt5.8.0/5.8/clang_64
+ # - ls -la ${QT_PREFIX}
 #  - brew update
-#  - sh ${TRAVIS_BUILD_DIR}/install-qt.sh
-#  - export QT_PREFIX=`/usr/local/opt/${QT}/bin/qmake -query "QT_INSTALL_PREFIX"`
+  - sh ${TRAVIS_BUILD_DIR}/install-qt.sh
+  - export QT_PREFIX=`/usr/local/opt/${QT}/bin/qmake -query "QT_INSTALL_PREFIX"`
   - echo ${QT_PREFIX}
  # - brew install libical
  # - brew install libusb libusb-compat
@@ -140,14 +140,15 @@ after_success:
   - cd ${TRAVIS_BUILD_DIR}
   - mv ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.app
   - GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah --version
-  #- ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -executable=GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah -qmldir=../GoldenCheetah_${QT_VER}
-  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -dmg
+  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -always-overwrite
+  #- ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -dmg
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
   - python macdeployqtfix.py -v GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah ${QT_PREFIX}
   - hdiutil create -fs HFS+ -volname GoldenCheetah_${QT_VER} -srcfolder GoldenCheetah_${QT_VER}.app GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg
+  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -dmg -no-plugins
   - sudo rm -rf ${QT_PREFIX}/lib/kqoauth.framework
-#  - brew remove ${QT}
-  - mv ${TRAVIS_BUILD_DIR}/Qt5.8.0 mv ${TRAVIS_BUILD_DIR}/Qt5.8.0_tmp
+  - brew remove ${QT}
+#  - mv ${TRAVIS_BUILD_DIR}/Qt5.8.0 mv ${TRAVIS_BUILD_DIR}/Qt5.8.0_tmp
   - hdiutil mount GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg
   - cd /Volumes/GoldenCheetah_${QT_VER}
   - ls -laR GoldenCheetah_${QT_VER}.app
