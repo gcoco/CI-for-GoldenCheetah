@@ -140,9 +140,10 @@ after_success:
   - cd ${TRAVIS_BUILD_DIR}
   - mv ${TRAVIS_BUILD_DIR}/${BRANCH}/src/GoldenCheetah.app ${TRAVIS_BUILD_DIR}/GoldenCheetah_${QT_VER}.app
   - GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah --version
-  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -always-overwrite
-  #- ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -dmg
   - curl https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py -o ${TRAVIS_BUILD_DIR}/macdeployqtfix.py
+  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah__${QT_VER}.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/Helpers/QtWebEngineProcess.app -verbose=2 -always-overwrite
+  - python macdeployqtfix.py -v GoldenCheetah_${QT_VER}.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/5/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess ${QT_PREFIX}
+  - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -always-overwrite
   - python macdeployqtfix.py -v GoldenCheetah_${QT_VER}.app/Contents/MacOS/GoldenCheetah ${QT_PREFIX}
   - hdiutil create -fs HFS+ -volname GoldenCheetah_${QT_VER} -srcfolder GoldenCheetah_${QT_VER}.app GoldenCheetah_${TRAVIS_TAG}_${QT_VER}.dmg
   - ${QT_PREFIX}/bin/macdeployqt GoldenCheetah_${QT_VER}.app -verbose=2 -dmg -no-plugins
