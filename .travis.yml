@@ -9,6 +9,9 @@ env:
 before_install:
   - pwd
   - echo TRAVIS_BUILD_DIR = ${TRAVIS_BUILD_DIR}
+  - echo TRAVIS_TAG = ${TRAVIS_TAG}
+  - echo TRAVIS_PULL_REQUEST_BRANCH = ${TRAVIS_PULL_REQUEST_BRANCH}
+  - kgsgslkg
   - export QTDIR="${TRAVIS_BUILD_DIR}/Qt/${QT_V}.${QT_M}/clang_64";
   - brew outdated openssl || brew upgrade openssl;
   - QT_INSTALLER_FILE_NAME=qt-opensource-mac-x64-clang-${QT_V}.${QT_M};
