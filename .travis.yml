@@ -70,9 +70,10 @@ before_script:
   #- ${TRAVIS_BUILD_DIR}/travis/$TRAVIS_OS_NAME/install-lmfit.sh
   # Setup GoldenCheetah
   - cd ${TRAVIS_BUILD_DIR}
-  - git clone --depth 1 git://github.com/GoldenCheetah/GoldenCheetah.git
+  - git clone --depth 10 git://github.com/GoldenCheetah/GoldenCheetah.git
   - cd GoldenCheetah
   - export GC_COMMIT=`git rev-parse HEAD | cut -c 1-10`
+  - if [ -n "TRAVIS_TAG" ]; then GC_COMMIT=${TRAVIS_TAG}; git checkout ${GIT_COMMIT}; fi
   - export GC_DATE=`git log -1 --date=iso --format=fuller | egrep ^CommitDate | cut -c 13-22`
   - export GC_INFO=${GC_DATE}':master@'${GC_COMMIT}
   - git am ${TRAVIS_BUILD_DIR}/0001-For-qwtplot3d-fix.patch
@@ -138,15 +139,16 @@ after_success:
   - export VERSION="3.5.0dev+`date +%Y%m%d`"
   - sed -i 's/VERSION/'"$VERSION"'/g' ${TRAVIS_BUILD_DIR}/build/DEBIAN/control
 #  - cat ${TRAVIS_BUILD_DIR}/build/DEBIAN/control
-  - dpkg -b ${TRAVIS_BUILD_DIR}/build/ ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb
-  - dpkg -c ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb
+  - if [ -n "TRAVIS_TAG" ]; then VERSION=${TRAVIS_TAG}; fi
+  - dpkg -b ${TRAVIS_BUILD_DIR}/build/ ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_amd64.deb
+  - dpkg -c ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_amd64.deb
 #  - ls -l ${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb
   
 deploy:
   provider: releases
   api_key:
     secure: GI+6glvv5Bq7mr8eEab/P+Wq6RzKq5QVCQ+8bWzJ3DqhAkter09jhwOXmBVCUgano2mNGsNrcnyAY/sQyGcnm5IEpdzXYlOQeUfww47OyiS4ECAxLDVLp2/fo8KHuKDJIs7aw/vBnqh3R5vkaZOMfePL5/SgwOL7nNzS5seYN6Y=
-  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_${HTML}_amd64.deb'
+  file: '${TRAVIS_BUILD_DIR}/GoldenCheetah_${VERSION}_amd64.deb'
 #  file: '${TRAVIS_BUILD_DIR}/gc-libs.tar.gz'
   skip_cleanup: true
   on:
