@@ -68,6 +68,11 @@ before_script:
   # Clone GoldenCheetah
   - git clone --depth 1 -b ${BRANCH} git://github.com/GoldenCheetah/GoldenCheetah.git  ${TRAVIS_BUILD_DIR}/${BRANCH}
   - cd  ${TRAVIS_BUILD_DIR}/${BRANCH}
+  - export GC_COMMIT=`git rev-parse HEAD | cut -c 1-10`
+  - if [ -n "TRAVIS_TAG" ]; then GC_COMMIT=${TRAVIS_TAG}; git checkout ${GIT_COMMIT}; fi
+  - export GC_DATE=`git log -1 --date=iso --format=fuller | egrep ^CommitDate | cut -c 13-22`
+  - export GC_INFO=${GC_DATE}':master@'${GC_COMMIT}
+  - echo DEFINES += GC_VERSION=\\\\\\\"${GC_INFO}\\\\\\\" >> src/gcconfig.pri
 #  - git checkout `cat $TRAVIS_BUILD_DIR/commit`
 #  - sh $TRAVIS_BUILD_DIR/git-info.sh
   # Copy in the libftd2xx libs/includes
